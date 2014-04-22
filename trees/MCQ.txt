@@ -1,0 +1,2 @@
+Binary Trees
+Any unique tree can be built with any order traversal provided we are given inorder traversal along with the another e.g Pre/Post/Level
