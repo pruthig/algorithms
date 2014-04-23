@@ -27,12 +27,12 @@ mainPtr->left = newNode(6);
 mainPtr->right = newNode(12);
 
 mainPtr->left->left = newNode(2);
-mainPtr->left->right = newNode(10);
+mainPtr->left->right = newNode(9);
 
-mainPtr->right->left = newNode(4);
+mainPtr->right->left = newNode(11);
 mainPtr->right->right = newNode(18);
 
-mainPtr->right->right->left = newNode(0);
+mainPtr->right->right->left = newNode(16);
 mainPtr->right->right->right = newNode(20);
 
 return mainPtr;
