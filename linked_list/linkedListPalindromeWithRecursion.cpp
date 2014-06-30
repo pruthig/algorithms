@@ -119,6 +119,7 @@ else
 
 
 
+//wont go down now
 if(second->node != h->node)
 	return false;
 
