@@ -1,0 +1,5 @@
+applications of hashing
+
+*Find duplicates
+*2 sum problem
+*O(1) lookup
