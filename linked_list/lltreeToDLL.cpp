@@ -49,12 +49,12 @@ struct treeStruct* old = NULL;
 struct treeStruct* dll = NULL;
 bool t = false;
 
-void  countNodes(struct treeStruct *cur){
+void  treeToDLL(struct treeStruct *cur){
 
 if(cur == NULL)
 	return;	
 
-countNodes(cur->left);
+treeToDLL(cur->left);
 if(!t){
 	dll = cur;
 	t = true;
@@ -67,13 +67,13 @@ else{
 	old = cur;
 }
 	
-countNodes(cur->right);
+treeToDLL(cur->right);
 
 }
 
 int main(){
 struct treeStruct *rootPtr = treeCreator();
-countNodes(rootPtr);
+treeToDLL(rootPtr);
 //c->right = NULL;
 print(dll);
 return 0;
