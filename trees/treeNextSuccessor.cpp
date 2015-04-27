@@ -1,4 +1,4 @@
-//Base tree ... totally bare
+//The aim is gto find the next in-order successor of the tree ( BST ) ... thats it
 #include<iostream>
 
 
@@ -49,20 +49,35 @@ struct treeStruct* treeCreator()
                                               / \
                                             16   20
 */
-
-void traverseNodes(struct treeStruct *ptr)
+int counter = 0;
+bool found = false;
+int node;
+void searchNodes(struct treeStruct *ptr, int p)
 {
-	if(ptr == NULL)
+	if(ptr== NULL)
 		return;
-	traverseNodes(ptr->left);
-	cout<<ptr->element;
-	traverseNodes(ptr->right);
+
+	searchNodes(ptr->left, p);
+	if(found == true){
+		node = ptr->element;
+		found = false;
+	}
+
+	if(ptr->element == p)
+		found = true;
+	
+	searchNodes(ptr->right, p);
+
 }
 
 int main()
 {
 	struct treeStruct *rootPtr = treeCreator();
-	traverseNodes(rootPtr);
+	int t;
+	cout<<"Enter the node of which i-o successor to be searched :";
+	cin>>t;
+	searchNodes(rootPtr, t);
+	cout<<"Solution is  : "<<node<<endl;
 	return 0;
 }
 

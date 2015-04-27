@@ -1,4 +1,6 @@
-//Base tree ... totally bare
+//This is another method to find inorder traversal, the crux of the method is that if the right child of
+//node is NULL then next successor will be the immediate parent whose left child is thi node...In the below example, 9 has 10
+//as its successor
 #include<iostream>
 
 
@@ -50,19 +52,57 @@ struct treeStruct* treeCreator()
                                             16   20
 */
 
-void traverseNodes(struct treeStruct *ptr)
-{
-	if(ptr == NULL)
+void find_t(treeStruct *root, treeStruct **temp, int t){
+	if(root == NULL)
 		return;
-	traverseNodes(ptr->left);
-	cout<<ptr->element;
-	traverseNodes(ptr->right);
+
+	find_t(root->left, temp, t);
+	if(root->element == t)
+		*temp = root;
+	find_t(root->right, temp, t);
+}
+void searchNodes(struct treeStruct *r, int p)
+{
+	struct treeStruct *p_pointer = NULL;
+	struct treeStruct *ptr = r;
+
+	find_t(ptr, &p_pointer, p);
+	if(p_pointer == NULL){
+		cout<<"Element not found\n";
+		return;
+	}
+	if(p_pointer->right != NULL){
+		p_pointer = p_pointer->right;
+		while(p_pointer->left != NULL)
+			p_pointer = p_pointer->left;
+		cout<<"Successor is : "<<p_pointer->element;
+		return;
+	}
+	
+	//2nd case
+	struct treeStruct *successor = NULL;
+	while(ptr)
+	{
+		if( p < ptr->element ){
+			successor = ptr;
+			ptr = ptr->left;
+		}
+		else if(p > ptr->element)
+			ptr = ptr->right;
+		else
+			break;
+	}
+	cout<<"Next Successor is :"<<successor->element;
+
 }
 
 int main()
 {
 	struct treeStruct *rootPtr = treeCreator();
-	traverseNodes(rootPtr);
+	int t;
+	cout<<"Enter the node of which i-o successor to be searched :";
+	cin>>t;
+	searchNodes(rootPtr, t);
 	return 0;
 }
 
