@@ -56,7 +56,6 @@ int main()
 void insertElement()
 {
 		int element;
-		struct linked* dummy = head;
 		cout<<"Enter the element you want to insert\n";
 		cin>>element;
 
@@ -70,11 +69,10 @@ void insertElement()
 			return;
 		}
 
+		struct linked* dummy = head;
 		while(dummy->next != NULL)
 			dummy = dummy->next;
 
-
-		//insert now
 		dummy->next = newNode;
 }
 
