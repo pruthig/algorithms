@@ -1,3 +1,4 @@
+//this program prints all the ancestors of given node...
 #include<iostream>
 
 
@@ -9,7 +10,6 @@ struct treeStruct *left;
 struct treeStruct *right;
 }treeStruct;
 
-void print();
 
 struct treeStruct* newNode(int data)
 {
@@ -28,50 +28,53 @@ mainPtr->left = newNode(6);
 mainPtr->right = newNode(12);
 
 mainPtr->left->left = newNode(2);
-mainPtr->left->right = newNode(9);
+mainPtr->left->right = newNode(10);
 
-mainPtr->right->left = newNode(11);
+mainPtr->right->left = newNode(4);
 mainPtr->right->right = newNode(18);
 
-mainPtr->right->right->left = newNode(16);
+mainPtr->right->right->left = newNode(0);
 mainPtr->right->right->right = newNode(20);
 
 return mainPtr;
 }
 
-int arr[99] = {-1};
-int count = -1;
+/*
+                                        10
+                                      /    \
+                                    6      12
+                                   / \     / \
+                                  2   9   11  18
+                                              / \
+                                            16   20
+*/
 
-void traverse(struct treeStruct *ptr, int node){
 
-if(ptr == NULL)
-	return;
-if(ptr->element == node){
-	print();
+void findNodes(struct treeStruct *ptr, int e){
+if(ptr == NULL){
+	cout<<"Element not found\n";
+	return ;
+}
+else if(ptr->element == e){
+	cout<<"Element found\n";
 	return;
 }
-
-if(ptr != NULL)
-	arr[++count] = ptr->element;
-	
-traverse(ptr->left,  node);
-traverse(ptr->right, node);
---count;
-
+else if(e < ptr->element){
+	cout<<ptr->element<<", ";
+	findNodes(ptr->left, e);
 }
-
-void print(){
-for(int i=0;i<=count;i++)
-	cout<<arr[i]<<", ";
-cout<<endl;
+else{
+	findNodes(ptr->right, e);
+	cout<<ptr->element<<", ";
+}
 }
 
 int main(){
-int node = 0;
-cout<<"enter the input\n";
-cin>>node;
 struct treeStruct *rootPtr = treeCreator();
-traverse(rootPtr, node);
+int element = 0;
+cout<<"Enter the element you want to find\n";
+cin>>element;
+findNodes(rootPtr, element);
 return 0;
 }
 

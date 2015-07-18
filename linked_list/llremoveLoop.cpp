@@ -33,7 +33,7 @@ insertElement(i);
 struct linked *singleJump = head;
 struct linked *doubleJump = head;
 
-while(doubleJump->next != NULL){
+while(doubleJump && doubleJump->next){
 singleJump = singleJump->next;
 doubleJump = doubleJump->next->next;
 

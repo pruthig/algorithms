@@ -82,37 +82,37 @@ void insertElement()
 		dummy->next = newNode;
 }
 
-void segregate(){
+void segregate()
+{
 
-if(head == NULL)
-	return;
+	if(head == NULL)
+		return;
 
-struct linked *odd = NULL;
-struct linked *even = NULL;
-struct linked *dummy = head;
+	struct linked *odd = NULL;
+	struct linked *even = NULL;
+	struct linked *dummy = head;
 
-struct linked *backed = dummy->next;
+	struct linked *backed = dummy->next;
 
-while(backed != NULL){
-backed = dummy->next;
-if(dummy->node%2 == 0)
-	MoveNode(dummy, &even);
-else
-	MoveNode(dummy, &odd);
+	while(backed != NULL){
+	backed = dummy->next;
+	if(dummy->node%2 == 0)
+		MoveNode(dummy, &even);
+	else
+		MoveNode(dummy, &odd);
 
-dummy = backed;
-}
+	dummy = backed;
+	}
 
-//Merge them
-head = even;
-dummy = even;
-while(dummy->next != NULL) dummy = dummy->next;
-dummy->next = odd;
+	//Merge them
+	head = even;
+	dummy = even;
+	while(dummy->next != NULL) dummy = dummy->next;
+	dummy->next = odd;
 
 }
 
 void MoveNode(struct linked* dummy, struct linked** eod){
-struct linked* backedHead = *eod;
 dummy->next = *eod;
 *eod = dummy;
 }

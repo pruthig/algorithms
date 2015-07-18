@@ -83,7 +83,7 @@ cout<<"Number of element in the list "<<count<<endl;
 
 dummy = head->next;
 
-//dummy now points to middle
+//dummy points to middle after this operation
 for(int i=0; i <= count/2 ;i++, dummy = dummy->next);
 
 if(count%2 != 0)

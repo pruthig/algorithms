@@ -21,6 +21,16 @@ newElement->element = data;
 return newElement;
 }
 
+/*
+                                        10
+                                      /    \
+                                    6      12
+                                   / \     / \
+                                  2   9   11  18
+                                              / \
+                                            16   20
+*/
+
 struct treeStruct* treeCreator(){
 //create the main pointer
 struct treeStruct *mainPtr;
