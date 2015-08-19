@@ -1,4 +1,6 @@
 //Main class that will hold the list
+//Subject class basically has methods to register and unregister the observers and a method to notify
+//those observers
 
 
 
@@ -18,6 +20,7 @@ public:
 void attach(shop*);
 void detach(shop*);
 void notify(int price);
+void changePriceOfSubject(int n);
 };
 
 
@@ -38,6 +41,10 @@ for(auto a:list)
 	a->notify(price);
 }
 
+void subject::changePriceOfSubject(int n){
+	notify(n);
+}
+
 
 
 int main(){
@@ -47,7 +54,9 @@ shop *s1 = new shop("Gaurav", 32);
 shop *s2 = new shop("Tarun", 79);
 s.attach(s1);
 s.attach(s2);
-s.notify(200);
+s.changePriceOfSubject(80);   //changePrice will impact and modify prices of all commodities in another case we can have 
+//certain set of variables that are mutable and you generate the notification call when any of the mentioned 
+//variables get changed...
 return 0;
 }
 
