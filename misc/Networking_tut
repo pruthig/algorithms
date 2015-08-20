@@ -1,0 +1,172 @@
+//Requisite headers for socket programming
+
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+>> Socket is basically the logical endpoint from theoretical perspective and a unix file descriptor if we talk about it from system perspective
+Different typesof sockets:
+* Internet Sockets
+* Unix domain sockets
+
+Two types of internet sockets:
+Datagram Sockets and Stream Sockets. former one is connection oriented while the later one is connection less
+
+UDP is connectionless as you just put data in a IP header and transmit over a wire and there is no dedicated connection made between 2 entities example skype, tftp
+
+TCP is used by 
+telnet, ftp, http
+UDP is used by
+tftp, VoIP , rtp
+
+struct sockaddr {	
+	unsigned short sa_family;
+	char sa_data[4];
+};	
+
+struct sockaddr_in{
+	short int sin_family; //Address family
+	unsigned short int sin_port; //port number
+	struct in_addr sin_addr; //IP address
+	char sin_zero[8];
+};
+
+// Internet address (a structure for historical reasons)
+struct in_addr {
+unsigned long s_addr; // that’s a 32-bit long, or 4 bytes
+};
+
+
+A pointer to a struct sockaddr_in can be cast to a pointer to a struct sockaddr
+and vice-versa
+//there are some in-built functions that helps to store the ip address in long as such
+
+int inet_aton(const char *cp, struct in_addr *inp);
+struct sockaddr_in my_addr;
+my_addr.sin_family = AF_INET;
+// host byte order
+my_addr.sin_port = htons(MYPORT);
+// short, network byte order
+inet_aton("10.12.110.57", &(my_addr.sin_addr));
+printf("%s", inet_ntoa(ina.sin_addr));
+memset(&(my_addr.sin_zero), ’\0’, 8); // zero the rest of the struct
+
+
+
+
+
+
+IP to be put in head:
+DTP - domain, type, protocol --> AF_INET or AF_UNIX, SOCK_STREAM or SOCK_DGRAM, IPPROTO_TCP or 0
+
+SOCK_STREAM do not maintain boundaries of packets. It needs to be communicated first, like we can send the size first
+It generates and checks a per-packet checksum to catch transmission errors
+generally maximum size of sending and receiving is 160KB. Broadcasting and multicasting are not supported by TCP
+The most commonly used protocol containing an out-of-band data mechanism is the Internet's Transmission Control Protocol. It implements out-of-band data using an "urgent pointer", which marks certain data in the transmitted data stream as out-of-band
+
+
+//sockfd , SOL_SOCKET
+int setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t optlen);
+setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,&yes,sizeof(int));
+
+SO_REUSEADDR allows your server to bind to an address which is in a
+TIME_WAIT state specified in above function
+
+
+//Server side TCP
+
+>> unsigned int sck = sock(int domain, int type, int protocol);
+>> int bind(int sockfd, struct sockaddr *my_addr, int addrlen);              //bind calls simply means port is tied to that computer
+//you have to specify address because a computer can have many ip addresses so you have to specify the exact one.
+my_addr.sin_port = 0; // choose an unused port at random
+my_addr.sin_addr.s_addr = INADDR_ANY; // use my IP address
+>> int listen(int sockfd, int backlog);
+>> int returnedSockedDesc = accept(origSocket, sockaddr *clientIp, clientIPlength);
+
+//Server side UDP
+>> unsigned int sck = sock(int domain, int type, int protocol);
+>> int bind(int sockfd, struct sockaddr *my_addr, int addrlen);              //bind calls simply means port is tied to that computer
+
+
+//Client side::
+>> unsigned int sck = sock(int domain, int type, int protocol);
+>> int connect(int sockfd, struct sockaddr *serv_addr, int addrlen);
+
+Now common for both
+send(sockfd, message, messageLength, flags);                            //returns bytes sent
+recv(sockfd, message, messageLength, flags);                            //bytes received
+sendto(sockfd, message, messagelength, addr, addrlen);
+recvfrom(sockfd, message, messagelength, addr, addrlen);
+
+
+Difference between write and send is flags which are there in send() call
+If sendto() is used on a connection-mode (SOCK_STREAM, SOCK_SEQPACKET) socket, the arguments dest_addr and addrlen are ignored (and the error EISCONN may  be
+returned  when they are not NULL and 0)
+
+int shutdown(int sockfd, int how);
+//Shutdown closes the connection in the specific direction  0-recvX 1-sendX 2-X(close)
+close(fd);  //closes the connection altogether
+
+
+
+
+Addon
+#include <unistd.h>
+int gethostname(char *hostname, size_t size);
+Generally what happens is that an accept connection forks a new child process that will handle the given request and 
+with each new request a new process is forked
+
+int select(int numfds, fd_set *readfds, fd_set *writefds,
+fd_set *exceptfds, struct timeval *timeout);
+
+* fd_set readfds;
+• FD_ZERO(fd_set *set)         //// clears a file descriptor set
+• FD_SET(int fd, fd_set *set)  //  adds fd to the set
+• FD_CLR(int fd, fd_set *set)  // removes fd from the set
+• FD_ISSET(int fd, fd_set *set)
+– tests to see if fd is in the set
+
+
+
+
+
+if timeout is 0 , select will return immediately
+.............NULL it will never timeout
+
+
+
+Articulated Notes:
+* In that state it will wait until all pending data has been successfully sent or until a timeout is hit, in which case the socket is closed forcefully.
+* To make the socket non-blocking use this -> fcntl(sockfd, F_SETFL, O_NONBLOCK);
+* epoll can monitor a very large number of descriptors and will return a list of only those that changed (no need to pass over all the original list of descriptors).
+* To know whether a remote host has closed the connection is that select() will return ready to read you can check which descriptor is set and then you will find recv returns 0 , that way that willl help
+* When you do accept you have to check if the new fd is greater than current max if yes then update the max.
+
+
+
+Partial send handling
+
+while(total < *len) {
+n = send(s, buf+total, bytesleft, 0);
+if (n == -1) { break; }
+total += n;
+bytesleft -= n;
+}
+*len = total; // return number actually sent here
+return n==-1?-1:0; // return -1 on failure, 0 on success
+}
+
+
+
+Now The ULTIMATE
+
+HOW TO FIX MESSAGE BOUNDARIES IN TCP:
+ 
+Solution 1:
+Fix some size and send according to that protocol, but that will waste space
+
+>> Fill data in a packet using following protocol
+---size_of_data + header + payload    <There should be maximum limit on payload>
+On receiving side create an array in the form of circular buffer that is large enough to hold 2 packets and reading style will be the same 
+
