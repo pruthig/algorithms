@@ -12,11 +12,4 @@ cout<<"Bezier curve algo called\n";
 }
 };
 
-class client{
-strategy st;
-public:
-strategy getStrategy(){
-return st;
-}
-};
 
