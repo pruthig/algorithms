@@ -1,0 +1,480 @@
+//Requisite headers for socket programming
+
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+>> Socket is basically the logical endpoint from theoretical perspective and a unix file descriptor if we talk about it from system perspective
+There are different types of sockets, based on domain perspective:
+* Internet Sockets
+* Unix domain sockets
+
+Two types of internet sockets:
+Datagram Sockets and Stream Sockets. former one is connection oriented while the later one is connection less
+
+UDP is connectionless as you just put data in a IP header and transmit over a wire and there is no dedicated connection made between 2 entities example skype, tftp
+
+TCP is used by 
+telnet, ftp, http
+
+TCP 3 way handshake takes place in the listen function - Here Handshake packets are sent in terms of Sync/Sync-Ack/Ack
+
+
+
+UDP is used by
+tftp, VoIP , rtp
+
+struct sockaddr {	
+	unsigned short sa_family;
+	char sa_data[4];
+};	
+
+struct sockaddr_in{
+	short int sin_family; //Address family
+	unsigned short int sin_port; //port number
+	struct in_addr sin_addr; //IP address
+	char sin_zero[8];
+};
+
+// Internet address (a structure for historical reasons)
+struct in_addr {
+unsigned long s_addr; // that’s a 32-bit long, or 4 bytes
+};
+
+
+A pointer to a struct sockaddr_in can be cast to a pointer to a struct sockaddr
+and vice-versa
+//there are some in-built functions that helps to store the ip address in long as such
+
+int inet_aton(const char *cp, struct in_addr *inp);
+struct sockaddr_in my_addr;
+my_addr.sin_family = AF_INET;
+// host byte order
+my_addr.sin_port = htons(MYPORT);
+// short, network byte order
+inet_aton("10.12.110.57", &(my_addr.sin_addr));
+printf("%s", inet_ntoa(ina.sin_addr));
+memset(&(my_addr.sin_zero), ’\0’, 8); // zero the rest of the struct
+
+
+
+
+
+
+IP to be put in head:
+DTP - domain, type, protocol --> AF_INET or AF_UNIX, SOCK_STREAM or SOCK_DGRAM, IPPROTO_TCP or 0
+
+SOCK_STREAM do not maintain boundaries of packets. It needs to be communicated first, like we can send the size first
+It generates and checks a per-packet checksum to catch transmission errors
+generally maximum size of sending and receiving is 160KB. Broadcasting and multicasting are not supported by TCP
+The most commonly used protocol containing an out-of-band data mechanism is the Internet's Transmission Control Protocol. It implements out-of-band data using an "urgent pointer", which marks certain data in the transmitted data stream as out-of-band
+
+
+//sockfd , SOL_SOCKET
+int setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t optlen);
+setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,&yes,sizeof(int));
+
+SO_REUSEADDR allows your server to bind to an address which is in a
+TIME_WAIT state specified in above function
+
+
+//Server side TCP
+
+>> unsigned int sck = sock(int domain, int type, int protocol);
+>> int bind(int sockfd, struct sockaddr *my_addr, int addrlen);              //bind calls simply means port is tied to that computer
+//you have to specify address because a computer can have many ip addresses so you have to specify the exact one.
+my_addr.sin_port = 0; // choose an unused port at random
+my_addr.sin_addr.s_addr = INADDR_ANY; // use my IP address
+>> int listen(int sockfd, int backlog);
+>> int returnedSockedDesc = accept(origSocket, sockaddr *clientIp, clientIPlength);
+
+//Server side UDP
+>> unsigned int sck = sock(int domain, int type, int protocol);
+>> int bind(int sockfd, struct sockaddr *my_addr, int addrlen);              //bind calls simply means port is tied to that computer
+
+
+//Client side::
+>> unsigned int sck = sock(int domain, int type, int protocol);
+>> int connect(int sockfd, struct sockaddr *serv_addr, int addrlen);
+
+Now common for both
+send(sockfd, message, messageLength, flags);                            //returns bytes sent
+recv(sockfd, message, messageLength, flags);                            //bytes received
+sendto(sockfd, message, messagelength, addr, addrlen);
+recvfrom(sockfd, message, messagelength, addr, addrlen);
+
+
+Difference between write and send is flags which are there in send() call
+If sendto() is used on a connection-mode (SOCK_STREAM, SOCK_SEQPACKET) socket, the arguments dest_addr and addrlen are ignored (and the error EISCONN may  be
+returned  when they are not NULL and 0)
+
+int shutdown(int sockfd, int how);
+//Shutdown closes the connection in the specific direction  0-recvX 1-sendX 2-X(close)
+close(fd);  //closes the connection altogether
+
+
+
+
+Addon
+#include <unistd.h>
+int gethostname(char *hostname, size_t size);
+Generally what happens is that an accept connection forks a new child process that will handle the given request and 
+with each new request a new process is forked
+
+int select(int numfds, fd_set *readfds, fd_set *writefds,
+fd_set *exceptfds, struct timeval *timeout);
+
+* fd_set readfds;
+• FD_ZERO(fd_set *set)         //// clears a file descriptor set
+• FD_SET(int fd, fd_set *set)  //  adds fd to the set
+• FD_CLR(int fd, fd_set *set)  // removes fd from the set
+• FD_ISSET(int fd, fd_set *set)
+– tests to see if fd is in the set
+
+
+
+
+
+if timeout is 0 , select will return immediately
+.............NULL it will never timeout
+
+
+
+Articulated Notes:
+* In that state it will wait until all pending data has been successfully sent or until a timeout is hit, in which case the socket is closed forcefully.
+* To make the socket non-blocking use this -> fcntl(sockfd, F_SETFL, O_NONBLOCK);
+* epoll can monitor a very large number of descriptors and will return a list of only those that changed (no need to pass over all the original list of descriptors).
+* To know whether a remote host has closed the connection is that select() will return ready to read you can check which descriptor is set and then you will find recv returns 0 , that way that willl help
+* When you do accept you have to check if the new fd is greater than current max if yes then update the max.
+
+
+
+Partial send handling
+
+while(total < *len) {
+n = send(s, buf+total, bytesleft, 0);
+if (n == -1) { break; }
+total += n;
+bytesleft -= n;
+}
+*len = total; // return number actually sent here
+return n==-1?-1:0; // return -1 on failure, 0 on success
+}
+
+
+
+Now The ULTIMATE
+
+HOW TO FIX MESSAGE BOUNDARIES IN TCP:
+ 
+Solution 1:
+Fix some size and send according to that protocol, but that will waste space
+
+>> Fill data in a packet using following protocol
+---size_of_data + header + payload    <There should be maximum limit on payload>
+On receiving side create an array in the form of circular buffer that is large enough to hold 2 packets and reading style will be the same 
+
+
+
+
+
+
+
+
+
+
+
+******************* Multithreading **************
+
+
+max thread can be found at 
+ (62304) /proc/sys/kernel/threads-max
+
+Multitasking OS - Multiple processes
+Multithreading OS - Multiple threads
+pid_t  pid;
+
+
+
+Process is a program in execution and can have following states : ready, running, blocked, terminated
+Thread is basic unit of CPU utilization.
+That's because the kernel schedules threads rather than processes.
+When a process begins, it begins with a single thread.
+
+> pthread_t p;
+> pthread_attr_t attr;
+> pthread_create(&p, &attr, void *(*start_routine) (void *), void *arg);
+> pthread_detach(
+> pthread_join(thr, &res);    where void *res  print it like *(int*)res);
+
+Process context switching involves switching the memory address space. This includes memory addresses, mappings, page tables, and kernel resources
+detach takes no arguments while join takes 2
+The main distinction between a thread switch and a process switch is that during a thread switch, the virtual memory space remains the same, while it does not during a process switch  the processor's Translation Lookaside Buffer (TLB) or equivalent gets flushed making memory accesses much more expensive
+
+The new thread inherits the calling thread's floating-point environment (fenv(3)).
+
+       The initial value of the new thread's CPU-time clock is 0 (see
+       pthread_getcpuclockid(3)).
+
+The new thread inherits copies of the calling thread's capability
+       sets (see capabilities(7))
+> pthread_create can fail if there are no resources, attr values are wrong or No permission
+> By default, a new thread is created in a joinable state,
+       unless attr was set to create the thread in a detached state (using
+       pthread_attr_setdetachstate(3))
+
+
+> Stack size limit can be get by ulimit -s
+
+
+
+When a pthread is cancelled its reaction depends on cancelability state and type
+>State and Type
+State refers whether cancel is enabled or disabled and type like deferred or async(immediately killed, its bad)
+pthread_setcanceltype(3),
+pthread_setcancelstate(2),
+int pthread_attr_setdetachstate(pthread_attr_t *attr, int detachstate);
+int pthread_attr_getdetachstate(const pthread_attr_t *attr, int *detachstate);
+
+
+ A thread's cancellation type, determined by pthread_setcanceltype(3), may be either asynchronous or deferred 
+
+> When a thread is cancelled Cancellation clean-up handlers are popped (in the reverse of the order in which they were pushed) and called.  (See
+pthread_cleanup_push(3).
+> Thread-specific data destructors are called, in an unspecified order.  (See pthread_key_create(3).)
+> The thread is terminated After a canceled thread has terminated, a join with that thread using pthread_join(3) obtains PTHREAD_CANCELED
+
+s = pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL); to disable cancellation
+
+printf("thread_func(): started; cancellation disabled\n");
+sleep(5);
+printf("thread_func(): about to enable cancellation\n");
+
+s = pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+
+pthread_exit does not terminate the thread immediately, it runs cancellation handlers first
+
+
+Name three thread design patterns 
+1. Thread pool (Boss/Workers)
+2. Peer (Work crew)
+3. Pipeline
+
+
+
+write(1, buf, strlen(buf)); it is preferred over printf because printf is buffered and in case of multithreading it might now throw whole o/p on the screen
+
+Mutexes
+
+pthread_mutex_t pmx = PTHREAD_RECURSIVE_MUTEX_INITIALIZER / PTHREAD_MUTEX_INITIALIZER / PTHREAD_ERRORCHECK_MUTEX_INITIALIZER;
+pthread_mutexattr_settype()  - PTHREAD_MUTEX_RECURSIVE, PTHREAD_MUTEX_DEFAULT, PTHREAD_MUTEX_NORMAL, 
+int pthread_mutexattr_gettype(const pthread_mutexattr_t *restrict attr,
+int *restrict type);
+int pthread_mutexattr_settype(pthread_mutexattr_t *attr, int type);
+
+To set the type of mutexes as robust and else use these 2 methods
+int pthread_mutexattr_getrobust(const pthread_mutexattr_t *restrictattr, int *restrictrobust);
+int pthread_mutexattr_setrobust(pthread_mutexattr_t *attr, PTHREAD_MUTEX_ROBUST);
+Mutex destroy can fail if mutex is locked or used by a condition variable.
+
+
+This type of mutex does not detect deadlock. A thread attempting to relock this mutex without first unlocking it shall deadlock. Attempting to unlock a mutex locked by a different thread results in undefined behavior. Attempting to unlock an unlocked mutex results in undefined behavior.
+To check the state of mutexes or check errors use : PTHREAD_MUTEX_ERRORCHECK
+Error checking is also provided in pTHREAD_MUTEX_RECURSIVE : It is necessary in recursive functions.
+
+Example where recursive mutex are required
+
+public void Process(...)
+{
+  acquire_mutex(mMutex);
+  // Heavy processing
+  ...
+  reset();
+  ...
+  release_mutex(mMutex);
+}
+
+public void reset()
+{
+  acquire_mutex(mMutex);
+  // Reset
+  ...
+  release_mutex(mMutex);
+}
+
+
+A lock and calls B which in turns call C now if C again try to lock that mutex it will results into a deadlock
+
+
+
+Random Sys calls:
+mmap - maps a file into memory like if there are 2 processes which are performing i/o on a single file. Then you jave to made several file specifc calls
+instead you can bring the whole file into memory and work with it.
+
+int fd;
+fd = open("mapdemofile", O_RDWR);
+
+//Memory mapped files can easily shared among multiple processes
+//PROT refers to the protection argument.
+void *mmap(void *addr,    size_t len,    int prot,             int flags,             int fildes,   off_t off);
+                    0,   <-size->    <-PROT_READ/WRITE->  <MAP_SHARED/PRIVATE>       <file_desc>     <offset.
+int munmap(caddr_t addr, size_t len);
+
+
+
+
+
+
+Robust mutex is that which can be handled even when a process dies
+
+
+
+Named pipe lifetime extends even after termination of process
+
+
+IPC 
+Boss/Worker - One server handles the requests and pass it on to the peers
+Workcrew/Peer Model - Multiple threads are responsible for their own work
+pipeline - suboperations handles by different processes
+
+
+
+
+
+Sample select code :
+
+
+fd_set fd_in, fd_out;
+struct timeval tv;
+ 
+// Reset the sets
+FD_ZERO( &fd_in );
+FD_ZERO( &fd_out );
+ 
+// Monitor sock1 for input events
+FD_SET( sock1, &fd_in );
+ 
+// Monitor sock2 for output events
+FD_SET( sock1, &fd_out );
+ 
+// Find out which socket has the largest numeric value as select requires it
+int largest_sock = sock1 > sock2 ? sock1 : sock2;
+ 
+// Wait up to 10 seconds
+tv.tv_sec = 10;
+tv.tv_usec = 0;
+ 
+// Call the select
+int ret = select( largest_sock + 1, &fd_in, &fd_out, NULL, &tv );
+ 
+// Check if select actually succeed
+if ( ret == -1 )
+    // report error and abort
+else if ( ret == 0 )
+    // timeout; no event detected
+else
+{
+    if ( FD_ISSET( sock1, &fd_in ) )
+        // input event on sock1
+ 
+    if ( FD_ISSET( sock2, &fd_out ) )
+        // output event on sock2
+}
+When the select interface was designed and developed, nobody probably expected there would be multi-threaded applications serving many thousands connections
+The answer is, “If a file descriptor being monitored by select() is closed in another thread, the result is unspecified. When the remote socket is closed you
+will get read as 0
+select() being used for portability
+and select precision is in nanoseconds() while poll() has of milliseconds()
+
+There is no hard limits in using poll() function. it can detect remote peer shutdown without monitoring for read events.
+
+
+Deadlock
+A condition ina computer system when 2 or more processes are waiting to acquire a resource which in turn is acquired by another resource and creating a circular dependency > Correction can be by:
+> Process Termination (Age and priority taken into account)
+> Resource pre-emption
+
+ deadlock avoidance is the Banker's algorithm, which requires resource usage limit to be known in advance
+
+Context switching are fast when working with threads. The reason is that we only have to save and/or restore PC, SP and registers
+Fault-tolerance and scalability is the main advantages of using processes vs. threads. Feasibility of running threads on multiprocessor system
+Bugggy. Multiple concurrent processes allows one process to crash without necessarily crashing the others.
+
+Spinlocks are locks which spin on mutexes. Spinning refers to continuously polling until a condition has been met. In the case of spinlocks, if a thread cannot obtain the mutex, it will keep polling the lock until it is free. The advantage of a spinlock is that the thread is kept active and does not enter a sleep-wait for a mutex to become available, thus can perform better in certain cases than typical blocking-sleep-wait style mutexes. Mutexes which are heavily contended are poor candidates for spinlocks. 
+
+Spinlocks should be avoided in uniprocessor contexts.
+1. Mutex
+2. Join
+3. Condition variables
+4. Barriers
+5. Spin lock
+6. Semaphore
+
+
+or locks, the idea is that you acquire a lock and then do your work knowing that nobody else can interfere, then release the lock.
+
+For "lock-free", the idea is that you do your work somewhere else and then attempt to atomically commit this work to "visible state", and retry if you fail.
+
+The problems with "lock-free" are that:
+
+it's hard to design a lock-free algorithm for something that isn't trivial. This is because there's only so many ways to do the "atomically commit" part (often relying on an atomic "compare and swap" that replaces a pointer with a different pointer).
+if there's contention, it performs worse than locks because you're repeatedly doing work that gets discarded/retried
+it's virtually impossible to design a lock-free algorithm that is both correct and "fair". This means that (under contention) some tasks can be lucky (and repeatedly commit their work and make progress) and some can be very unlucky (and repeatedly fail and retry)
+
+
+
+4 layers are used in TCP
+Application
+transport
+Internet 
+link
+
+So to on/off a particular bit do          n & ~(1<<k-1)  it will be 1111 0 1111111 & it with original number that bit will beome 0
+to on a particular bit  n | (1<<k-1)
+
+An example when child inherit the file descriptors is the example of pipe
+pipe() example
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <unistd.h>
+int main(void)
+{
+ int pfds[2];
+ char buf[30];
+ pipe(pfds);
+ if (!fork()) {
+ printf(" CHILD: writing to the pipe\n");
+ write(pfds[1], "test", 5);
+ printf(" CHILD: exiting\n");
+ exit(0);
+ } else {
+ printf("PARENT: reading from pipe\n");
+ read(pfds[0], buf, 5);
+ printf("PARENT: read \"%s\"\n", buf);
+ wait(NULL);
+ }
+ return 0;
+}
+
+#include <sys/msg.h>
+#include <stddef.h>
+key_t key;
+int msqid;
+struct pirate_msgbuf pmb = {2, { "L'Olonais", 'S', 80, 10, 12035 } };
+key = ftok("/home/beej/somefile", 'b');
+msqid = msgget(key, 0666 | IPC_CREAT);
+/* stick him on the queue */
+msgsnd(msqid, &pmb, sizeof(struct pirate_info), 0);
+//To receive
+msgrcv(msqid, &pmb, sizeof(struct pirate_info), 2, 0);
+
+ipcs()  //list the message queues
+ipcrm()  //remove the message Qs
+
+int msgctl(int msqid, int cmd,
+ struct msqid_ds *buf);
+to remove the queue ->   msgctl(Qid, IPC_RMID, 0)
+

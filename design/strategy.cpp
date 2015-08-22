@@ -18,6 +18,14 @@ else
 
 };
 
+class client{
+strategy st;
+public:
+strategy getStrategy(){
+return st;
+}
+};
+
 int main(){
 client c;
 c.getStrategy.getTransform("bezier").call();
