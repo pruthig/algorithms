@@ -1,0 +1,94 @@
+//Program to interface not to implementation...If your code is written to an interface
+//then i can ne used to initiate all classes that implements that interface through polymorphism...so not tied to any particular concrete class. Encapsulating the classes/methods that create objects is better idea..
+//Separation between what varies and whats shouldn't shud be separated
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Simple Factory Method:
+>>Just delegate the creation of objects to a specific class
+Put the above creational object in new object called SimplePizzaFactory
+Just move --> the creational object out of its use
+
+class SimplePizzaFactory{
+public Pizza createPizza(string s){
+if( s == "TangPizza")
+	pizza = new TangPizza;
+else if(s == "CheezyPizza")
+	pizza = new CheezyPizza;
+else
+	pizza = new DefaultPizza;
+}
+return pizza;
+}
+
+
+Official Definition...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The Factory Method Pattern defines an interface for creating an object, but lets subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses
+------------------------------------------------------------------------------
+
+//Creator classes
+******************************************* Creator classes *******************************
+class pizzastore{
+Pizza orderPizza(string s){
+createPizza(s);
+}
+bakePizza(pizza);         /*Not expected to modified
+addCondiments(pizza);       for over large period 
+return pizza;              of time. */
+}
+
+class NYpizzastore : public pizzastore{
+Pizza createPizza(string s){
+if(s == "tata")
+return new TaTaPizza;                            //while TaTaPizza is of type Pizza
+}
+};
+
+class ChicagoPizzaStore : public pizzastore{};
+
+***************************************  Product classes  ***********************************
+class Pizza{};
+
+class NYPizza : public Pizza{};
+class cheezyPizza : public Pizza{};
+class lubPizza : public Pizza{};
+
+###################################################################################################
+IN MAIN FUNCTION
+
+pizzastore p = new NYpizzastore;
+Pizza p = p.orderPizza("cheese");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///// Now here in factory method we can delegate the mandate to create pizza to subclasses rather than creating yourself
+
+
+                 PizzaStore
+                  /      \
+                 /        \
+                /          \
+          NYPizzaStore      ChicagoPizzaStore
+
+PizzaStore p  =  new NYPizzaStore;
+p.orderPizza("Cheese");
+//Now depending upon the store corresponsing version of createPizza() will be called
+
+---Pizza pz = createPizza("Cheese");  //called inside p's orderPizza method

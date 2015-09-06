@@ -1,0 +1,34 @@
+Double Check Lock Pattern
+
+//Here you need to specify the class type along with the definition of static function defined inside a class...
+Singleton* Singleton::instance() {
+   if (pInstance == 0) { // 1st test
+      Lock lock;
+      if (pInstance == 0) { // 2nd test
+         pInstance = new Singleton;
+      }
+   }
+   return pInstance;
+}
+
+
+State Machine Design pattern
+
+We create a table of function pointers
+Used Singleton and Strategy Pattern
+Have knowledge about Facade/Factory pattern
+
+
+Strategy pattern specifically defines a family of algorithms encapsulate each one in an interface and make them interchangeable depending  on the client using it.
+Generic example:
+SalesOrder (class) calculates tax using CalcTax (class) which is an interface , USTax (class) and CanTax (class) are derived from this base class
+Concrete Strategies implement these different algorithms . the context call these concrete strategy algorithm using this generic Strategy interface.
+Context holds that object/pointer(in case of abstract class) of strategy.
+
+
+Creational design patterns are Factory Method, Abstract Factory, Builder, Singleton, Object Pool, Prototype and Singleton
+Structural design patterns are Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Private Class Data and Proxy
+Behavioral patterns are Chain of responsibility, Command, Interpreter, Iterator, Mediator, Memento, Null Object, Observer, State, Strategy, Template method, Visitor
+
+
+
