@@ -134,9 +134,11 @@ void mergeSort(int l, int r)
 
 void merge(int l, int mid, int r)
 {
+	//Create two temporary lists of sizes that needs to be merged
 	struct linked *p1 = createlinked(mid-l+1);
 	struct linked *p2 = createlinked(r-mid);
 	
+	//Fill the data from the original nodes 
 	struct linked* p_d = p1;
 	for(int i = l; i <= mid; i++){
 
@@ -152,20 +154,24 @@ void merge(int l, int mid, int r)
 	}
 
 	int i = l;
+	//Actually we have all the elements in temporaries so we can compare those 2 and fill data in the major list
 	while(p1 != NULL && p2 != NULL && i<=r)
 	{
 		if(p1->node < p2->node){
+			//copy data in original list
 			getlinkedPointer(i)->node = p1->node;
 			p1 = p1->next;
 			
 		}
-		else{
+		else{		
+			//copy data to the original list
 			getlinkedPointer(i)->node = p2->node;
 			p2 = p2->next;
 		}
 		i++;
 	}
-
+	
+	//Copy the left nodes
 	if(p1 != NULL && p2 == NULL && i<=r){
 		while(p1 != NULL){
 			getlinkedPointer(i)->node = p1->node;

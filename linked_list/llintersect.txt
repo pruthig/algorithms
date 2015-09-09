@@ -31,3 +31,9 @@
 * if d>0 traverse c2 that many times and then compare the 2 lists moving pointers one by one.
 * if d<0 traverse c1 that many times and then compare 2 lists moving pointers 1 by 1.
 * if found intersection then return it else return "Not found"
+
+//Approach 4
+* Take a visited flag with each node
+* Traverse the first list and marked its visited flag to true
+* Traverse the second list and if you find the visited flag true while parsing \
+  then that denotes the intersecting node

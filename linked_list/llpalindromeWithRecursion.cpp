@@ -15,16 +15,15 @@ void printElement();
 bool checkWithLoop(struct linked* h, int p, int lvl);
 
 struct linked{
-char node;
+int node;
 struct linked *next;
 };
 
-struct linked *head = (struct linked*)malloc(sizeof(struct linked));
-
+struct linked *head = NULL;
+static struct linked* second = NULL;
 int main()
 {
 int input;
-head->next = NULL;
 
 do{
 cout<<"=====================\n"<<"1. Insert"<<endl<<"2. Check Palindrome"<<endl<<"3. print"<<endl<<"-1. Exit"<<"\n===================="<<endl;
@@ -56,41 +55,46 @@ return 0;
 
 
 void insertElement(){
-char element;
-struct linked* dummy = head;
+int element;
 cout<<"Enter the element you want to insert\n";
 cin>>element;
-while(dummy->next != NULL)
-dummy = dummy->next;
 
 struct linked *newNode = (struct linked*)malloc(sizeof(struct linked));
 newNode->next = NULL;
 newNode->node = element;
+
+if(head == NULL){
+	head = newNode;
+	return;
+}
+
+	
+struct linked* dummy = head;
+while(dummy->next != NULL)
+	dummy = dummy->next;
+
 
 //insert now
 dummy->next = newNode;
 }
 
 
-static struct linked* second;
 
 void checkPalindrome(){
-struct linked *dummy = head->next;
+struct linked *dummy = head;
 
 int count = 0;
 for(;dummy != NULL; count++, dummy=dummy->next);
 cout<<"Number of element in the list "<<count<<endl;
 
-dummy = head->next;
+dummy = head;
 
 //dummy points to middle after this operation
-for(int i=0; i <= count/2 ;i++, dummy = dummy->next);
+for(int i=0; i <= count/2 - 1 ;i++, dummy = dummy->next);
 
-if(count%2 != 0)
-	second = dummy->next;
+second = dummy->next;
 
-	second = dummy;
-dummy = head->next;
+dummy = head;
 
 if (checkWithLoop(dummy, count, 0))
 	cout<<"List is Palindrome\n";
@@ -101,7 +105,7 @@ else
 
 void printElement(){
 
-struct linked *dummy = head->next;
+struct linked *dummy = head;
 
 while(dummy != NULL){
 cout<<dummy->node<<"-> ";
