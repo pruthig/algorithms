@@ -1,4 +1,5 @@
 //All nodes finder will find all the nodes having right and left childern
+//It uses level order traversal to do the same
 #include<iostream>
 #include<queue>
 

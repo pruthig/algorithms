@@ -11,7 +11,7 @@ using namespace  std;
 
 void insertElement();
 void deleteElement();
-void reverseList();
+void reverseList(struct linked*, struct linked*);
 void printElement();
 
 
@@ -29,7 +29,7 @@ head->next = NULL;
 head->node = 0;
 
 do{
-cout<<"=====================\n"<<"1. Insert"<<endl<<"2. delete"<<endl<<"3. print"<<endl<<"-1. Exit"<<"\n===================="<<endl;
+cout<<"=====================\n"<<"1. Insert"<<endl<<"2. reverse"<<endl<<"3. delete "<<endl<<"4. print"<<endl<<"-1. Exit"<<"\n===================="<<endl;
 cout<<"Enter the input\n";
 cin>>input;
 
@@ -38,7 +38,7 @@ case 1:
 insertElement();
 break;
 case 2:
-reverseList();
+reverseList(NULL, head);
 break;
 case 3:
 deleteElement();
@@ -99,7 +99,7 @@ cout<<"Sorry Element not found"<<endl;
 
 void printElement(){
 
-struct linked *dummy = head->next;
+struct linked *dummy = head;
 
 while(dummy != NULL){
 cout<<dummy->node<<"-> ";
@@ -109,22 +109,15 @@ cout<<"NULL"<<endl;
 } 
 
 
-void reverseList(){
-struct linked *prev, *current, *next;
-prev = NULL;
-current = head->next;
-next = head->next->next;
-
-while(next != NULL)
-{
-	current->next = prev;
-	prev = current;
-	current = next;
-	next = current->next;
+void reverseList(struct linked *prev, struct linked *cur){
+if(cur == NULL){
+	head = prev;
+	return;
 }
-current->next = prev;
-head->next = current;
-cout<<"Linked list reversed\n";
+
+reverseList(cur, cur->next);
+
+cur->next = prev;
 }
 
 
