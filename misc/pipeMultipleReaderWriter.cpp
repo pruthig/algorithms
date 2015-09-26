@@ -15,6 +15,7 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 void* reader(void* i){
 	char ch;
 	while(1){
+	sleep(25);
 	read(fd[0], &ch, 1);
 	printf("Got input as : %c\n", ch);
 	}
@@ -22,10 +23,13 @@ void* reader(void* i){
 
 void* writerA(void* i){
 	char ch = 'A';
+	int count = 0;
 	while(1){
+	++count;
 	//pthread_mutex_lock(&mx);
 	//pthread_cond_wait(&cond, &mx);
 	write(fd[1], &ch, 1);
+	printf("Written count 'A' : %d\n", count);
 	++ch;
 	//pthread_cond_signal(&cond);
 	//pthread_mutex_unlock(&mx);
@@ -34,10 +38,13 @@ void* writerA(void* i){
 
 void* writera(void* u){
 	char ch = 'a';
+	int count = 0;
 	while(1){
+	++count;
 	//pthread_mutex_lock(&mx);
 	//pthread_cond_wait(&cond, &mx);
 	write(fd[1], &ch, 1);
+	printf("Written count 'a' : %d\n", count);
 	++ch;
 	//pthread_cond_signal(&cond);
 	//pthread_mutex_unlock(&mx);
