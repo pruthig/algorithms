@@ -122,9 +122,8 @@ void findSum()
 		{
 				int s1 = d1?(d1->node):0;
 				int s2 = d2?(d2->node):0;
-				carry = ((s1+s2+carry)/10)?1:0;
 				createNode( (s1+s2+carry)%10);
-
+				carry = ((s1+s2+carry)/10)?1:0;
 				if(d1)
 					d1 = d1->next;
 				if(d2)
