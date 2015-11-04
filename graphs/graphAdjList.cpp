@@ -1,17 +1,19 @@
 #include "graphAdjList.h"
 
+using std::vector;
+
 int Graph::degree(int i) {
-  return graph[i].size();
+  return graphVector[i].size();
 }
 
 void Graph::addEdge(int v, int w) {
-  graph[v].push_back(w);
+  graphVector[v].push_back(w);
 }
 
 bool Graph::deleteEdge(int v, int w) {
   vector<int>::iterator itr;
-  if(searchEdge(v, w) != graph[v].end()) {
-    graph[v].erase(itr);
+  if(searchEdge(v, w) != graphVector[v].end()) {
+    graphVector[v].erase(itr);
     return true;
   }
   return false;
@@ -19,15 +21,27 @@ bool Graph::deleteEdge(int v, int w) {
 
 vector<int>::iterator Graph::searchEdge(int v, int w) {
   vector<int>::iterator itr;
-  for(itr = graph[v].begin(); itr != graph[v].end(); ++itr) {
+  for(itr = graphVector[v].begin(); itr != graphVector[v].end(); ++itr) {
       if(*itr == w) {
         return itr;
     }   
-    return graph[v].end();
+    return graphVector[v].end();
 }
+}
+
+void Graph::addVertex(int v) {
+	vector<int> a;
+	graphVector.push_back(a);
 }
 
 
 int main(){
+	Graph gObject;
+	vector<int> v;
+	gObject.addVertex(1);
+	gObject.addVertex(2);
+
+	gObject.addEdge(0, 2);
+	gObject.addEdge(1, 2);
 	return 0;
 }
