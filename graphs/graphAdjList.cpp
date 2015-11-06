@@ -1,6 +1,15 @@
 #include "graphAdjList.h"
 
-using std::vector;
+void Graph::init(int a){
+    vertexCount = a;
+    marked = new bool[a];
+    edgeTo = new int[a];
+    id = new int[a];
+    counter = 0;
+    for(int i = 0 ; i < a; ++i)
+        marked[i] = false;
+    addVertex(a);
+}
 
 int Graph::degree(int i) {
   return graphVector[i].size();
@@ -30,18 +39,122 @@ vector<int>::iterator Graph::searchEdge(int v, int w) {
 }
 
 void Graph::addVertex(int v) {
-	vector<int> a;
-	graphVector.push_back(a);
+    for(int i = 0; i < v; ++i) {
+        vector<int> a;
+        a.clear();
+    	graphVector.push_back(a);
+    }
+}
+
+void Graph::dfs(int vertex) {
+
+    if(!marked[vertex]) {
+        marked[vertex] = true;
+        std::cout<<"\nw = "<<vertex<<" marked true"<<endl;
+    }
+    id[vertex] = counter;
+    vector<int> vect = graphVector[vertex];
+    for(int w : vect) {
+        if(!marked[w]) {
+            marked[w] = true;
+            std::cout<<"\nw = "<<w<<" marked true"<<endl;
+            dfs(w);
+        }
+    }
+}
+
+void Graph::dfsWithStack(int vertex) {
+    stack<int> stck;
+    
+    stck.push(vertex);
+    while(!stck.empty()) {
+        int m = stck.top();
+        if(marked[m] == true) {
+            stck.pop();
+            continue;
+        }
+
+        marked[m] = true;
+        std::cout<<"\nm = "<<m<<" marked true"<<endl;
+        stck.pop();
+        vector<int> vect = graphVector[m];
+
+        for(int w : vect) {
+            
+            if(!marked[w]) {
+                stck.push(w);
+            }
+        }
+
+    }
+}
+
+//Do the bfs of graph With Q
+void Graph::bfsWithQueue(int vertex) {
+    queue<int> q;
+    
+    q.push(vertex);
+    marked[vertex] = true;
+    while(!q.empty()) {
+        int m = q.front();
+        std::cout<<"\nm = "<<m<<" marked true"<<endl;
+        q.pop();
+        vector<int> vect = graphVector[m];
+
+        for(int w : vect) {
+            
+            if(!marked[w]) {
+                marked[w] = true;
+                edgeTo[w] = m;
+                q.push(w);
+            }
+        }
+
+    }
 }
 
 
-int main(){
-	Graph gObject;
-	vector<int> v;
-	gObject.addVertex(1);
-	gObject.addVertex(2);
+void Graph::cc() {
+    for(int  i = 0; i < vertexCount; ++i) {
+        if(!marked[i]) {
+            dfs(i);
+            ++counter;
+        }
+    }
+}
 
-	gObject.addEdge(0, 2);
+
+//To cover DFS we need to have double entries for edges: x,y and y,x
+int main(){
+    int vertices;
+    std::cout<<"Enter the vertices\n";
+    std::cin>>vertices;
+	Graph gObject;
+    gObject.init(vertices);
+
+	gObject.addEdge(0, 1);
+	gObject.addEdge(0, 3);
+
+	gObject.addEdge(1, 0);
 	gObject.addEdge(1, 2);
+	gObject.addEdge(1, 3);
+	gObject.addEdge(1, 5);
+
+	gObject.addEdge(2, 1);
+	gObject.addEdge(2, 5);
+
+	gObject.addEdge(3, 0);
+	gObject.addEdge(3, 1);
+	gObject.addEdge(3, 4);
+
+	gObject.addEdge(4, 3);
+	gObject.addEdge(4, 5);
+
+	gObject.addEdge(5, 1);
+	gObject.addEdge(5, 2);
+	gObject.addEdge(5, 4);
+
+
+    gObject.cc();
 	return 0;
 }
