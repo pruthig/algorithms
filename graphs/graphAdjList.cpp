@@ -126,35 +126,37 @@ void Graph::cc() {
 
 //To cover DFS we need to have double entries for edges: x,y and y,x
 int main(){
-    int vertices;
-    std::cout<<"Enter the vertices\n";
-    std::cin>>vertices;
 	Graph gObject;
-    gObject.init(vertices);
+    gObject.init(10);
 
-	gObject.addEdge(0, 1);
-	gObject.addEdge(0, 3);
+	gObject.addEdge(0, 5);
+	gObject.addEdge(0, 6);
 
 	gObject.addEdge(1, 0);
-	gObject.addEdge(1, 2);
-	gObject.addEdge(1, 3);
-	gObject.addEdge(1, 5);
 
+	gObject.addEdge(2, 3);
 	gObject.addEdge(2, 1);
-	gObject.addEdge(2, 5);
 
-	gObject.addEdge(3, 0);
-	gObject.addEdge(3, 1);
 	gObject.addEdge(3, 4);
 
-	gObject.addEdge(4, 3);
-	gObject.addEdge(4, 5);
+	gObject.addEdge(4, 9);
 
-	gObject.addEdge(5, 1);
-	gObject.addEdge(5, 2);
-	gObject.addEdge(5, 4);
+	gObject.addEdge(5, 6);
+
+	gObject.addEdge(6, 1);
+	gObject.addEdge(6, 7);
+	gObject.addEdge(6, 2);
+
+	gObject.addEdge(7, 2);
 
 
-    gObject.cc();
+	gObject.addEdge(8, 3);
+	gObject.addEdge(8, 9);
+	gObject.addEdge(8, 2);
+	gObject.addEdge(8, 7);
+
+	gObject.addEdge(9, 3);
+
+    gObject.bfsWithQueue(0);
 	return 0;
 }

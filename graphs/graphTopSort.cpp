@@ -81,24 +81,34 @@ void Graph::topSort() {
 //To cover DFS we need to have double entries for edges: x,y and y,x
 int main(){
 	Graph gObject;
-    gObject.init(7);
+    gObject.init(10);
 
-	gObject.addEdge(0, 1);
-	gObject.addEdge(0, 2);
-	gObject.addEdge(0, 5);
+    gObject.addEdge(0, 1); 
 
-	gObject.addEdge(1, 4);
+    gObject.addEdge(1, 2); 
+    gObject.addEdge(1, 6); 
 
-	gObject.addEdge(3, 2);
-	gObject.addEdge(3, 5);
-	gObject.addEdge(3, 6);
-	gObject.addEdge(3, 4);
+    gObject.addEdge(2, 6); 
+    gObject.addEdge(2, 7); 
+    gObject.addEdge(2, 8); 
 
-	gObject.addEdge(5, 2);
+    gObject.addEdge(3,2); 
+    gObject.addEdge(3, 8); 
+    gObject.addEdge(3, 9); 
 
-	gObject.addEdge(6, 0);
-	gObject.addEdge(6, 4);
+    gObject.addEdge(4, 3); 
 
+    gObject.addEdge(5,0); 
+
+    gObject.addEdge(6, 0); 
+    gObject.addEdge(6, 5); 
+
+    gObject.addEdge(7, 6); 
+    gObject.addEdge(7, 8); 
+
+
+    gObject.addEdge(9,4); 
+    gObject.addEdge(9, 8); 
     gObject.topSort();
     cout<<endl;
 	return 0;
