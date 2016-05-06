@@ -1,0 +1,45 @@
+Only multiply equalities when both the sides of inequality is +ve
+
+Square root of x^2 = |x|
+
+(Others were more amorous: I met a femme fatale with a leg in plaster cast. On it was scrawled, like a lover’s note, #Brexit.)
+
+When DS asks for a combination of variables, don't solve for each variable, just extract out the value of equation.
+When a value of a variable is sought and you are getting 2 values, then the answer of the problem would be no solution even after combination of the 2 statements
+
+In DS questions for Inequality, it might happen that you have to check -ve and +ve sign of variables of given equation to arrive at a final answer.
+
+x^2 - x means 0 < x < 1
+
+If you find difficult to simplify an expression then simply plug-in values of random numbers and you can check the result with all the answer choices you've got
+If the exponent is between 0 and 1 the number > than the original proper fraction
+
+The retailer has less than twice as many radios as clocks in inventory.
+r < 2c
+
+
+Absolute equation both sides, consider only 2 cases  ++ and +-
+
+sq_root(b^2 - 4*a*c) is called the discriminant in the equation. If it is 0, eqn has 1 solution, if > 0 then it gives 2 solution else eqn has no solution
+For function problems, pick number and try out  equations
+
+when you do not know the sign of numbers, you cannot take reciprocals
+if x < y then 1/x > 1/y either if both are +ve or both are -ve
+Do not flip sign when one is +ve and other one is -ve
+
+Taking squares:
+if both sides positive raise the square and sign will remain the same
+if both side -ve flip the sign. 
+If not sure whether number could be +ve or -ve, you cannot do squares
+
+
+====================   Word problems ======================
+
+Algebraic translations:
+Using equations
+Rates and Work
+Make RT = D pattern for rate/distance problems.
+
+Average speed of a person that walked to/ from for a distance with speeds x and y is 2*x*y/(x+y)
+
+When dealing with tasks, take the task as 1 unit
