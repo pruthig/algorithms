@@ -31,7 +31,18 @@ Taking squares:
 if both sides positive raise the square and sign will remain the same
 if both side -ve flip the sign. 
 If not sure whether number could be +ve or -ve, you cannot do squares
+Square of odd is odd and even is even
+====================  Fractions/Decimals =================
 
+*   If there is increment of 25% in value for a given commodity over a period of n years, the resultant value will be :
+    (original_value)* (1.25)^n
+*   Similarly, in case where value if being decremented, say by 20% use the below reverse addition form
+    (original_value) * (0.8)^n
+*   Use the above method to solve questions like: A commodity price first incremented by 25%, then inc. by 40% and
+    finally decremented by 20% 
+    The solution will be like : (original_value)*(1.25)*(1.4)*(0.8)
+*   Incrementing the value of numerator and denominator by constant amount takes its value closer to 1 and vice versa.
+*   Formula to find average speed - (2*a*b)/(a+b)
 
 ====================   Word problems ======================
 
@@ -43,3 +54,27 @@ Make RT = D pattern for rate/distance problems.
 Average speed of a person that walked to/ from for a distance with speeds x and y is 2*x*y/(x+y)
 
 When dealing with tasks, take the task as 1 unit
+
+================ Set ==========================
+
+*   For all evenly spaced set, the average equals - (first+last)/2
+*   The sum of that set is (average)*(numer_of_items)
+*   If a given median is not integer then there are even number of elements for sure.
+*   The product of k elements is always divisible by k!
+*   For any consecutive set of odd number of integers, the sum is always divisible by number of elements.
+*   Same is not applicable for set of even number of consecutive integers.
+*   Weighted average is like giving unequal precedence to the numbers in the set, example:
+    
+    m*(a/(a+b)) + n*(b/(a+b)) = x
+
+==============================================================
+
+
+
+
+
+
+
+$$$$$$$$    ERROR LOG   $$$$$$$$$$$$
+
+*   Read the statement twice/thrice in data sufficiency question and write down what is asked for.
