@@ -69,7 +69,34 @@ When dealing with tasks, take the task as 1 unit
 
 ==============================================================
 
+---------------------  Number Properties ------------------------------
 
+if sum of 2 primes is odd then one of the number is definitely will be 2
+There are no guaranteed outcome in division operations so it can be odd,even or a decimal number
+
+"OR" means add
+"AND"means multiply
+
+n! for arrangement of n things given all are unique and if there are some similar numbers also then the result will be n!/m! where m is the number of like things
+
+GCF of number m and n X LCM of number m and n = m X n
+All perfect squares have odd number of factors.
+You can perform arithmetic on remainder itself:
+*   If a number x leaves 5 as a remainder on division by 7 and y leaves remainder of 5 on divisible by 7. Then the total is : 10, correcting it will give: 10 - 7 = 3
+
+To find total number of factors of a number : like 2,000
+divide the number in prime factors - 2^4 + 5^3, now there are 5 options for 2 and 4 options for 3 (considering that a factor might not have any of them) Using combinatorics - (4+1)*(3+1) = 20
+
+If a number is given (variable) and another number is given + the LCM of both the numbers is given, to find the variable put both the number and the LCM in a table and factorize to find.
+
+E <-- to find
+45  -  5 X 9
+225 -  5 X 5 X 9
+Now to complete 225 E must contains two 5's and 0 or more 9's, 
+If it contains only 5's it can be 5 X 5 X 5 = 75
+or 5 X 5 = 25
+
+----------------------------------------------------------------------------------------
 
 
 
