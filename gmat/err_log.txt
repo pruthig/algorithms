@@ -1,0 +1,34 @@
+/*
+Documentation of progress made and error committed.
+*/
+
+            =====    Quantitative    ======
+
+Source : GMAT 2015 Quant Review
+Target - 60 sec/qn with 95% accuracy.
+
+Questions   :   Incorrect   :   Time spent per question :   Accuracy Obtained
+1-20            2               40.75                   :   90%
+21-40           3               59.5                    :   85%
+41-60           2               42                      :   90%
+61-80           2               89                      :   90%
+81-110          5               77                      :   83%
+111-130         1               Untimed                 :   95%
+
+                                    Average accuracy    :   89%
+
+                                Cumulative error log:
+
+Questions on Problem Statements:
+
+1-20
+Wrong interpretation of statements              --          Spend more time to extract intricate details
+21-40
+Missed checking some answer choices             --          Try to cover each scenario
+41-60
+Wrong calculation                               --          Write more clearly in notebook/scratchpad
+Incorrect equation formation from word problem  --          Read statement at least twice
+61-80
+Wrong assumption                                --          Assume only if certain condition is given with the Qn.
+
+
