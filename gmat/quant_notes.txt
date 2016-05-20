@@ -98,10 +98,10 @@ or 5 X 5 = 25
 
 ----------------------------------------------------------------------------------------
 
+Short Solutions:
 
+For any prime number n > 3 , whats the remainder if n^2 is divisible by 12.
+Consider the product of elements (n-1) and (n+1)
+both are before and after the prime number and have a difference of 2. So, (n-1) is divisible by 2 and (n+1) by 4. Since n is divisible by 12 one of the n-1, n+1 will be divisible by 3 because n is a prime number, so the number will be divisible by 24 (2*4*3)
+or (n-1)*(n+1) or (n^2 - 1) will be divisible by 24. So dividing n^2 will us the remainder 1.
 
-
-
-$$$$$$$$    ERROR LOG   $$$$$$$$$$$$
-
-*   Read the statement twice/thrice in data sufficiency question and write down what is asked for.
