@@ -32,6 +32,29 @@ if both sides positive raise the square and sign will remain the same
 if both side -ve flip the sign. 
 If not sure whether number could be +ve or -ve, you cannot do squares
 Square of odd is odd and even is even
+
+====================  Combinatorics ======================
+In problems where it is required to insert things in odd positions use the below depiction
+
+| - | - | - | - | - |
+e.g - 4 boys, 3 girls arrange with no girls together - 4! * 5*4*3*2*1
+
+Formula to find rank of a word in dictionary
+Write the word and put its relevant alphabetical rank above it(which is relative to the given alphabets)
+For example for "RANDOM" it will be - R(6), A(1), N(4), D(2), O(5), M(3)
+for each word write the numbers of integers - smaller than that integer on the right - below that number.
+For RANDOM it will be : 5, 0, 2, 0, 1, 0
+The rank would be 1 + n!*first_number + (n-1)!*second_number + ...
+For "RANDOM" - 1 + 5*5! + 0*4! + 2*3! + 0*2! + 1*1! + 0*0! = 1+600+12+1 = 614
+
+Number of lines that can be drawn between set of n points = nC2
+Number of triangles that can be drawn between set of n points = nC3
+
+Number of circular arrangements for n things = (n - 1)!
+
+
+
+
 ====================  Fractions/Decimals =================
 
 *   If there is increment of 25% in value for a given commodity over a period of n years, the resultant value will be :
@@ -55,7 +78,7 @@ Average speed of a person that walked to/ from for a distance with speeds x and 
 
 When dealing with tasks, take the task as 1 unit
 
-================ Set ==========================
+========================= Set =================================
 
 *   For all evenly spaced set, the average equals - (first+last)/2
 *   The sum of that set is (average)*(numer_of_items)
@@ -67,9 +90,7 @@ When dealing with tasks, take the task as 1 unit
     
     m*(a/(a+b)) + n*(b/(a+b)) = x
 
-==============================================================
-
----------------------  Number Properties ------------------------------
+======================= Number Properties =======================
 
 if sum of 2 primes is odd then one of the number is definitely will be 2
 There are no guaranteed outcome in division operations so it can be odd,even or a decimal number
@@ -96,7 +117,22 @@ Now to complete 225 E must contains two 5's and 0 or more 9's,
 If it contains only 5's it can be 5 X 5 X 5 = 75
 or 5 X 5 = 25
 
-----------------------------------------------------------------------------------------
+============================== Modulus =================================
+For question involving finding out the number of solution to a equation which involves multiple Modulus based terms
+Get value of x from each sub-equation, put its value and get the outcome and that solution of x should satisfy the initial solution of the sub-equation was inserted.
+This method is called the "critical values" method
+like: |x+3| – |4-x| = |8+x| How many solutions will this equation have? It will have 0
+Here, put values in the extreme and middle range of -3, 4, and -8 one-by-one and find the value of x, it won't satisfy the inserted value.
+Range will be :
+x<-8
+-8<x<-3
+-3<x<4
+x>4
+
+======================= Coordinate Geometry ==============
+*	Perpendicular lines have -ve reciprocal slopes.If slope of line is m, then slope of line perpendicular to this line will be (-1/m)
+*	
+-------------------------------------------------------------------------------------------
 
 Short Solutions:
 
@@ -104,4 +140,6 @@ For any prime number n > 3 , whats the remainder if n^2 is divisible by 12.
 Consider the product of elements (n-1) and (n+1)
 both are before and after the prime number and have a difference of 2. So, (n-1) is divisible by 2 and (n+1) by 4. Since n is divisible by 12 one of the n-1, n+1 will be divisible by 3 because n is a prime number, so the number will be divisible by 24 (2*4*3)
 or (n-1)*(n+1) or (n^2 - 1) will be divisible by 24. So dividing n^2 will us the remainder 1.
+There are 15 prime numbers between 1-50 and 25 prime numbers between 1-100
+Do use P(~A) = 1 - P(A) at appropriate places
 

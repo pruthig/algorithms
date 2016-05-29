@@ -61,3 +61,8 @@ Didn't write down all options.			--	    Most of the questions are trivial, try a
 101-124
 Develop more hands-on on probability and combinatorics to score high.
 Try both venn and matrix when in confusion.
+
+
+==========================
+Question of finding numbers with 2 distinct digits - Considered that number can contain 2 digit twice (thrice is also there)
+Isosceles triangle one was 100, not able to get that others SHOULD be of 40 degree each.
