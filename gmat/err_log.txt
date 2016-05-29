@@ -4,8 +4,12 @@ Documentation of progress made and error committed.
 
             =====    Quantitative    ======
 
-Source : GMAT 2015 Quant Review
-Target - 60 sec/qn with 95% accuracy.
+#######################################################################################################
+
+
+Source : GMAT 2015 Quant Review :
+--------------------------------
+Target - 75 sec/qn with 95% accuracy.
 -----------------------------  Problem Solving ---------------------------------
 Questions   :   Incorrect   :   Time spent per question (in seconds) :   Accuracy Obtained
 1-20            2               40.75                   	     :   90%
@@ -20,13 +24,16 @@ Questions   :   Incorrect   :   Time spent per question (in seconds) :   Accurac
 
 -----------------------------  Data Sufficiency -----------------------------
 Questions   :   Incorrect   :   Time spent per question (in seconds) :   Accuracy Obtained
-1-20        :   1           :   65.7                       	     :	95%
+1-20        :   1           :   65.7                       	         :	95%
 21-40       :   1           :   78.15                       	     :	95%
-41-70	    :   4	    :   79.5				     :  86.6%
-81-100	    :   6           :   125.2				     :  70%
+41-70	    :   4	        :   79.5				                 :  86.6%
+81-100	    :   6           :   125.2				                 :  70%
+101-124     :   6           :   Untimed                              :  75%
 
-				    Average accuracy	:   86.7%
+				                    Average accuracy	:   83.83%
 
+
+########################################################################################################
 
                                 Cumulative error log:
 
@@ -49,5 +56,8 @@ Didn't read the statement correctly		--	    Take time to go through the question
 21-40	
 Forgot A option while solving B			--	    Ponder if combination of both A and B can give results even if o/p seems bleak
 81-100
-Read statement in rush				--	    Give some more time.
+Read statement in rush				    --	    Give some more time.
 Didn't write down all options.			--	    Most of the questions are trivial, try all options rather than solving the equations.
+101-124
+Develop more hands-on on probability and combinatorics to score high.
+Try both venn and matrix when in confusion.
