@@ -51,9 +51,7 @@ Number of lines that can be drawn between set of n points = nC2
 Number of triangles that can be drawn between set of n points = nC3
 
 Number of circular arrangements for n things = (n - 1)!
-
-
-
+Desc - Fix the position of 1 person and find the max permutation of left out people
 
 ====================  Fractions/Decimals =================
 
@@ -66,6 +64,13 @@ Number of circular arrangements for n things = (n - 1)!
     The solution will be like : (original_value)*(1.25)*(1.4)*(0.8)
 *   Incrementing the value of numerator and denominator by constant amount takes its value closer to 1 and vice versa.
 *   Formula to find average speed - (2*a*b)/(a+b)
+*	Rational number can be represented as a/b which can be written as terminating or repeating decimal. The numbers which cannot be represented in this way are called irrational numbers. such as pi, sq(2). There is no overlap between these sets. rational + irrational = real numbers
+*	There are 25 primes between 1 and 100
+	2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+*	All prime numbers are of the form -> 6*n-1 and 6*n+1
+*	If n is a positive integer there is always a prime number p : n < p < 2n
+*	If a number equals the sum of its proper divisors, it is said to be a perfect number. 6 = 1 + 2 + 3
+*	if a is a factor of b and c, then a is a factor of (b+c)
 
 ====================   Word problems ======================
 
@@ -73,6 +78,8 @@ Algebraic translations:
 Using equations
 Rates and Work
 Make RT = D pattern for rate/distance problems.
+
+For average speed calculation and all take distance of 100
 
 Average speed of a person that walked to/ from for a distance with speeds x and y is 2*x*y/(x+y)
 
