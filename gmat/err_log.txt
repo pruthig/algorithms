@@ -66,3 +66,5 @@ Try both venn and matrix when in confusion.
 ==========================
 Question of finding numbers with 2 distinct digits - Considered that number can contain 2 digit twice (thrice is also there)
 Isosceles triangle one was 100, not able to get that others SHOULD be of 40 degree each.
+
+In a number problem if we were to assign unique code to n people then if x digit long then code range should be taken from length 1 to k
