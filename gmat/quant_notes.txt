@@ -20,6 +20,19 @@ r < 2c
 
 Absolute equation both sides, consider only 2 cases  ++ and +-
 
+==========================  Equations ====================
+To solve quadratic equation without using formula : x^2 + bx + c
+find the numbers, the sum of whom is -b and product is c
+for example:
+Consider the equation : x^2 + x - 12
+Here we have to find the numbers whose sum is -b or -1 and product as -12. the solution is 3 and -4.
+(x+y)^2 - (x-y)^2 = 4*x*y
+(x+y+z)^2 = x^2 + y^2 + z^2 + 2(x*y + y*z + z*x)
+x^3 + y^3 = (x+y)(x^2 + y^2 - x*y)
+x^3 - y^3 = (x-y)(x^2 + y^2 + x*y)
+===============================================================
+
+
 sq_root(b^2 - 4*a*c) is called the discriminant in the equation. If it is 0, eqn has 1 solution, if > 0 then it gives 2 solution else eqn has no solution
 For function problems, pick number and try out  equations
 
@@ -140,6 +153,22 @@ for 1, 3, 7, 9 - Convert number in such a way such that last digit of number is 
 for 2, 4, 6, 8 - keep in mind 76*xxx76 = zxy...76 and 24^any_even_power = xyz...76 and 24^odd_power=24 .. here we will get exact last 2 digits
 (1) if number's 10s digit is even, then last digit will always has to be 25.
 (2) if number's 10s digit is odd, then last digit will always has to be in cyclic pattern of 25, 75,25,75 and so on...
+
+**************
+Last digits of a product of integers are last digits of the product of last digits of these integers.
+For instance last 2 digits of 845*9512*408*613 would be the last 2 digits of 45*12*8*13=540*104=40*4=160=60
+**************
+
+Compound interest than compounds C times in a year, n is the duration and rate is interest rate
+
+
+principal* (1 + rate/C)^(n*C)
+
+|x| + |y| >= |x+y|
+
+Remainder:
+in questions related to if a number divided by x leaves a remainder of a and y leaves remainder b. We can write the equation as xy + (first number common to both the equations)
+In the questions which asks to find the remainder when dividing by 5, frame the equation as (x0 + p)^z now check what is the remainder when p^z will have when divided by 5. on expansion, this equation will have multiple of x0 except the last which will be p^z.
 
 ============================== Modulus =================================
 For question involving finding out the number of solution to a equation which involves multiple Modulus based terms:

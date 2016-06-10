@@ -63,6 +63,23 @@ Develop more hands-on on probability and combinatorics to score high.
 Try both venn and matrix when in confusion.
 
 
+---------------------   OG-13 -----------------------------------------
+Data Sufficiency -
+Questions   :   Incorrect   :   Time spent per question (in seconds) :   Accuracy Obtained
+1-20 		:				:		59 								 :		
+20-50 (31)  :	3			:		82 								 :		90.32
+
+Incorrect + Error Log
+39 - Misread word problem statement.
+41 - Exponents problem in DS, 
+
+Problem Solving - Qn 25 to 70
+Questions   :   Incorrect   :   Time spent per question (in seconds) :   Accuracy Obtained
+45			:		2		:		74								 :		95.55
+
+Incorrect + Error Log
+31, 32 - Inequality questions, misread statement
+
 ==========================
 Question of finding numbers with 2 distinct digits - Considered that number can contain 2 digit twice (thrice is also there)
 Isosceles triangle one was 100, not able to get that others SHOULD be of 40 degree each.
