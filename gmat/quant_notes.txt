@@ -1,4 +1,4 @@
-Only multiply equalities when both the sides of inequality is +ve
+﻿Only multiply equalities when both the sides of inequality is +ve
 
 Square root of x^2 = |x|
 
@@ -166,9 +166,13 @@ principal* (1 + rate/C)^(n*C)
 
 |x| + |y| >= |x+y|
 
+|x+y| > |x-y| only if x and y have same sign
+ 
 Remainder:
 in questions related to if a number divided by x leaves a remainder of a and y leaves remainder b. We can write the equation as xy + (first number common to both the equations)
 In the questions which asks to find the remainder when dividing by 5, frame the equation as (x0 + p)^z now check what is the remainder when p^z will have when divided by 5. on expansion, this equation will have multiple of x0 except the last which will be p^z.
+
+Any integer divided by a power of 2 or 5 will result in a terminating decimal
 
 ============================== Modulus =================================
 For question involving finding out the number of solution to a equation which involves multiple Modulus based terms:
