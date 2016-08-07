@@ -85,7 +85,19 @@ Desc - Fix the position of 1 person and find the max permutation of left out peo
 *	If a number equals the sum of its proper divisors, it is said to be a perfect number. 6 = 1 + 2 + 3
 *	if a is a factor of b and c, then a is a factor of (b+c)
 
-====================   Word problems ======================
+====================   Percentages   ===========================
+
+F = P ( 1 + r/n)^nt, where
+F = Final value
+P = Principal
+r = annual interest rate
+n = number of compounding periods per year
+t = number of years
+
+*	Fraction gets smaller when an integer is subtracted from numerator and denominator of the fraction.
+
+
+====================   Word problems ===========================
 
 Algebraic translations:
 Using equations
