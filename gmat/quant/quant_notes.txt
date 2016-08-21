@@ -226,6 +226,14 @@ x+2=x-3+1..
 no valid value..
 so the solution is x=1
 
+=======================  Work/Rate Problems  ======================
+
+In Work/rate problems, if equations are needed to be proved and numbers are given in term of as even or odd numbers then in that case change them into 2*z for even and 2*z + 1 for odd numbers.
+In case combined rates are given, keep rates as 1/x and 1/y 
+If a machine can complete work in 'a' hours and another can in 'b' hourse then stake of a is 1/a( 1/a + 1/b )
+
+
+====================================================================
 ======================= Coordinate Geometry ==============
 
 We have the rectangle with dimensions 9*6 (9 horizontal dots and 6 vertical). AB is parallel to y-axis and AC is parallel to x-axis.
