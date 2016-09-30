@@ -84,7 +84,14 @@ Desc - Fix the position of 1 person and find the max permutation of left out peo
 *	If n is a positive integer there is always a prime number p : n < p < 2n
 *	If a number equals the sum of its proper divisors, it is said to be a perfect number. 6 = 1 + 2 + 3
 *	if a is a factor of b and c, then a is a factor of (b+c)
-
+*   A fraction will always yield a terminating decimal as long as the denominator has only 2 and 5 as its prime factors
+*   In questions asking whether number can be limited to finite decimals check for '7' and '3' in denominator which should be eliminated to make this happen.
+*   
+--- Rules for Rounding Off -----
+Rule I — When the figure next beyond the last figure or place to be retained is less than 5, the figure in the last place retained shall be left unchanged.
+Rule II — When the figure next beyond the last figure or place to be retained is more than 5 or is 5 followed by any figures other than zeros, the figure in the last place retained shall be increased by 1. --> 13.455 --> 13.5
+Rule III — When the figure next beyond the last figure or place to be retained is 5 alone or 5 followed by zeros only, the figure in the last place retained shall be (a) increased by 1 if it is odd and (b) left unchanged if even (zero would be regarded as an even number for this purpose).
+13.45 -> 13.4, 13.75 -> 13.8
 ====================   Percentages   ===========================
 
 F = P ( 1 + r/n)^nt, where
@@ -117,6 +124,7 @@ When dealing with tasks, take the task as 1 unit
 *   The sum of that set is (average)*(numer_of_items)
 *   If a given median is not integer then there are even number of elements for sure.
 *   The product of k elements is always divisible by k!
+*   x! is divisible by all integers up to and including x
 *   For any consecutive set of odd number of integers, the sum is always divisible by number of elements.
 *   Same is not applicable for set of even number of consecutive integers.
 *   Weighted average is like giving unequal precedence to the numbers in the set, example:
@@ -186,7 +194,13 @@ In the questions which asks to find the remainder when dividing by 5, frame the 
 
 Any integer divided by a power of 2 or 5 will result in a terminating decimal
 
+When the integer x is divided by the integer y, the remainder is 60. Which of the following is a possible
+value of the quotient x/y?
+x = ky + r ==> x/y  =  k + r/y ==> r/y = given options check if completely divisible : given were 15.15, 18.16 and 17.17 (incorrect)
+
+* Prime factors and normal factors are different.
 ============================== Modulus =================================
+
 For question involving finding out the number of solution to a equation which involves multiple Modulus based terms:
 Solution : First, get value of x from each sub-equation so that value of that modulus becomes 0 if we plug-in the value of x, those values are called the critical values. One by one take that value of x and determine the sign of subequation by checking the sign of sub-equation inside the modulus. While solving change the sign of sub-equation and insert that value. Get the value of x and check if that falls in the range as specified by its sub-equation. If it doesn't fall in that put its value and get the outcome and that solution of x should satisfy the initial solution of the sub-equation was inserted.
 This method is called the "critical values" method
@@ -226,14 +240,28 @@ x+2=x-3+1..
 no valid value..
 so the solution is x=1
 
+========================== Sequence and Series =======================
+* Sum of n terms is : a*n + n*(n-1)/2
+* A set of 3 consecutive number is divisible by 8 if middle number is odd number.
+* For any set of consecutive integers with an odd number of terms, the sum of the integers is always a multiple of the number of terms
 =======================  Work/Rate Problems  ======================
 
 In Work/rate problems, if equations are needed to be proved and numbers are given in term of as even or odd numbers then in that case change them into 2*z for even and 2*z + 1 for odd numbers.
 In case combined rates are given, keep rates as 1/x and 1/y 
 If a machine can complete work in 'a' hours and another can in 'b' hourse then stake of a is 1/a( 1/a + 1/b )
 
+================================  Standard Deviation ==============================================
+* Minimum number in a list of number with 2 standard deviations as -> s-2d, s-d, s, s+d, s+2d is "s-2d"
+* On multiplying list by a number X, standard deviation changes my multiple of X, if divided it dives else either it remains the same or pushed up
+
 
 ====================================================================
+
+==============================  Geometry ================================
+* A right angle triangle has the maximum area when it is an isosceles triangle
+* Similar triangles has areas in the form that one area is some multiple of another area.
+* The area of a rhombus is not determined by squaring a side, but rather by taking half the product of the diagonals,
+
 ======================= Coordinate Geometry ==============
 
 We have the rectangle with dimensions 9*6 (9 horizontal dots and 6 vertical). AB is parallel to y-axis and AC is parallel to x-axis.
