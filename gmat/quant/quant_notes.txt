@@ -66,6 +66,7 @@ Number of triangles that can be drawn between set of n points = nC3
 Number of circular arrangements for n things = (n - 1)!
 Desc - Fix the position of 1 person and find the max permutation of left out people
 
+If there is a question asking about the number possible with 2 conditions in that case consider individual case of one condition combination
 ====================  Fractions/Decimals =================
 
 *   If there is increment of 25% in value for a given commodity over a period of n years, the resultant value will be :
@@ -130,6 +131,15 @@ When dealing with tasks, take the task as 1 unit
 *   Weighted average is like giving unequal precedence to the numbers in the set, example:
     
     m*(a/(a+b)) + n*(b/(a+b)) = x
+*   For evenly spaced numbers mean and median are same and that set is in arithmetic series.
+*   1 unit of standard deviation from mean: mean-s_d , mean+s_d
+*   Alligation and Mixture : use cross formula
+
+A1		A2
+ \	  /
+	A
+ /	  \
+N1		N2
 
 ======================= Number Properties =======================
 
@@ -261,7 +271,7 @@ If a machine can complete work in 'a' hours and another can in 'b' hourse then s
 * A right angle triangle has the maximum area when it is an isosceles triangle
 * Similar triangles has areas in the form that one area is some multiple of another area.
 * The area of a rhombus is not determined by squaring a side, but rather by taking half the product of the diagonals,
-
+* The number of diagonals in a figure - n*(n-1)/3 
 ======================= Coordinate Geometry ==============
 
 We have the rectangle with dimensions 9*6 (9 horizontal dots and 6 vertical). AB is parallel to y-axis and AC is parallel to x-axis.
