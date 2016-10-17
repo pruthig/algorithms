@@ -1,11 +1,14 @@
+GMATPrep-1       -  January 17, 2016    -   570 ( Q47, V23, IR4 ) - Diagnostic
+GMATPrep-1(R)    -  June 19, 2016       -   580 ( Q47, V23, IR4 )
+GMATPrep-2       -  August 7, 2016      -   630 ( Q48, V28, IR5 )
+MGMAT-4          -  August 24, 2016     -   630 ( Q44, V32, IR2.3 )
+MGMAT-4          -  August 24, 2016     -   690 ( Q51, V34, X )
+MGMAT-5          -  August 31, 2016     -   590 ( Q42, V31, IR4.5 )
+GMATPrep-1(R)    -  October 1, 2016     -   680 ( Q49, V34, IR4 ) 
+MGMAT-6          -  October 9, 2016     -   670 ( Q48, V33, IR0 )
+MGMAT-1(R)       -  October 11, 2016    -   740 ( Q46, V45, IR4 )
+GMATPrep-2(R)    -  October 16, 2016    -   710 ( Q49, V38, IR8 )
 
-GMATPrep    -  January 17, 2016    -   570 ( Q47, V23, IR4 )
-GMATPrep    -  June 19, 2016       -   580 ( Q47, V23, IR4 )
-GMATPrep    -  August 7, 2016      -   630 ( Q48, V28, IR5 )
-GMATPrep    -  October 1, 2016     -   680 ( Q49, V34, IR4 )
-MGMAT-6     -  October 9, 2016     -   670 ( Q48, V33, IR0 )
-MGMAT-1(R)  -  October 11, 2016    -   740 ( Q46, V45, IR4 )
-MGMAT-1(R)  -  October 16, 2016    -   710 ( Q49, V38, IR8 )
 
 
-
+Average : Q47 V33 IR4.5 : 650
