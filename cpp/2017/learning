@@ -1,0 +1,185 @@
+===========================  C   =====================================
+
+Data segment is divided in RW and RO areas - RW contains the variables while the RO areas contains the string literals.
+FOllowing registers are involved for stack maintenance - EBP (base pointer; used to address local vars ) , ESP (Always points to last element on stack) , EIP (Holds the address of next instruction to be executed; it stores the address of next instruction when a function call is made, so that control can progress when the control returns.
+
+Dynamic libs are larger in size because of symbol table
+Dynamic libs can be loaded at any address hence they use position independent code (PIC). Each dynamic lib contains the Global offset table that contains pointers to all static data in program
+
+http://stackoverflow.com/questions/4415059/how-is-a-shared-library-file-called-by-two-different-processes-in-linux
+
+http://www.iecc.com/linker/linker10.html
+
+http://stackoverflow.com/questions/24225172/how-to-manually-find-the-contents-of-a-register-after-a-hex-code-instruction
+
+http://bottomupcs.sourceforge.net/csbu/x3824.htm
+
+On success scanf return sthe number of otems successfully read
+Internal linkage refers to the variables whose scope is the transalation unit ( A single source file ), the another one is External linkage.
+Anonymous namespaces have internal linkage by default.
+
+Scope of variables, if defined outside the function:
+// in namespace or global scope
+int i; // extern by default
+const int ci; // static by default
+extern const int eci; // explicitly extern
+static int si; // explicitly static
+
+// the same goes for functions (but there are no const functions)
+int foo(); // extern by default
+static int bar(); // explicitly static 
+
+const variables internally link by default unless otherwise declared as extern
+A pointer of type -->    const int *e; cannot change the value by itself though it can be changed by simple assignment to that variable or by another pointer.
+
+Indirection is applied to a given address and returns the value at that particular address.
+To find the word size subtract the memory address
+Endianness describes the format/layout in which data will be stored in memory
+
+Need for pointer to be prefixed with '*' --> take the example of multiplicaton operator a**b (where 'b' is pointer variable)
+
+
+
+
+
+
+============================  C++  ===================================
+
+
+
+type safe
+libraries
+inline > preprocessor,  but only a request to compiler
+anywhere declaration
+
+MACRO, by default, has a file scope..even if decl. in a function..
+C++ has overloading and call by reference
+
+Generics in C++
+
+template<class T>
+void swap(T &a, T &b){
+T e;
+e = a;
+a = b;
+b = e;
+}
+
+Default variable - starts from RHS
+An array passed as an argument is passed by reference
+
+Generics   ===>
+Multiple template arguments:
+template<class T1, class T2>
+void copy(const T1 src[], T2 dest[], int size){
+for(int i =0; i < size; ++i) {
+dest[i] = static_cast<T2>(src[i]);
+}
+}
+
+const_cast<> cast away constness ( not recommended )
+
+
+
+Operator overloading   ===>
+# Ternary operators cannot be overloaded..
+Example:
+ostream& operator<<(ostream& out, days d) 
+{
+    out<<"ok";
+}
+
+ostream& is returned to keep associativity i.e.  cout << a << b =>  operator<<(cout, a) << b  => out << b
+The type variable is returned in case of binary operators.
+
+Class member functions have automatic access to private members
+
+Constructor   ===>
+Initializer list - Constructor
+
+constructor(Type t1, Type t2):var_1(t1), var_2(t2) {}
+# Initializer list can initialize const variable, but default consructor cannot
+
+
+# this is used to disambiguate member variable and argument name if both have same name
+
+class point {
+double x;
+point(double x) {
+    x = x;  //wont do anything
+}
+};
+
+Dynamic allocation   ===>
+char *p = new char[12];    // get off heap
+int *i  new int(10);   // single int initialized
+delete[] p;
+delet i;
+
+
+C++11 enums
+enum class is a better form of enumeration data structure.
+enum class <Identifier> : <Int Type> { enumeration list }
+It is type safe too.
+Example:
+
+enum class Color : short{
+RED, 
+BLUE,
+GREEN
+};
+
+
+for-range loop:
+for(auto i : w) {
+	cout<<i<<endl;
+}
+in case of complex containers, auto is a pointer and *ptr is actually a value.
+
+Friend function:
+Independent of access modifiers.
+
+
+STL -  3 legs of stool
+- Containers
+-- Sequence containers - Vector, Deque, List
+-- Associative Containers - Maps, Sets
+- Iterators
+-- input ... random
+- Algorithms
+-- Sorting, Find, Count, Mutating Sequence
+
+Newly introduced:
+
+<regex>  - Regular Expression
+<thread> - Threading
+<unordered_map> - hash based map, original map was based on RB tree
+<array> - Fixed size array has size as a member
+<forward_list> - SLL, original list is DLL
+
+Iterators:
+
+Input
+Output
+Forward - Search forward using ++ operator
+It can be copy constrcuted and can be used with == and !=
+
+// the function replaces x by y in specified iterator range - a mutating sequence algo.
+template<class ForwardIterator, class T>
+void replace(ForwardIterator first, ForwardIterator last, const T&x, const T&y)
+{}
+
+Random
+Bidirectional
+
+
+
+
+
+
+
+
+
+
+
+
