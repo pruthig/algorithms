@@ -32,6 +32,8 @@ static int bar(); // explicitly static
 const variables internally link by default unless otherwise declared as extern
 A pointer of type -->    const int *e; cannot change the value by itself though it can be changed by simple assignment to that variable or by another pointer.
 
+ptrdiff_t is defined in stddef.h 
+
 Indirection is applied to a given address and returns the value at that particular address.
 To find the word size subtract the memory address
 Endianness describes the format/layout in which data will be stored in memory
@@ -140,6 +142,15 @@ Friend function:
 Independent of access modifiers.
 
 
+Newly introduced:
+
+<regex>  - Regular Expression
+<thread> - Threading
+<unordered_map> - hash based map, original map was based on RB tree
+<array> - Fixed size array has size as a member
+<forward_list> - SLL, original list is DLL
+
+
 STL -  3 legs of stool
 - Containers
 -- Sequence containers - Vector, Deque, List
@@ -149,15 +160,31 @@ STL -  3 legs of stool
 - Algorithms
 -- Sorting, Find, Count, Mutating Sequence
 
-Newly introduced:
+Containers:
 
-<regex>  - Regular Expression
-<thread> - Threading
-<unordered_map> - hash based map, original map was based on RB tree
-<array> - Fixed size array has size as a member
-<forward_list> - SLL, original list is DLL
+STL was accepted in 1994.
 
-Iterators:
+Two type of containers:
+Sequence - Vector , List ( Also forward_list ), Deque
+Associative - Map , Multimap (A hash based impl. called unordered map ) , Set , MultiSet
+C++11 Associative - Hash based lookup in Set and Map - unordered_map and unordered_set
+
+
+Typical Container Interfaces:
+* Constructors - Default and Copy.
+* Destructors.
+* Element access.
+* ELement insertion.
+* Element deletion.
+* Element emplacements ( C++11 std. move constructors ).
+* Iterators.
+* Associated memory allocators.
+
+Associative Containers:
+These containers are key based access elements and employs self-balancing binary trees to store and access data.
+There is an ordering relation between elements in the associative containers. 
+
+Iterators: It is generally a pointer to the data type operated upon.
 
 Input
 Output
@@ -169,8 +196,107 @@ template<class ForwardIterator, class T>
 void replace(ForwardIterator first, ForwardIterator last, const T&x, const T&y)
 {}
 
-Random
-Bidirectional
+Random - Equivalent to indexed array
+template<class RandomIterator>
+sort(RandomIterator ri_1, RandomIterator ri_2);
+
+Bidirectional - That allows -- in addition to ++
+reverse(BidirectionalIterator b1, BidirectionalIterator b2);
+The reverse function uses swap and move that would lead to reverse.
+
+## Algorithms Library ##
+* Sorting algorthms
+* Non-mutating sequence algorithms
+* Mutating Sequence algorithms
+* Numerical algorithms
+* Generally used iterators to access containers instantiated on given type.
+
+template<class RandomAcc>
+void sort( RandomAcc a, RandomAcc b );     // A QuickSort algorithms
+
+template<class RandomAcc>
+void stable_sort( RandomAcc a, RandomAcc b );  // In-place algorithms
+
+* Non-mutating sequence algorithms
+These algos do not modify the sequence they go through. Example - find()
+
+template<class InputIter, Class T>
+InputIter find(InputIter b, InputIter e, const T& t);   // Find position of 't' in range 'b' to 'e'
+
+template<class InputIter, class Predicate>
+InputIter find_if(InputIter b, InputIter e, Predicate p); // Find position of first element that makes the predicate true
+                                                       // in range 'b' to 'e' , otherwise position 'e' returned.
+
+template<class InputIter, class Function>
+void for_each(InputIter d, InputIter e, Function f);  // Apply 'f' to each value stored in 'd' to 'e'
+
+* Numerical Algorithms
+- Sums
+- Inner product
+- Adjacent differences
+
+template<class InputIter, class T, BinOp binop) {
+    // Successive elements from range b to e are summed with sum = binop(sum, element)
+}
+
+Sum - accumulate(v1, v1+3, 0.0);
+Inner product - prod = inner_product(v1, v1+3, v2, 0);
+
+
+#### Lambda Expressions ####
+A i-place type of unnamed function derived from LISP.
+
+In another way to write below: 
+void outarr() { cout<<i; }
+
+int main() {
+vector<int> v(6);
+for_each(v.begin(), v.end(), outarr);
+return 0;
+}
+
+we can write:
+[](int i) { cout << i << endl; }   // goes where function object is required
+
+[](int n) { return n*4.4; } // returns double
+[](int n) -> int { return ++n; } // explicit
+
+
+
+#### Function Objects####
+Function Objects are the classes with operator() defined. These are inlined and produce efficient code.
+
+#### Defined function object classes ####
+-> Arithmetic Objects
+-> Comparison Objects
+-> Logical Objects
+
+Generators - 
+template <class ForwardIterator, class Generator>
+  void generate (ForwardIterator first, ForwardIterator last, Generator gen);
+The behavior of this function template is equivalent to:
+template <class ForwardIterator, class Generator>
+
+void generate ( ForwardIterator first, ForwardIterator last, Generator gen )
+{
+  while (first != last) {
+    *first = gen();
+    ++first;
+  }
+}
+
+template<class T>
+struct plus/minus/times/divides/modulus/negate<T>
+
+### Function Adapters ###
+-> Creation of function objects using adaptation
+-> Negators for negating predicate objects
+-> Binders for binding a function argument       
+-> Adapters for pointer to a function.
+
+
+
+
 
 
 
