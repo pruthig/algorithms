@@ -1,0 +1,18 @@
+Closest pair algorithm:
+
+For 1-D - Sort the points according to the 1-Dimension and pick the smallest between the 2 values in the order.
+
+ClosestPair of a set of points:
+1. Divide the set into two equal sized parts by the line l, and recursively compute the minimal distance in each part.
+2. Let d be the minimal of the two minimal distances.
+3. Eliminate points that lie farther than d apart from l
+4. Sort the remaining points according to their y-coordinates
+5. Scan the remaining points in the y order and compute the distances of each point to its five neighbors.
+6. If any of these distances is less than d then update d.
+
+Steps 2-6 define the merging process which must be repeated logn times because this is a divide and conquer algortithm:
+Step 2 takes O(1) time
+Step 3 takes O(n) time
+Step 4 is a sort that takes O(nlogn) time
+Step 5 takes O(n) time (as we saw in the previous section)
+Step 6 takes O(1) time
