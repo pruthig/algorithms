@@ -4,16 +4,24 @@
  * and open the template in the editor.
  */
 #include<iostream>
+#include<fstream>
 
-using std::cout;
+using namespace std;
 
 void c_i_conquer(int arr[], int start_index, int end_index);
 void c_i_divide(int arr[], int start_index, int end_index);
 
-int inversion_count = 0;
-
+long long inversion_count = 0;
+int x = 0;
 void counting_inversions_main() {
-    int raw_arr[] = { 5, 2, 7, 12, 3, 1, 32, 8, 47, 11 };
+    int raw_arr[100000] = { 0 }; 
+    std::ifstream infile("IntegerArray.txt");
+    
+    for(int j=0; j<100000; j++)
+     infile >> raw_arr[j];
+
+    cout<<"Completed reading numbers from file"<<endl;
+    
     int array_size = sizeof(raw_arr)/sizeof(int);
     // pass starting and end index of array
     c_i_divide(raw_arr, 0, array_size-1);
@@ -23,12 +31,10 @@ void counting_inversions_main() {
 
 // 2,5,7,12 - 0, 3
 void c_i_divide(int arr[], int start_index, int end_index) {
-    
     if(start_index == end_index)
         return;
-    
     int mid = (start_index + end_index)/2;
-    c_i_divide(arr, 0, mid);
+    c_i_divide(arr, start_index, mid);
     c_i_divide(arr, mid+1, end_index);
     c_i_conquer(arr, start_index, end_index);
 
@@ -49,7 +55,7 @@ void c_i_conquer(int arr[], int start_index, int end_index) {
             ++i; ++p;
         }
         else  {
-            inversion_count++;
+            inversion_count += mid-i+1;
             dummy[p] = arr[j];
             ++j; ++p;
         }

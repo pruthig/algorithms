@@ -7,13 +7,13 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=GNU-Linux
-CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=coursera
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/coursera
-CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=coursera.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/coursera.tar
+CND_PLATFORM_Debug=MinGW-Windows
+CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW-Windows
+CND_ARTIFACT_NAME_Debug=netbeansproject
+CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW-Windows/netbeansproject
+CND_PACKAGE_DIR_Debug=dist/Debug/MinGW-Windows/package
+CND_PACKAGE_NAME_Debug=netbeansproject.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/MinGW-Windows/package/netbeansproject.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
