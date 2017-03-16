@@ -41,6 +41,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/dijkstra.o \
 	${OBJECTDIR}/merge_sort.o \
 	${OBJECTDIR}/operator_overloading.o \
+	${OBJECTDIR}/quicksort_last_pivot.o \
+	${OBJECTDIR}/quicksort_randomized_pivot.o \
 	${OBJECTDIR}/sum_of_vector_elements.o
 
 
@@ -97,6 +99,16 @@ ${OBJECTDIR}/operator_overloading.o: operator_overloading.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/operator_overloading.o operator_overloading.cpp
+
+${OBJECTDIR}/quicksort_last_pivot.o: quicksort_last_pivot.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/quicksort_last_pivot.o quicksort_last_pivot.cpp
+
+${OBJECTDIR}/quicksort_randomized_pivot.o: quicksort_randomized_pivot.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/quicksort_randomized_pivot.o quicksort_randomized_pivot.cpp
 
 ${OBJECTDIR}/sum_of_vector_elements.o: sum_of_vector_elements.cpp
 	${MKDIR} -p ${OBJECTDIR}

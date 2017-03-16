@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include<iostream>
-#include<fstream>
+#include <iostream>
+#include <fstream>
+#include <ctime>
 
 using namespace std;
 
@@ -23,8 +24,12 @@ void counting_inversions_main() {
     cout<<"Completed reading numbers from file"<<endl;
     
     int array_size = sizeof(raw_arr)/sizeof(int);
+    int start_s=clock();
+    
     // pass starting and end index of array
     c_i_divide(raw_arr, 0, array_size-1);
+    int stop_s=clock();
+    cout << "Time elapsed in ms: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << endl;   
     cout<<"Total inversions are : ";
         cout<<" "<<inversion_count;
 }

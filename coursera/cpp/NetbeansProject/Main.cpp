@@ -19,18 +19,20 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-    cout<<"What do u want to test"<<'\n';
-    cout<<"1. Vector Example"<<'\n';
-    cout<<"2. Operator Overloading"<<'\n';
-    cout<<"3. Merge Sort"<<'\n';
-    cout<<"4. Card Game"<<'\n';
-    cout<<"5. Dijkstra Algorithms"<<'\n';
-    cout<<"6. Count inversions in an array"<<'\n';
-    
+
     int match;
     
     while(1)
     {
+        cout<<"\n\nWhat do u want to test"<<'\n';
+        cout<<"1. Vector Example"<<'\n';
+        cout<<"2. Operator Overloading"<<'\n';
+        cout<<"3. Merge Sort"<<'\n';
+        cout<<"4. QuickSort with last element chosen as pivot"<<'\n';
+        cout<<"5. QuickSort with random element chosen as pivot"<<'\n';
+        cout<<"6. Card Game"<<'\n';
+        cout<<"7. Dijkstra Algorithms"<<'\n';
+        cout<<"8. Count inversions in an array"<<'\n';
         cout<<"\nEnter your choice\n";
         cin>>match;
 
@@ -45,14 +47,21 @@ int main(int argc, char** argv) {
                 merge_sort_main();
                 break;
             case 4:
-                card_game_main();
+                quicksort_last_pivot_main();
                 break;
             case 5:
-                dijkstra_main();
+                quicksort_randomized_pivot_main();
                 break;
             case 6:
+                card_game_main();
+                break;
+            case 7:
+                dijkstra_main();
+                break;
+            case 8:
                 counting_inversions_main();
                 break;
+
             default:
                 exit(0);
 

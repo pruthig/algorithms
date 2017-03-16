@@ -16,3 +16,20 @@ Step 3 takes O(n) time
 Step 4 is a sort that takes O(nlogn) time
 Step 5 takes O(n) time (as we saw in the previous section)
 Step 6 takes O(1) time
+
+Master theorem:
+Used to determine running time of recursive algorithms.
+Defined as:
+
+T(n) = a * T( n / b ) + O( n^d )  where
+a -> Number of recursive calls
+b -> Factor by which input problem is divided, e.g for merge sort it is 2
+d -> Denotes the effort put while combining the solution.
+
+a = b^d  ==>  O( (n^d)*logn )
+b^d > a  ==>  O( n^d )
+a > b^d  ==>  O( n^(logb^a) )
+
+Effort put in recursion = c*n^d * ( (j = 0 to logb ) Σ ( (a / b^d )^j )
+
+

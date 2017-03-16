@@ -1,25 +1,36 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Merge Sort
+ * © Gaurav Pruthi <gaurav.pruthi88@gmail.com>
  */
-#include<iostream>
+#include <iostream>
+#include <fstream>
+#include <ctime>
 
-using std::cout;
+using namespace std;
 
 void merge_conquer(int arr[], int start_index, int end_index);
 void merge_divide(int arr[], int start_index, int end_index);
 
 
 void merge_sort_main() {
-    int raw_arr[] = { 5, 2, 7, 12, 3, 1, 32, 8, 47, 11 };
-    int array_size = sizeof(raw_arr)/sizeof(int);
+    int arr[100000] = { 0 }; 
+    std::ifstream infile("IntegerArray.txt");
+    
+    for(int j=0; j<100000; j++)
+     infile >> arr[j];
+    
+    int array_size = sizeof(arr)/sizeof(int);
+    
+    // Calculate the performance
+    int start_s=clock();
     // pass starting and end index of array
-    merge_divide(raw_arr, 0, array_size-1);
-    cout<<"Sorted array is : ";
-    for(int i = 0; i < array_size; ++i) {
-        cout<<" "<<raw_arr[i]<<",";
-    }
+    merge_divide(arr, 0, array_size-1);
+    int stop_s=clock();
+    cout << "Merge Sort on 1 lakh elements: Time elapsed in ms: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000; 
+    //cout<<"Sorted array is : ";
+    //for(int i = 0; i < array_size; ++i) {
+    //    cout<<" "<<raw_arr[i]<<",";
+    //}
     
 }
 
@@ -30,7 +41,7 @@ void merge_divide(int arr[], int start_index, int end_index) {
         return;
     
     int mid = (start_index + end_index)/2;
-    merge_divide(arr, 0, mid);
+    merge_divide(arr, start_index, mid);
     merge_divide(arr, mid+1, end_index);
     merge_conquer(arr, start_index, end_index);
 

@@ -19,6 +19,8 @@
       <itemPath>dijkstra.cpp</itemPath>
       <itemPath>merge_sort.cpp</itemPath>
       <itemPath>operator_overloading.cpp</itemPath>
+      <itemPath>quicksort_last_pivot.cpp</itemPath>
+      <itemPath>quicksort_randomized_pivot.cpp</itemPath>
       <itemPath>sum_of_vector_elements.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -60,6 +62,10 @@
       </item>
       <item path="operator_overloading.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="quicksort_last_pivot.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="quicksort_randomized_pivot.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="sum_of_vector_elements.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -97,6 +103,10 @@
       <item path="merge_sort.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="operator_overloading.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="quicksort_last_pivot.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="quicksort_randomized_pivot.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="sum_of_vector_elements.cpp" ex="false" tool="1" flavor2="0">
       </item>
