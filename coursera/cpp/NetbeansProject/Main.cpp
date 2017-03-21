@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
         cout<<"1. Vector Example"<<'\n';
         cout<<"2. Operator Overloading"<<'\n';
         cout<<"3. Merge Sort"<<'\n';
-        cout<<"4. QuickSort with last element chosen as pivot"<<'\n';
+        cout<<"4. QuickSort with median of 3 chosen as pivot"<<'\n';
         cout<<"5. QuickSort with random element chosen as pivot"<<'\n';
         cout<<"6. Card Game"<<'\n';
         cout<<"7. Dijkstra Algorithms"<<'\n';

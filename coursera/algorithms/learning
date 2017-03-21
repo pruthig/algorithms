@@ -33,3 +33,13 @@ a > b^d  ==>  O( n^(logb^a) )
 Effort put in recursion = c*n^d * ( (j = 0 to logb ) Σ ( (a / b^d )^j )
 
 
+Quicksort Algorithm:
+> Elegant and in place
+> Practical with O(nlogn) time
+
+Steps:
+Choose a pivot
+Run a loop so that all elements < pivot are to the left of the pivot and rest to the right
+Quicksort runs in O(n^2) if sorted array is passed because only 1st half will be executed since 2 halfs are not divided evenly.
+or we can call it as unbalanced split.
+== Random Pivot ==
