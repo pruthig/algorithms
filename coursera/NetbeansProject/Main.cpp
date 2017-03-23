@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
         cout<<"6. Card Game"<<'\n';
         cout<<"7. Dijkstra Algorithms"<<'\n';
         cout<<"8. Count inversions in an array"<<'\n';
+        cout<<"9.Order Statistics"<<'\n';
         cout<<"\nEnter your choice\n";
         cin>>match;
 
@@ -60,6 +61,9 @@ int main(int argc, char** argv) {
                 break;
             case 8:
                 counting_inversions_main();
+                break;
+            case 9:
+                order_statistics_main();
                 break;
 
             default:

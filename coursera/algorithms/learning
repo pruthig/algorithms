@@ -42,4 +42,34 @@ Choose a pivot
 Run a loop so that all elements < pivot are to the left of the pivot and rest to the right
 Quicksort runs in O(n^2) if sorted array is passed because only 1st half will be executed since 2 halfs are not divided evenly.
 or we can call it as unbalanced split.
-== Random Pivot ==
+Efficiency:
+Efficiency of Quicksort is O(nlogn). First, Big-Oh is the number of comparisons of elements in the given set.
+For Quicksort if 'C' denotes the sum of  all comparisons:
+C = (i=0 to n-1) Σ (j = i+1 to n)  Σ Sum[ Prob(i,j] ]    -  (1)                // where prob[i,j] is the probability that the elements a[i] and a[j] will be compared.
+Let the elements be --> z(i) ... | ... z(j)
+Now z(i) and z(j) will be compared only when any of these is selected as a pivot element, the probability of the same is - 2 / (j-i+1)
+Putting this in Eqn. (1)
+
+
+C = (i=0 to n-1) Σ (j = i+1 to n)  Σ Sum(2 / (j-i+1)) or
+C = 2*n* Σ (j = i+1 to n) 1 / (j-i+1) or
+C = 2*n*logn or
+C = n*logn           - Q.E.D
+
+Order Statistics:
+Nearly a quicksort. It just that we are looking for 'i'th position and we recurse once either going to left or to right not on both sides.
+T(n) = T(n/2) + O(n)  ==>  O(n)
+
+ ****************  Graphs *********************
+ 
+ Minimum cut/Graph partition is a dividing graph in 2 so that there are minimum number of crossing edges.
+ 
+ N defines the number of vertices and M defined the number of edges.
+ M =  Ω(N) = O(N^2)
+ 
+ 
+ 
+ 
+
+
+

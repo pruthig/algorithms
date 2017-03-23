@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/dijkstra.o \
 	${OBJECTDIR}/merge_sort.o \
 	${OBJECTDIR}/operator_overloading.o \
+	${OBJECTDIR}/order_statistics.o \
 	${OBJECTDIR}/quicksort_median_of_3_pivot.o \
 	${OBJECTDIR}/quicksort_randomized_pivot.o \
 	${OBJECTDIR}/sum_of_vector_elements.o
@@ -99,6 +100,11 @@ ${OBJECTDIR}/operator_overloading.o: operator_overloading.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/operator_overloading.o operator_overloading.cpp
+
+${OBJECTDIR}/order_statistics.o: order_statistics.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/order_statistics.o order_statistics.cpp
 
 ${OBJECTDIR}/quicksort_median_of_3_pivot.o: quicksort_median_of_3_pivot.cpp
 	${MKDIR} -p ${OBJECTDIR}
