@@ -11,10 +11,10 @@
 using namespace std;
 
 const int size = 6;
-std::vector< std::list<int> > graph(size);
+static std::vector< std::list<int> > graph(size);
 
 
-void construct_graph() {
+static void construct_graph() {
     //list<int> l = graph.at(0);
    
     graph.at(1).push_back(2);

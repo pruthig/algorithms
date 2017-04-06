@@ -5,8 +5,8 @@
  */
 
 /* 
- * File:   Ex.cpp
- * Author: pruthi
+ * File:   Main.cpp
+ * Author: Gaurav Pruthi
  *
  * Created on 5 March, 2017, 11:00 AM
  */
@@ -33,7 +33,12 @@ int main(int argc, char** argv) {
         cout<<"6. Card Game"<<'\n';
         cout<<"7. Dijkstra Algorithms"<<'\n';
         cout<<"8. Count inversions in an array"<<'\n';
-        cout<<"9.Order Statistics"<<'\n';
+        cout<<"9. Order Statistics"<<'\n';
+        cout<<"10.Find karger min cut"<<'\n';
+        
+        cout<<"100. Tree Data Structure Operations"<<'\n';
+        
+        cout<<"0 Exit"<<'\n';
         cout<<"\nEnter your choice\n";
         cin>>match;
 
@@ -65,7 +70,12 @@ int main(int argc, char** argv) {
             case 9:
                 order_statistics_main();
                 break;
-
+            case 10:
+                karger_min_cut_main();
+                break;
+            case 100:
+                tree_main();
+                break;
             default:
                 exit(0);
 

@@ -23,6 +23,10 @@ void counting_inversions_main();
 void quicksort_last_pivot_main();
 void quicksort_randomized_pivot_main();
 void order_statistics_main();
+void karger_min_cut_main();
 
+
+// Data structures
+void tree_main();
 #endif /* GENERIC_H */
 
