@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include "generic.h"
+#include <cstdlib>
 using namespace std;
 
 /*
@@ -35,6 +36,7 @@ int main(int argc, char** argv) {
         cout<<"8. Count inversions in an array"<<'\n';
         cout<<"9. Order Statistics"<<'\n';
         cout<<"10.Find karger min cut"<<'\n';
+        cout<<"11. Find Minimum Spanning tree"<<'\n';
         
         cout<<"100. Tree Data Structure Operations"<<'\n';
         
@@ -72,6 +74,9 @@ int main(int argc, char** argv) {
                 break;
             case 10:
                 karger_min_cut_main();
+                break;
+            case 11:
+                prim_mst_main();
                 break;
             case 100:
                 tree_main();

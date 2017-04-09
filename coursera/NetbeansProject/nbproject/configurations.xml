@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="100">
+<configurationDescriptor version="94">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -21,6 +21,7 @@
         <itemPath>merge_sort.cpp</itemPath>
         <itemPath>operator_overloading.cpp</itemPath>
         <itemPath>order_statistics.cpp</itemPath>
+        <itemPath>prim_mst.cpp</itemPath>
         <itemPath>quicksort_median_of_3_pivot.cpp</itemPath>
         <itemPath>quicksort_randomized_pivot.cpp</itemPath>
         <itemPath>sum_of_vector_elements.cpp</itemPath>
@@ -78,6 +79,8 @@
       </item>
       <item path="order_statistics.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="prim_mst.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="quicksort_median_of_3_pivot.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="quicksort_randomized_pivot.cpp" ex="false" tool="1" flavor2="0">
@@ -127,6 +130,8 @@
       <item path="operator_overloading.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="order_statistics.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="prim_mst.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="quicksort_median_of_3_pivot.cpp" ex="false" tool="1" flavor2="0">
       </item>

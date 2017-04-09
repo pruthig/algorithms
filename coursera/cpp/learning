@@ -145,7 +145,11 @@ The difference between getc() and getchar() is getc() can read from any input st
  void* needs to be typecasted so that it can be used for pointer arithmetic for which we need to have the size of pointer.
  sizeof void is 1 because we can perform arithmetic on void pointer.
  
- 
+sizeof is an operator - We can't take its address, it can work like this - sizeof a, the expression we introduce is not executed if provided and input in sizeof like in sizeo a++ It can be used as a compile-time constant, which is only possible if it's an operator rather than a function.char c[sizeof(int)];
+
+
+
+
 
 
 
@@ -243,23 +247,31 @@ GREEN
 };
 
 
+C++11 feature - auto
+auto is used to declare a type which is deduced from the context and it is no longer a storage type.
+
+
+
+
 for-range loop:
 for(auto i : w) {
 	cout<<i<<endl;
 }
+A reference declaration of type -> auto &i allows mutation of data
+
 in case of complex containers, auto is a pointer and *ptr is actually a value.
 
 Friend function:
 Independent of access modifiers.
 
 
-Newly introduced:
+Newly introduced in C++11:
 
 <regex>  - Regular Expression
 <thread> - Threading
 <unordered_map> - hash based map, original map was based on RB tree
 <array> - Fixed size array has size as a member
-<forward_list> - SLL, original list is DLL
+<forward_list> - SLL, original list is DLL       
 
 
 STL -  3 legs of stool
@@ -297,9 +309,14 @@ There is an ordering relation between elements in the associative containers.
 
 Iterators: It is generally a pointer to the data type operated upon.
 
-Input
-Output
+Input - Weakest (One direction, no mutation allowed)
+Application: accumulate(InputIterator, InputIterator, <int>(Starting value)) -> Returns the sum after reading the file...
+
+Output - Next Weakest ( One direction, mutation allowed)
 Forward - Search forward using ++ operator
+Bidirectional - 
+Random access Iterator - Strongest (Access and Modify in O(1) )
+
 It can be copy constrcuted and can be used with == and !=
 
 // the function replaces x by y in specified iterator range - a mutating sequence algo.
@@ -314,6 +331,8 @@ sort(RandomIterator ri_1, RandomIterator ri_2);
 Bidirectional - That allows -- in addition to ++
 reverse(BidirectionalIterator b1, BidirectionalIterator b2);
 The reverse function uses swap and move that would lead to reverse.
+
+End of iterator has no value, it is just a sentinel.
 
 ## Algorithms Library ##
 * Sorting algorthms

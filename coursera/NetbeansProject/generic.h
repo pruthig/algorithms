@@ -24,7 +24,7 @@ void quicksort_last_pivot_main();
 void quicksort_randomized_pivot_main();
 void order_statistics_main();
 void karger_min_cut_main();
-
+void prim_mst_main();
 
 // Data structures
 void tree_main();

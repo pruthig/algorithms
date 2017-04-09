@@ -5,6 +5,7 @@
 */
 #include<iostream>
 #include <list>
+#include <cstdlib>
 #include<vector>
 #include<iterator>
 #include<fstream>
