@@ -16,7 +16,6 @@
 
 #include<iostream>
 #include <queue>
-#include <cstdlib>
 
 using namespace std;
 
@@ -46,6 +45,7 @@ public:
     int findTreeSize(TreeNode *node);
     void maxDepth(TreeNode *node, int count, int *max);
     void traverseLevelOrder(TreeNode *root);
+    void printRootToLeaf();
 };
 
 TreeNode* Tree::getRoot(){
@@ -124,6 +124,36 @@ void Tree::traverseLevelOrder(TreeNode *root) {
     }
 }
 
+void printRootToLeafUtil(TreeNode *node, int arr[], int counter) {
+    if(node->left == NULL && node->right == NULL) {
+        int i = 0;
+        arr[counter] = node->value;
+        while(arr[i] != 0 && i <= counter) {
+            cout<<arr[i]<<", ";
+            i++;
+        }
+        cout<<endl;
+        arr[counter] = 0;
+        return;
+    }
+    arr[counter++] = node->value;
+    
+    if(node->left)
+        printRootToLeafUtil(node->left, arr, counter);
+    if(node->right)
+        printRootToLeafUtil(node->right, arr, counter);
+    
+    arr[counter--] = 0;
+}
+
+// To print root to leaf paths, use an array where you'll add the elements from the end
+void Tree::printRootToLeaf() {
+    int arr[50] = { 0 };
+    //int counter = 0;
+    
+    ::printRootToLeafUtil(getRoot(), arr, 0);
+}
+
 void tree_main() {
     int match;
     Tree *tree = new Tree();
@@ -137,6 +167,7 @@ void tree_main() {
         cout<<"102. Tree traversal - Level order"<<'\n';
         cout<<"103. Find tree Size"<<'\n';
         cout<<"104. Find Max Depth"<<'\n';
+        cout<<"105. Print Root->Leaf"<<'\n';
         cout<<"0. Exit"<<'\n';
         cout<<"\nEnter your choice\n";
         cin>>match;
@@ -155,6 +186,9 @@ void tree_main() {
             case 104:
                 tree->maxDepth(tree->getRoot(), 0, &maxDepth);
                 cout<<"Max Depth is:"<<maxDepth<<"\n";
+                break;
+            case 105:
+                tree->printRootToLeaf();
                 break;
             case 0:
             default:
