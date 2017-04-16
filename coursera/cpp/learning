@@ -425,6 +425,25 @@ struct plus/minus/times/divides/modulus/negate<T>
 -> Adapters for pointer to a function.
 
 
+###Inheritance ##
+Public:
+All members -public, private are inherited
+
+#Virtual Function
+Base class function overridden by derived classes.
+
+C++11 -->
+'Final' Keyword
+To make a class underivable -
+class X final : public Y{};
+It is a contextual and 'final' can be used for identifier name as well.
+
+Derived class pointer can be implicitly converted to base class pointer.
+Until and unless base class has a same name function defined as virtual, base class pointer pointing to derived class object will call base class function.
+If a function is overridden in derived class then that function hide all overloaded functions of base class.
+Constructors cannot be virtual but destructors can.
+
+
 
 
 

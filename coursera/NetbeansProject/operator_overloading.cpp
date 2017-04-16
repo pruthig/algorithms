@@ -38,6 +38,7 @@ ostream& operator<<(ostream& out, const Day& d) {
             break;
         
     }
+	return out;
 }
 
 void operator++( Day& d) {

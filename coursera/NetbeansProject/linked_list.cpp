@@ -201,6 +201,7 @@ bool LinkedList::checkPalindrome() {
     // Its a recursive approach where in we use an extra pointer which
     // will start recursing when we reach to the end of list
     // left traversing -----> <----- stack_provided_right_pointer
+	return false;
 }
 int linked_list_main() {
     LinkedList *list = new LinkedList;

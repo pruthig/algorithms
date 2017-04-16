@@ -52,7 +52,7 @@ static void construct_graph() {
 }
 
 
-int num_of_edges() {
+static int num_of_edges() {
 	// graph is the vector of lists 
 	int num = 0;
 	for (auto list : graph) {
@@ -62,7 +62,7 @@ int num_of_edges() {
 	return num;
 }
 
-int number_of_vertices(){
+static int number_of_vertices(){
 	int size = 0;
 	for (auto ptr : graph)
 	if (ptr) size++;
@@ -70,7 +70,7 @@ int number_of_vertices(){
 	return size;
 }
 
-void find_min_cut(){
+static void find_min_cut(){
 	int num_edges = 0;
 	int counter = 0;
 	int v1 = 0, v2 = 0;

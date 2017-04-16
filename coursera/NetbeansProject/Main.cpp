@@ -37,6 +37,7 @@ int main(int argc, char** argv) {
         cout<<"9. Order Statistics"<<'\n';
         cout<<"10.Find karger min cut"<<'\n';
         cout<<"11. Find Minimum Spanning tree"<<'\n';
+		cout<<"12. Play Hex Game" << '\n';
         
         cout<<"100. Tree Data Structure Operations"<<'\n';
         
@@ -78,6 +79,9 @@ int main(int argc, char** argv) {
             case 11:
                 prim_mst_main();
                 break;
+			case 12:
+				hex_main();
+				break;
             case 100:
                 tree_main();
                 break;

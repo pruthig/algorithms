@@ -51,7 +51,7 @@ static void construct_graph() {
 }
 
 
-int num_of_edges() {
+static int num_of_edges() {
 	// graph is the vector of lists 
 	int num = 0;
 	for (auto list : graph) {
@@ -61,7 +61,7 @@ int num_of_edges() {
 	return num;
 }
 
-int number_of_vertices(){
+static int number_of_vertices(){
 	int size = 0;
 	for (auto ptr : graph)
 	if (ptr) size++;
@@ -124,7 +124,7 @@ void find_min_cut(){
 
 }
 
-int main(){
+int kmc_main(){
 	int count = 30;
 	while (count--) 
 	{

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E74ED4BC-F8F7-4E08-AFDA-30ECD9AB2885}</ProjectGuid>
+    <RootNamespace>C_for_C_Programmers</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\NetbeansProject\card_game.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\counting_inversions.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\dijkstra.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\hex.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\KargerMinCut.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\karger_min_cut.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\linked_list.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\Main.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\merge_sort.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\operator_overloading.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\order_statistics.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\prim_mst.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\quicksort_median_of_3_pivot.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\quicksort_randomized_pivot.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\sum_of_vector_elements.cpp" />
+    <ClCompile Include="..\..\NetbeansProject\tree.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\NetbeansProject\DS_learning" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\NetbeansProject\generic.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\NetbeansProject\IntegerArray.txt" />
+    <Text Include="..\..\NetbeansProject\KargerMinCut.txt" />
+    <Text Include="..\..\NetbeansProject\MinCut.txt" />
+    <Text Include="..\..\NetbeansProject\MST.txt" />
+    <Text Include="..\..\NetbeansProject\QuickSort.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

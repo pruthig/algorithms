@@ -59,9 +59,7 @@ bool is_connected() {
     
     
 }
-int dijkstra_main(){
-    
+void dijkstra_main(){
     //std::vector< std::list<int> > graph[size];  // A data structure to hold a tree
     construct_graph();
-    
 }
