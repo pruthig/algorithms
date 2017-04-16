@@ -10,7 +10,11 @@ using namespace std;
 
 void displayGraph();
 
+// Two data structures will be used
+// A 2-D array for display and storing the values
 char graph[DIM][DIM];
+// and adjacency list representation of graph
+
 
 void hex_main() {
 	// 2_D mx of chars - 'H' for human, 'C' for Computer, '0' means blank

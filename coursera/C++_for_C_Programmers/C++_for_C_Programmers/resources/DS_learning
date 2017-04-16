@@ -1,0 +1,14 @@
+Trees:
+Lowest Common Ancestor:
+If both nodes are greater than current node, go right, else go left if ! << and >> then stop.
+
+Binary Trees
+Any unique tree can be built with any order traversal provided we are given inorder traversal along with the another e.g Pre/Post/Level
+
+For level order traversal in spiral form, we have to use 2 stacks - one for l->r and other for r->l
+
+To find the sum tree - sum(node->left) + sum(node->right) + old_value
+
+If tree is not empty then height = 1 + max of left height and right height
+
+
