@@ -14,8 +14,8 @@ http://stackoverflow.com/questions/24225172/how-to-manually-find-the-contents-of
 
 http://bottomupcs.sourceforge.net/csbu/x3824.htm
 
-On success scanf return sthe number of otems successfully read
-Internal linkage refers to the variables whose scope is the transalation unit ( A single source file ), the another one is External linkage.
+On success scanf return sthe number of items successfully read
+Internal linkage refers to the variables whose scope is the translation unit ( A single source file ), the another one is External linkage.
 Anonymous namespaces have internal linkage by default.
 
 Scope of variables, if defined outside the function:
@@ -112,10 +112,6 @@ int main()
 '_' alone can be a legit var name.
 
 C allows a global variable to be declared again when first declaration doesn’t initialize the variable.
-
-In C, Static variable needs to be assigned a constant literal while in C++ it is allowed. e.g
-static int y = give(); // is invalid in C while ok in C++
-This is because static have to be initialized before program startsup.
 
 Declaration can be done any number of times but definition only once.
 
@@ -442,6 +438,48 @@ Derived class pointer can be implicitly converted to base class pointer.
 Until and unless base class has a same name function defined as virtual, base class pointer pointing to derived class object will call base class function.
 If a function is overridden in derived class then that function hide all overloaded functions of base class.
 Constructors cannot be virtual but destructors can.
+
+C++ doesn't support super() because it supports multiple inheritance and using super() may introduce ambiguity.
+
+
+
+
+
+
+"Default arguments do not participate in signature of functions. So 
+signatures of fun() in base class and derived class are considered same
+
+static member function cannot be static, const or volatile because When you apply the const qualifier to a nonstatic member function, it affects the this pointer.
+There shall not be a static and a non-static member function with the same name and the same parameter types
+ any time you have a virtual function in a class, you should immediately add a virtual destructor 
+ If any parameterised constructor is defined default ctor is not created
+ A constructor can have only explicit and inline keywords as qualifiers.
+ Virtual function can be private
+ Compiler creates a copy constructor if we don't write our own. 
+  In C++, class variables are initialized in the same order as they appear in the class declaration.
+  Initializer list is needed for - references, consts and for initialization of member objects which do not have default constructor:
+  Global static objects are initialized even before main() is called.
+  static members are only declared in class declaration, not defined. They must be explicitly defined outside the class using scope resolution operator.
+  Destructor will get called after the return statement.
+  If we define copy-ctor then compiler won't emit default constructor but if we define constructor then compiler will emit c-ctor
+  Just by writing - Type(); generates a temporary like A();  and  int();
+  
+ A class is abstract if it has at least one pure virtual function.
+  If we do not override the pure virtual function in derived class, then derived class also becomes abstract class.
+  Chain function calls are possible if reference to current object is returned.
+  namespaces are the only entity that allowed to span across multiple files. No other syntactic rules are allowed. For example, we can't split class definition across files nor structure definition.
+  
+  The unnamed namespaces you have created will only be accessible within the file you created it in.
+Unnamed namespaces are the replacement for the static declaration of variables.
+
+// Aliasing 
+namespace alias = name1::name2::name3;
+ 
+ To find size of a data type - (char *)(&type+1)-(char*)(&type)
+*(&arr + 1) ==> Same address as (&arr + 1), but type of pointer is "int *".
+
+
+
 
 
 

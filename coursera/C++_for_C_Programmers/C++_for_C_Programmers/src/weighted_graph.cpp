@@ -1,16 +1,16 @@
 // Generic class that will hold implementation of graph data structure which can be used both for directed
 // and undirected graph
 
-#include "graph.h"
+#include "weighted_graph.h"
 
 // Default constructor
-Graph::Graph(){
+WeightedGraph::WeightedGraph(){
 
 
 }
 
-// Constructor for Graph which will read the file which contains the edges with weights.
-Graph::Graph(char *file_path) {
+// Constructor for WeightedGraph which will read the file which contains the edges with weights.
+WeightedGraph::WeightedGraph(char *file_path) {
 
 	int counter = 0;
 	std::ifstream infile(file_path);
@@ -47,7 +47,7 @@ Graph::Graph(char *file_path) {
 }
 
 // Destructor
-Graph::~Graph() {
+WeightedGraph::~WeightedGraph() {
 	// Delete array to mark nodes
 	visited.clear();
 	// delete all nodes
@@ -55,22 +55,22 @@ Graph::~Graph() {
 }
 
 // Check presence of node in graph
-bool Graph::is_node_present(int v1) {
+bool WeightedGraph::is_node_present(int v1) {
 	if (graph.at(v1).size() > 0)
 		return true;
 	else
 		return false;
 }
 
-// Graph is vector of list, resize it if needed
-void Graph::add_node(int v1) {
+// WeightedGraph is vector of list, resize it if needed
+void WeightedGraph::add_node(int v1) {
 	if (v1 >= graph.size()) {
 		graph.resize(v1 * 2);
 	}
 }
 
 // Remove a node from graph
-void Graph::remove_node(int v1) {
+void WeightedGraph::remove_node(int v1) {
 	graph.at(v1).clear();
 	// remove it from its neighboring vertex list;
 	for (auto& list_t : graph) {
@@ -82,11 +82,11 @@ void Graph::remove_node(int v1) {
 	}
 }
 
-vector<bool>& Graph::get_visited_nodes(){
+vector<bool>& WeightedGraph::get_visited_nodes(){
 	return visited;
 }
 
-void Graph::remove_edge(int v1, int v2) {
+void WeightedGraph::remove_edge(int v1, int v2) {
 	list< pair<int, int> >& temp_list1 = graph.at(v1);
 	for (auto &temp_pair : temp_list1) {
 		if (temp_pair.first == v2) {
@@ -105,7 +105,7 @@ void Graph::remove_edge(int v1, int v2) {
 }
 
 // Only need to check presence of edge in list at v1
-bool Graph::is_edge_present(int v1, int v2) {
+bool WeightedGraph::is_edge_present(int v1, int v2) {
 	list< pair<int, int> >& temp_list = graph.at(v1);
 	for (auto &temp_pair : temp_list) {
 		if (temp_pair.first == v2) {
@@ -115,7 +115,7 @@ bool Graph::is_edge_present(int v1, int v2) {
 	return false;
 }
 // Add an edge to graph
-void Graph::add_edge(int v1, int v2, int w) {
+void WeightedGraph::add_edge(int v1, int v2, int w) {
 	if (!is_edge_present(v1, v2)) {
 		graph.at(v1).push_back(std::make_pair(v2, w));
 	}
@@ -126,22 +126,22 @@ void Graph::add_edge(int v1, int v2, int w) {
 }
 
 // Returns the number of edges, calculated in ctor.
-int Graph::get_num_of_edges() {
+int WeightedGraph::get_num_of_edges() {
 	return number_of_edges;
 }
 
 // Returns the number of vertices, calculated in ctor.
-int Graph::get_num_of_vertices(){
+int WeightedGraph::get_num_of_vertices(){
 	return number_of_vertices;
 }
 
 // Returns the neighbors in the form of list
-list<pair<int, int>> Graph::get_neighbors(int vertex) {
+list<pair<int, int>> WeightedGraph::get_neighbors(int vertex) {
 	return graph.at(vertex);
 }
 
 // Method to check if all vertices are visited.
-bool Graph::are_all_visited() {
+bool WeightedGraph::are_all_visited() {
 	for (auto a : visited) {
 		if (a == false)
 			return false;
@@ -150,7 +150,7 @@ bool Graph::are_all_visited() {
 }
 
 // A method that will return the weight of MST
-int Graph::get_total_weight() {
+int WeightedGraph::get_total_weight() {
 	return total_weight;
 }
 

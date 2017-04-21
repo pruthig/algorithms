@@ -10,7 +10,7 @@ using namespace std;
 
 
 // Constructor for the MST algorithm. It will call the Graph's constructor to fill the graph nodes
-Prim::Prim(char *file_name): Graph(file_name){
+Prim::Prim(char *file_name) : WeightedGraph(file_name){
 }
 
 // This method will find the minimum spanning tree and calculate its weight which will be the
@@ -52,6 +52,12 @@ void Prim::find_MST() {
 		cout << "Edge # " << counter << " (" << v1 << ", " << v2 << ")" << "   with weight: " << min_weight << endl;
 		++counter;
 	}
+}
+
+
+// A method that will return the weight of MST
+int Prim::get_total_weight() {
+	return total_weight;
 }
 
 // Main function

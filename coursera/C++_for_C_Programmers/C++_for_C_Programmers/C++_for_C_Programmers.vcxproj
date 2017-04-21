@@ -12,14 +12,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\card_game.cpp" />
+    <ClCompile Include="src\computer.cpp" />
     <ClCompile Include="src\counting_inversions.cpp" />
     <ClCompile Include="src\dijkstra.cpp" />
-    <ClCompile Include="src\graph.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\weighted_graph.cpp" />
     <ClCompile Include="src\hex.cpp" />
     <ClCompile Include="src\KargerMinCut.cpp" />
     <ClCompile Include="src\karger_min_cut.cpp" />
     <ClCompile Include="src\linked_list.cpp" />
-    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\merge_sort.cpp" />
     <ClCompile Include="src\operator_overloading.cpp" />
     <ClCompile Include="src\order_statistics.cpp" />
@@ -28,10 +30,15 @@
     <ClCompile Include="src\quicksort_randomized_pivot.cpp" />
     <ClCompile Include="src\sum_of_vector_elements.cpp" />
     <ClCompile Include="src\tree.cpp" />
+    <ClCompile Include="src\unweighted_graph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\computer.h" />
     <ClInclude Include="inc\generic.h" />
-    <ClInclude Include="inc\graph.h" />
+    <ClInclude Include="inc\player.h" />
+    <ClInclude Include="inc\unweighted_graph.h" />
+    <ClInclude Include="inc\user.h" />
+    <ClInclude Include="inc\weighted_graph.h" />
     <ClInclude Include="inc\hex.h" />
     <ClInclude Include="inc\prim_mst.h" />
   </ItemGroup>
