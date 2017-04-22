@@ -17,6 +17,7 @@
     <ClCompile Include="src\dijkstra.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\user.cpp" />
     <ClCompile Include="src\weighted_graph.cpp" />
     <ClCompile Include="src\hex.cpp" />
     <ClCompile Include="src\KargerMinCut.cpp" />

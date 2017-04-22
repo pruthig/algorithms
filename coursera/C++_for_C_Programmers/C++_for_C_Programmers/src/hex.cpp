@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 // Default constructor to initialize graph
 Hex::Hex():UnweightedGraph(DIM*DIM)
 {
@@ -10,6 +9,10 @@ Hex::Hex():UnweightedGraph(DIM*DIM)
 	// Here we are blanking out the matrix
 	memset(graph_matrix, 'O', sizeof(graph_matrix[0][0])*DIM*DIM);
 	populate_graph(DIM);
+}
+
+int Hex::get_board_dimension() {
+	return DIM;
 }
 
 // This method will update the adjacency list representation of graph with nodes
@@ -208,11 +211,6 @@ Player& Hex::player_object(){
 	return this->player;
 }
 
-// returns the color choice
-Color Hex::get_my_color(){
-	return this->color_choice;
-}
-
 int main(){
 	int option;
 	Hex hex_game;
@@ -233,7 +231,7 @@ int main(){
 		hex_game.computer_object().set_color(Color::BLUE);
 		hex_game.player_object().set_color(Color::RED);
 		cout << "My color is BLUE and I will play the first turn" << endl;
-		hex_game.computer_object().make_move(*this);
+		hex_game.computer_object().make_move(hex_game);
 	}
 	else {
 		hex_game.computer_object().set_color(Color::RED);
@@ -249,7 +247,7 @@ int main(){
 		cin >> option;
 		switch (option) {
 		case 1:
-			hex_game.player_object().make_move(*this);
+			hex_game.player_object().make_move(hex_game);
 			break;
 		case 2:
 			exit(0);

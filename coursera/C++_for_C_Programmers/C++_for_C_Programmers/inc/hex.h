@@ -5,23 +5,33 @@
 
 #include<iostream>
 #include<cstdlib>
+#include<queue>
 
-#include "graph.h"
+#include "computer.h"
+#include "player.h"
+#include "unweighted_graph.h"
 
-enum class GAME_STATUS {
-	BLUE_WON,
-	RED_WON,
-	IN_PROGRESS
+enum class Color {
+	BLUE,
+	RED
 };
-class Hex : public Graph {
+
+class Hex : public UnweightedGraph {
 	static const int DIM = 11;
 	char graph_matrix[DIM][DIM];    // special data struct to display the board
+	Player player;
+	Computer computer;
 public:
 	Hex();
+	void populate_graph(int dim);
+	bool check_result(Color color);
 	void display_board();
 	// player refers either to 'H' (Human) or 'C' (Computer)
 	bool make_move(int x, int y, char player);
-	GAME_STATUS find_game_status();
+	void update_matrix(int x, int y, char c);
+	int get_board_dimension();
+	Computer& computer_object();
+	Player& player_object();
 };
 
 void hex_main();

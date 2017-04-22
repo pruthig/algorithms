@@ -40,8 +40,7 @@ WeightedGraph::WeightedGraph(char *file_path) {
 
 
 	}
-	// Counter to sum up the minimum weight of graph
-	total_weight = 0;
+
 	// Correct the number of edges as graph is undirected
 	number_of_edges /= 2;
 }
@@ -148,11 +147,5 @@ bool WeightedGraph::are_all_visited() {
 	}
 	return true;
 }
-
-// A method that will return the weight of MST
-int WeightedGraph::get_total_weight() {
-	return total_weight;
-}
-
 
 

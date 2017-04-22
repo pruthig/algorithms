@@ -14,12 +14,14 @@
 #include <ctime>
 #include <climits>
 #include <cstdlib>
-#include "graph.h"
+#include "weighted_graph.h"
 
-class Prim : public Graph {
+class Prim : public WeightedGraph {
+	int total_weight;
 public:
 	Prim(char *file_name);
 	void find_MST();
+	int get_total_weight();
 };
 
 #endif
