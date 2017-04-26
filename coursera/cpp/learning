@@ -143,6 +143,20 @@ The difference between getc() and getchar() is getc() can read from any input st
  
 sizeof is an operator - We can't take its address, it can work like this - sizeof a, the expression we introduce is not executed if provided and input in sizeof like in sizeo a++ It can be used as a compile-time constant, which is only possible if it's an operator rather than a function.char c[sizeof(int)];
 
+// Direct solution: Function takes a char and returns a pointer to a
+// function which is taking two floats and returns a float. <opCode>
+// specifies which function to return
+float (*GetPtr1(const char opCode))(float, float)
+{
+   if(opCode == '+')
+      return &Plus;
+   else
+      return &Minus; // default if invalid operator was passed
+}
+
+// define a function pointer and initialize it to NULL
+float (*pt2Function)(float, float) = NULL;
+
 
 
 
@@ -272,8 +286,9 @@ Newly introduced in C++11:
 
 STL -  3 legs of stool
 - Containers
--- Sequence containers - Vector, Deque, List
--- Associative Containers - Maps, Sets
+-- Sequence containers - vector, deque, list, array(C++11), forward_list (C++11)
+-- Container Adaptors :  Provide a different interface for sequential containers - queue, priority_queue, stack
+-- Associative Containers - Map , Multimap (A hash based impl. called unordered map ) , Set , MultiSet
 - Iterators
 -- input ... random
 - Algorithms
@@ -282,11 +297,7 @@ STL -  3 legs of stool
 Containers:
 
 STL was accepted in 1994.
-
-Two type of containers:
-Sequence - Vector , List ( Also forward_list ), Deque
-Associative - Map , Multimap (A hash based impl. called unordered map ) , Set , MultiSet
-C++11 Associative - Hash based lookup in Set and Map - unordered_map and unordered_set
+array in C++ cannot be expanded at runtime
 
 
 Typical Container Interfaces:
@@ -368,6 +379,11 @@ template<class InputIter, class T, BinOp binop) {
 Sum - accumulate(v1, v1+3, 0.0);
 Inner product - prod = inner_product(v1, v1+3, v2, 0);
 
+To output the contents of a container, we can use it as:
+list<int> s{1, 2, 3, 4};
+std::copy(s.begin(),s.end(), std::ostream_iterator<int>(std::cout, " "));
+
+
 
 #### Lambda Expressions ####
 A i-place type of unnamed function derived from LISP.
@@ -388,6 +404,8 @@ we can write:
 [](int n) -> int { return ++n; } // explicit
 
 
+#### Tuples ####
+Tuple is a data type in C++11 which is a fixed sized collection of heterogeneous elements. Starting C++17, we can return list-initialization list from a function returning tuple<>. 
 
 #### Function Objects####
 Function Objects are the classes with operator() defined. These are inlined and produce efficient code.
@@ -420,10 +438,84 @@ struct plus/minus/times/divides/modulus/negate<T>
 -> Binders for binding a function argument       
 -> Adapters for pointer to a function.
 
+## Functors ##
+A Functor is the object with overloaded '()' operator. The advantage of functor over function is that it can maintain state per function. There are many in-built functors such as:
+less, greater, no_equal_to, greater_equal, less_equal
+logical_and, logical_or, logical_not
+multiplies, minus, plus, divide, modulus, negate
+e.g int x = multiplies<int>()(3, 4);  --> 12
+// learn function class template, bind function, 
+
+### Predicate ###
+It is a type of functor which is used in comparison.
+* It returns bool
+* It doesn't change any variable.
+
+### Template Specialization ####
+Template specialization is a way to achieve a desired behaviour for a particular data type by writing a specific function for that type alongside the template.
+
+// code to implement Quick Sort
+template <class T>
+void sort(T arr[], int size)
+{ }
+ 
+// Template Specialization: A function specialized for char data type
+template <>
+void sort<char>(char arr[], int size)
+{ // code to implement counting sort
+}
+
+The same can be done for class:
+template <class T>
+class Test
+{}
+
+template <>
+class Test <int>
+{}
+
+We can provide default arguments to template like this:
+template<class T, class U = char>
+We can provide non-type parameters to template provided that the passed argument is const since templates are resolved at compile time.
+template <class T, int m>
+class Test
+{}
+Test<char, 100>();
+
+
 
 ###Inheritance ##
 Public:
 All members -public, private are inherited
+
+Following are the things which a derived class inherits from its parent.
+1) Every data member defined in the parent class (although such members may not always be
+accessible in the derived class!)
+2) Every ordinary member function of the parent class (although such members may not always be
+accessible in the derived class!)
+3) The same initial data layout as the base class.
+
+Following are the things which a derived class doesn’t inherits from its parent :
+1) The base class’s constructors and destructor.
+2) The base class’s friends
+
+
+* Diamond Problem *
+The diamond problem occurs when two superclasses of a class have a common base class.
+To solve this we inherit the superclass in derived classes in virtual way.
+as in : 
+class Faculty : virtual public Person{};
+class Student : virtual public Person{};
+
+--> Virtual Base class is constructed by the most derived class So,
+class A{}
+class B : virtual public A{};
+class B : virtual public A{};
+class D : public B, public C{};
+Here D directly calls the base class constructor, primarily to solve diamond problem.
+
+
+
 
 #Virtual Function
 Base class function overridden by derived classes.
@@ -444,10 +536,15 @@ C++ doesn't support super() because it supports multiple inheritance and using s
 
 
 
-
+Notes
+* Unlike NULL, it is not implicitly convertible or comparable to integral types.
+* std::vector<bool> behaves similarly to std::vector, but it is space efficient,
 
 "Default arguments do not participate in signature of functions. So 
 signatures of fun() in base class and derived class are considered same
+
+*  If we write any constructor, then compiler doesn't create the default constructor. It is not true other way, i.e., if we write a default or parameterized constructor, then compiler creates a copy constructor.
+
 
 static member function cannot be static, const or volatile because When you apply the const qualifier to a nonstatic member function, it affects the this pointer.
 There shall not be a static and a non-static member function with the same name and the same parameter types
@@ -477,6 +574,20 @@ namespace alias = name1::name2::name3;
  
  To find size of a data type - (char *)(&type+1)-(char*)(&type)
 *(&arr + 1) ==> Same address as (&arr + 1), but type of pointer is "int *".
+
+
+
+Notes:
+
+* Aggregate Initialization : T object {arg1, arg2, ...}; ( C++11 )
+  Example: unsigned char b[5]{"abc"};
+* We can have function on LHS when that function is returning reference.
+* To make a C++ class whose objects can only be dynamically allocated, create a private destructor in the class
+* /*Single line that calculates sum*/
+    for(sum=0; n > 0; sum+=n%10,n/=10);
+* The bitwise XOR operator can be used to swap two variables
+* XOR of a number with itself ret 0
+
 
 
 
