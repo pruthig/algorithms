@@ -587,6 +587,9 @@ Notes:
     for(sum=0; n > 0; sum+=n%10,n/=10);
 * The bitwise XOR operator can be used to swap two variables
 * XOR of a number with itself ret 0
+* A function on the basis of static type cannot be overloaded ( One member and another non-member )
+* Deleting/Freeing a NULL pointer in C++ has no effect.
+* To allow construction of object only by new operator, make the d'tor private.
 
 
 
