@@ -111,7 +111,46 @@ Mark current input node as visited and go to its left and repeat this step marki
  N defines the number of vertices and M defined the number of edges.
  M =  Ω(N) = O(N^2)
  
+ BFS can be used to find shortest path in unweighted graph, for weighted we should use Dijkstra algorithm.
+ * DFS cannot find the shortest path because
  
+ 
+ Topological Ordering:
+ It is an ordering of nodes in a graph such that :
+ ( u, v ) є G ==> f(u) < f(v)
+ Topological ordering of courses so that one can find the prerequisites for completing a course.
+ Cyclic graph cannot have topological order.
+ Algorithm - Find the sink vertex by doing DFS and assign that vertex an integer - n
+ Loop through other vertices by decrementing the label number.
+ DFS_LOOP(Graph G) {
+ // Mark all unexplored.
+ // cur_label = n
+ // for each vertex v in G 
+	// if v not explored
+	// DFS(G, v);
+ }
+ DFS(Graph g, start_vertex s) {
+ // mark s explored
+ // for all edges from s -> v
+	 // if v not explored
+		// DFS(G, v)
+ // f(s) = cur_label;
+ // cur_lable--
+ 
+ Kosaraju Algorithm :- To find the Strongly Connected Components of a directed graph. Choice of starting node matters a lot in this. To find this, we'll do DFS on reversed Graph which will find the ordering of nodes in range 1 to n and then will use that ordering in decreasing order to find respective SCC. So, it is 2 step algorithm.
+ 1. Find finishing time of each node by doing DFS on reversed Graph. 
+	for(n->1)
+		//DFS(i)
+	DFS(i)
+		for(all i, j)
+		  //DFS(j)
+		finishing_time++
+		f(j) = finishing_time;
+
+ 2. Use that ordering and DFS on original graph in order from n to 1
+ 
+ 
+* Any acyclic connected graph is a tree
  
  ************** Strings **************************
  
