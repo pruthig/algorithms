@@ -109,6 +109,7 @@ void deleteElement()
 			return;
 
 		}
+        dummy = dummy->next;
 	}
 	cout<<"Sorry Element not found"<<endl;
 }

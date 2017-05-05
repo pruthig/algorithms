@@ -1,4 +1,9 @@
-===========================  C   =====================================
+
+											 ------
+                                             |
+											 |
+											 |
+											 |-----
 
 Data segment is divided in RW and RO areas - RW contains the variables while the RO areas contains the string literals.
 FOllowing registers are involved for stack maintenance - EBP (base pointer; used to address local vars ) , ESP (Always points to last element on stack) , EIP (Holds the address of next instruction to be executed; it stores the address of next instruction when a function call is made, so that control can progress when the control returns.
@@ -163,14 +168,51 @@ float (*pt2Function)(float, float) = NULL;
 
 
 
+Notes:
+* A program without main can be compiled but cannot be executed.
+* Associativity doesn't defines the precedence of evaluation of operands in an expression, as in f1() + f2()
+* When comma is used as an operator, it evaluates both left and right operands, but value of 1st is discarded.
+* sizeof doesn't evaluates the expression inside it
+* In C/C++ the pre-increment (decrement) and the post-increment (decrement) operators require an L-value expression as operand
+  So the expression : ++(-i) will give compilation error.
+* In complex expression like : printf("\n%d%d%d%d%d%d",--a,a--,--a,a--,++a,a); // go from right to left evaluating each small expression, postfix will be assigned value at the time of evaluation while prefix and normal are assigned equal final value/
+* Prefix and deref and address operator have same precedence but associativity is right->left
+* In ternary expression exp1?exp2:exp3 ,exp2 is considered as output type and exp3 will be converted into exp2 at runtime
+* Find sum with printf - printf("%*c%*c",  x, '\r',  y, '\r');
+int add(int x,int y){
+while(y!=0){
+int carry=x&y;
+x=x^y;
+y=carry<<1;
+}
+return x;
+}
+* sign of left operand is appended to result in case of modulus operator in C.
+* postincrement\decrement or preincrement\decrement requires lvalue and returns rvalue.
+* Use ##__VA_ARGS__ to use variable args in MACRO
+* Example of instance when inline function will work as expected while MACRO won't -> int x = 36/square(6);
+* In C, an array name is passed as pointer, so it should not use sizeof in function where it is passed.
+* Destructors are not called when exit(0) is called, but called when return(0) used
+*  The expression used in switch must be integral type ( int, char and enum) and the statements written above cases are never executed 
+* In C, functions can return any type except arrays and functions
+* To prevent error from MACRO, we use do{...}while(0);
+* To find offset of a member in struct -> ((size_t)&(((PodType *)0)->c))
+* We cannot have array of void's rather array of void pointers is allowed
+* Find duplicate in array in O(n):
+http://stackoverflow.com/questions/14944458/find-duplicate-element-in-array-in-time-on
+* Print string without printf and semicolon: if(puts("String")){}
+* 
 
 
 
 
 
+											  ------	|		    |
+                                             |          | 		    |
+											 |		----|---	----|---
+											 |			|		    |
+											 |-----		|		    |
 
-
-============================  C++  ===================================
 
 
 
@@ -204,6 +246,7 @@ dest[i] = static_cast<T2>(src[i]);
 }
 }
 
+Non-type parameters must be const, so they cannot be modified.
 const_cast<> cast away constness ( not recommended )
 
 
@@ -225,7 +268,8 @@ Constructor   ===>
 Initializer list - Constructor
 
 constructor(Type t1, Type t2):var_1(t1), var_2(t2) {}
-# Initializer list can initialize const variable, but default consructor cannot
+> Initializer list can initialize const variable, but default consructor cannot
+> Delegating constructors call another constructor to carry out a task. (C++11)
 
 
 # this is used to disambiguate member variable and argument name if both have same name
@@ -324,7 +368,7 @@ Forward - Search forward using ++ operator
 Bidirectional - 
 Random access Iterator - Strongest (Access and Modify in O(1) )
 
-It can be copy constrcuted and can be used with == and !=
+It can be copy constructed and can be used with == and !=
 
 // the function replaces x by y in specified iterator range - a mutating sequence algo.
 template<class ForwardIterator, class T>
@@ -383,7 +427,71 @@ To output the contents of a container, we can use it as:
 list<int> s{1, 2, 3, 4};
 std::copy(s.begin(),s.end(), std::ostream_iterator<int>(std::cout, " "));
 
+// To merge container classes
+std::merge(beg1, end1, beg2, end2, beg3);
 
+// This function is used to check whether one sorted container elements are including other sorted container elements or not. 
+// returns true if 1st container includes 2nd container else returns false.
+std::includes(beg1, end1, beg2, end2)
+
+//This function computes the set union of two containers and stores in new container.
+set_union(beg1, end1, beg2, end2, beg3)
+
+// This function computes the intersection of 2 containers.
+set_intersection(beg1, end1, beg2, end2, beg3)
+
+//This function computes the set difference of two containers and stores in new container
+set_difference(beg1, end1, beg2, end2, beg3)
+
+//This function is used to partition the elements on basis of condition mentioned in its arguments.
+std::partition(beg, end, condition)
+
+//This function returns boolean true if container is partitioned else returns false.
+std::is_partitioned(beg, end, condition)
+
+### Chrono library ### (C++11)
+Provided system neural date/time functions.
+1. Duration - Time span
+Class template std::chrono::duration represents a time interval.
+It consists of a count of ticks of type Rep and a tick period, where the tick period is a compile-time rational constant representing the number of seconds from one tick to the next.
+
+std::chrono::nanoseconds/microseconds/milliseconds/seconds/minutes/hours/ duration(1000);
+
+2. Clock
+std::chrono::system_lock();  // Adjust according to the system (realtime)
+std::chrono::steady_lock(); // No adjustments
+std::chrono::high_resolution_clock - It provides the smallest possible tick period.
+
+3. Time point
+std::chrono::time_point<std::chrono::system_clock> start, end
+std::chrono::duration<double> elapsed_seconds = end - start;
+std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+std::cout << "finished computation at " << std::ctime(&end_time)
+
+## Tuple ## (C++11)
+A tuple is an object that can hold data of multiple types.
+std::tuple <char, int, float> geek;
+geek = std::make_tuple('a', 10, 15.5);
+// To get item from tuple acc. to index
+get<index>geek
+
+tie() function dismember tuple to individual elements:
+int i_val; float f_val;,char c_val;
+tuple <int,char,float> tup1(20,'g',17.5);
+tie(i_val,ch_val,f_val) = tup1;
+
+Other functions: tuple_cat(), swap()	
+
+## ratio ##
+// To implement arithmetic operations on ratios
+ratio_add/subtract/multiply/divide();
+
+
+## auto ## (C++11)
+auto keyword is added C++11 which deduced the data type when variable is declared.
+auto (function)  - C++14
+ If auto is used to declare multiple variables, the deduced types must match. For example, the declaration auto i = 0, d = 0.0; is ill-formed, while the declaration auto i = 0, *p = &i; is well-formed and the auto is deduced as int.
+ 
 
 #### Lambda Expressions ####
 A i-place type of unnamed function derived from LISP.
@@ -483,6 +591,28 @@ class Test
 Test<char, 100>();
 
 
+### Overloading ###
+* A function on the following basis cannot be overloaded:
+> Based on return type.
+> If the functions differ by static keyword
+> argument arr[] or *arr
+> based on default arguments f(int b, int c) and f(int b, int c=9) are not allowed
+* A function can be overloaded if:
+> Functions differ by const keyword.
+
+
+### Exception handling
+> Implicit type conversion doesn’t happen for primitive types. A 'double' thrown cannot be caught as 'int'
+> When an exception is thrown, all objects created inside the enclosing try block are destructed before the control is transferred to catch block
+> Follow the rule of exception as in - Throw by value, Catch by reference.
+> Conversion constructor is not called for catch blocks.
+> Destructors are only called for the completely constructed objects. It means throwing and exception from constructor will not
+lead to the call of destructor for that object.
+> std::set_terminate(<Func_Ptr>); // It sets the terminate function which is called on program abortion
+> If exception is thrown in destructor, then program is terminated.
+> ‘...’ handler must be the last handler for its try block [-fpermissive]
+> The difference between postfix/prefix operator overloading is that we pass a dummy argument to postfix operator overload.
+
 
 ###Inheritance ##
 Public:
@@ -515,7 +645,11 @@ class D : public B, public C{};
 Here D directly calls the base class constructor, primarily to solve diamond problem.
 
 
-
+Notes-Inheritance
+* A Base class pointer/reference can point/refer to a derived class object, but the other way is not possible.
+* A base class pointer can point to a derived class object, but we can only access base class member or virtual functions using the base class pointer.
+* If a derived class writes its own method, then all functions of base class with same name become hidden, even if signaures of base class functions are different.
+* 
 
 #Virtual Function
 Base class function overridden by derived classes.
@@ -576,6 +710,8 @@ namespace alias = name1::name2::name3;
 *(&arr + 1) ==> Same address as (&arr + 1), but type of pointer is "int *".
 
 
+### Memory management ###
+When new operator is used as : new(std::nothrow) , in that case, new returns nullptr rather than throwing exception.
 
 Notes:
 
@@ -587,9 +723,15 @@ Notes:
     for(sum=0; n > 0; sum+=n%10,n/=10);
 * The bitwise XOR operator can be used to swap two variables
 * XOR of a number with itself ret 0
-* A function on the basis of static type cannot be overloaded ( One member and another non-member )
 * Deleting/Freeing a NULL pointer in C++ has no effect.
-* To allow construction of object only by new operator, make the d'tor private.
+* To allow construction of object only by new operator, make the d'tor private, but write another function to delete the object allocated using new operator.
+* return braced-init-list ;	(2)	(since C++11)
+* A private static variable cannot be accessed.
+* When virtual function is called from constructor, it will call base class function and not overridden one.
+* A function decl. is allowed inside another function def.
+*  With default arguments, we cannot skip an argument in the middle
+* Returning an object from function will call copy constructor and not default constructor
+
 
 
 

@@ -33,9 +33,11 @@ a > b^d  ==>  O( n^(logb^a) )
 Effort put in recursion = c*n^d * ( (j = 0 to logb ) Σ ( (a / b^d )^j )
 
 
-Quicksort Algorithm:
-> Elegant and in place
-> Practical with O(nlogn) time
+================================= Sorting =================================
+
+> Quicksort Algorithm:
+* Elegant and in place
+* Practical with O(nlogn) time
 
 Steps:
 Choose a pivot
@@ -61,25 +63,36 @@ Nearly a quicksort. It just that we are looking for 'i'th position and we recurs
 
 T(n) = T(n/2) + O(n)  ==>  O(n)
 
- **************** Trees ***********************
- The diameter of a tree T is the largest of the following quantities:
+> External Sort
+
+1) Read input_file such that at most 'run_size' elements
+   are read at a time. Do following for the every run read
+   in an array.
+      a) Sort the run using MergeSort.
+      b) Store the sorted run in a temporary file, say 'i' 
+         for i'th run.
+2) Merge the sorted files using the approach discussed here
+
+
+================================= Trees ====================================
+
+> The diameter of a tree T is the largest of the following quantities:
 
 * the diameter of T’s left subtree
 * the diameter of T’s right subtree
 * the longest path between leaves that goes through the root of T (this can be computed from the heights of the subtrees of T)
-int lheight = height(tree->left);
-int rheight = height(tree->right);
-int ldiameter = diameter(tree->left);
-int rdiameter = diameter(tree->right);
- 
-  return max(lheight + rheight + 1, max(ldiameter, rdiameter));
+* int lheight = height(tree->left);
+* int rheight = height(tree->right);
+* int ldiameter = diameter(tree->left);
+* int rdiameter = diameter(tree->right);
+* return max(lheight + rheight + 1, max(ldiameter, rdiameter));
 
---> We can make an inorder traversal using Morris threaded tree in which each node has a pointer that points to its successor.
+> We can make an inorder traversal using Morris threaded tree in which each node has a pointer that points to its successor.
 Algo as goes - with root as input node
 D.S - a visited set
 Mark current input node as visited and go to its left and repeat this step marking the left of the current node under consideration as visited.
 
---> Sum tree - Check if a given node is sum of its left and right subtrees
+> Sum tree - Check if a given node is sum of its left and right subtrees
     boolean isSumTree(Node node) 
 	{
         if (node == null || isLeaf(node))
@@ -96,26 +109,21 @@ Mark current input node as visited and go to its left and repeat this step marki
 		return (node.data == ls + rs && isSumTree(node.left) && isSumTree(node.right));
     }
 
--->Populate inorder successor-
+> Populate inorder successor-
 	Do reverse inorder traversal and keep track of previously visited node. so for each current node, do current_node->next = 
 	previous visited node
--->
+> Vertical Sum-
+	Find horizontal distance from root. Do -1 when going left and +1 when going right
 
+> Find Complete binary tree.
+If height of the tree is h, then the total number of nodes will be 2h-1 and vice-versa.
 
+Hence, If we just find height of the Binary tree, and then count the number of nodes in the tree then we can say for certainty, whether or not the tree is Complete.
 
-
- ****************  Graphs *********************
- 
- Minimum cut/Graph partition is a dividing graph in 2 so that there are minimum number of crossing edges.
- 
- N defines the number of vertices and M defined the number of edges.
- M =  Ω(N) = O(N^2)
- 
- BFS can be used to find shortest path in unweighted graph, for weighted we should use Dijkstra algorithm.
- * DFS cannot find the shortest path because
+================================= Graphs ====================================
  
  
- Topological Ordering:
+> Topological Ordering:
  It is an ordering of nodes in a graph such that :
  ( u, v ) є G ==> f(u) < f(v)
  Topological ordering of courses so that one can find the prerequisites for completing a course.
@@ -137,7 +145,7 @@ Mark current input node as visited and go to its left and repeat this step marki
  // f(s) = cur_label;
  // cur_lable--
  
- Kosaraju Algorithm :- To find the Strongly Connected Components of a directed graph. Choice of starting node matters a lot in this. To find this, we'll do DFS on reversed Graph which will find the ordering of nodes in range 1 to n and then will use that ordering in decreasing order to find respective SCC. So, it is 2 step algorithm.
+> Kosaraju Algorithm :- To find the Strongly Connected Components of a directed graph. Choice of starting node matters a lot in this. To find this, we'll do DFS on reversed Graph which will find the ordering of nodes in range 1 to n and then will use that ordering in decreasing order to find respective SCC. So, it is 2 step algorithm.
  1. Find finishing time of each node by doing DFS on reversed Graph. 
 	for(n->1)
 		//DFS(i)
@@ -149,21 +157,31 @@ Mark current input node as visited and go to its left and repeat this step marki
 
  2. Use that ordering and DFS on original graph in order from n to 1
  
+> Find cycles in graph
+* For undirected graph mark edges visited and non-visited, while for directed graph use nodes as visited/non-visited, use DFS for 
+this approach.
+
+--------------------------------  Notes --------------------------------------
+* Minimum cut/Graph partition is a dividing graph in 2 so that there are minimum number of crossing edges.
+ N defines the number of vertices and M defined the number of edges.
+ M =  Ω(N) = O(N^2)
+* BFS can be used to find shortest path in unweighted graph, for weighted we should use Dijkstra algorithm.
+* DFS cannot find the shortest path because
+* Any acyclic connected graph is a tree 
+
+================================= Strings ====================================
  
-* Any acyclic connected graph is a tree
- 
- ************** Strings **************************
- 
- Find next permutation of string:
+* Find next permutation of string:
  https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
 * Find the highest index i such that s[i] < s[i+1]. If no such index exists, the permutation is the last permutation.
 * Find the highest index j > i such that s[j] > s[i]. Such a j must exist, since i+1 is such an index.
 * Swap s[i] with s[j].
 * Reverse the order of all of the elements after index i till the last element.
 
-
- 
  
 
+================================= Linked Lists ===============================
 
-
+> 3 Sum Problem - Given 3 lists, find a triplet of a given sum with each number in a list
+Let lists - a, b, c; Sort b in ascending order and c in descending order; walk through a=a->next and checking through b and c
+O(n^2)
