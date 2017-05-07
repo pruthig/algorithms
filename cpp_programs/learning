@@ -1,0 +1,465 @@
+===========================  C   =====================================
+
+Data segment is divided in RW and RO areas - RW contains the variables while the RO areas contains the string literals.
+FOllowing registers are involved for stack maintenance - EBP (base pointer; used to address local vars ) , ESP (Always points to last element on stack) , EIP (Holds the address of next instruction to be executed; it stores the address of next instruction when a function call is made, so that control can progress when the control returns.
+
+Dynamic libs are larger in size because of symbol table
+Dynamic libs can be loaded at any address hence they use position independent code (PIC). Each dynamic lib contains the Global offset table that contains pointers to all static data in program
+
+http://stackoverflow.com/questions/4415059/how-is-a-shared-library-file-called-by-two-different-processes-in-linux
+
+http://www.iecc.com/linker/linker10.html
+
+http://stackoverflow.com/questions/24225172/how-to-manually-find-the-contents-of-a-register-after-a-hex-code-instruction
+
+http://bottomupcs.sourceforge.net/csbu/x3824.htm
+
+On success scanf return sthe number of otems successfully read
+Internal linkage refers to the variables whose scope is the transalation unit ( A single source file ), the another one is External linkage.
+Anonymous namespaces have internal linkage by default.
+
+Scope of variables, if defined outside the function:
+// in namespace or global scope
+int i; // extern by default
+const int ci; // static by default
+extern const int eci; // explicitly extern
+static int si; // explicitly static
+
+// the same goes for functions (but there are no const functions)
+int foo(); // extern by default
+static int bar(); // explicitly static 
+
+const variables internally link by default unless otherwise declared as extern
+A pointer of type -->    const int *e; cannot change the value by itself though it can be changed by simple assignment to that variable or by another pointer.
+
+ptrdiff_t is defined in stddef.h 
+
+Indirection is applied to a given address and returns the value at that particular address.
+To find the word size subtract the memory address
+Endianness describes the format/layout in which data will be stored in memory
+
+Need for pointer to be prefixed with '*' --> take the example of multiplicaton operator a**b (where 'b' is pointer variable)
+
+It is not mandatory to provide return statement in C/C++'s main method.
+In printf(), variables are considered right->left. In case of integers in printf post-inc vars are printed while going from right to left while pre-inc and normal var
+are assigned last value of that var.
+
+*** Functions ****
+C allows multiple arguments to be passed to a function which is declared to take no arguments, while C++ won't allow that:
+int func();
+func(1,2,3);  // Ok in C, not in C++
+
+
+#define get(a) #a   <-- converts 'a' to string
+Macros should be avoided because of type-unsafety
+
+The option '-Wall' enables all compiler messages.
+
+2 enums can have the same value - enum State {Working = 1, Failed = 0, Freezed = 0};
+
+The keyword 'struct' is optional in C++ while declaring variable name.
+Structure members cannot be initialized with declaration.
+The reason for above error is simple, when a datatype is declared, no memory is allocated for it. Memory is allocated only when variables are created.
+
+Designated initialization: It allows to declare the structure variables in any order. It is available only in C and not C++.
+
+// Examples of initializtion using designated initialization
+struct Point p1 = {.y = 0, .z = 1, .x = 2};
+
+Advantages of struct hack:
+Fast processing because of increased cache hits. One free call will free the struct along with that extra memory.
+It's just that while allocating memory for struct you have add that size.
+
+void argument_alignment_check( char c1, char c2 )
+{
+   printf("Displacement %d\n", (int)&c2 - (int)&c1);      <-- returns 4 because chars are integer or when arguments passed on stack, are they subjected to alignment
+}
+In C, the only operation that can be applied to struct variables is assignment.
+
+Bit fields in struct:
+// d has value between 1 and 31, so 5 bits
+// are sufficient
+unsigned int d: 5;
+
+
+
+A special unnamed bit field of size 0 is used to force alignment on next boundary.
+// A structure with forced alignment
+struct test2
+{
+   unsigned int x: 5;
+   unsigned int: 0;
+   unsigned int y: 8;
+};
+
+
+bit fields cannot be static and array of bit fields is not allowed. Also, size of bit fields cannot exceed its type.
+
+Memory layout of C program:
+Stack, Heap, Data Segment (Initialized (Further classified as RW and RO) and Uninitialized (BSS)), Text segment
+
+Writing to ReadOnly location will result in segmentation fault.
+The program break is the address of the first location beyond the current end of the data region.
+
+Other way to free the memory is using realloc() as in ->  realloc(ptr, 0);
+
+int var = 20;
+int main()
+{
+    int var = var; //Here var will hold a garbage value 
+}
+
+'_' alone can be a legit var name.
+
+C allows a global variable to be declared again when first declaration doesn’t initialize the variable.
+
+In C, Static variable needs to be assigned a constant literal while in C++ it is allowed. e.g
+static int y = give(); // is invalid in C while ok in C++
+This is because static have to be initialized before program startsup.
+
+Declaration can be done any number of times but definition only once.
+
+There are four types of storage duration.
+1. Automatic storage duration. the object is allocated at the beginning of the enclosed code block and de-allocated at the end. All local objects have this storage duration, except those declared static, extern or thread_local.
+2. Static storage duration. The storage for object is allocated when the program begins and de allocated when the program ends. Only the instance of the object exists. 
+3. thread storage duration. the object allocated when the thread begins and de allocated when the thread ends. Each thread has its own instance of object. Only objects declared thread_local have this storage duration. 
+4. Dynamic storage duration. The object is allocated and deallocated per request by using dynamic memory allocation function.
+
+* A variable can be both const and volatile, like a status register whose value we can't change but can be changed by ISR
+
+volatile and const are type qualifiers
+typedef is a storage class semantically because 2 storage classes are not allowed and writing typedef static int sint; will be non-sense because there is no variable being declared here.
+
+The only storage-class specifier that shall occur in a parameter declaration is register
+Taking address of register variable may or mayn't results in compiler error
+
+In C, return type of getchar(), fgetc() and getc() is int (not char).
+Second argument of printf needn't to be a variable, it can be a const as in:
+printf("number is: %d\n", 1911);
+Format string vulnerability (printf) - Using %x (retrieve address) and %n (Write to address), we can manipulate the location.
+In C, scanf returns the no. of inputs it has successfully read
+gets() doesn’t do any array bound testing. gets() keeps on reading until it sees a newline character.
+
+The difference between getc() and getchar() is getc() can read from any input stream,
+ you cannot pass an array by value in C
+ void* needs to be typecasted so that it can be used for pointer arithmetic for which we need to have the size of pointer.
+ sizeof void is 1 because we can perform arithmetic on void pointer.
+
+In C, We can leave a const variable uninitialized but the same is not possible in C++
+In C, type of char literal is 4 while in C++, it is 1
+Size of empty struct is 0 in C because as per std - If the struct-declaration-list contains no named members, the behavior is undefined.
+
+struct Bar { };
+struct Foo {struct Bar a[2]; struct Bar b; }; Foo f; // f.a[] and f.b have to be different and for this we should allocate 1 for Bar
+
+variable of type is not allowed by compiler;
+
+ 
+
+
+
+
+
+
+
+
+
+
+============================  C++  ===================================
+
+
+
+type safe
+libraries
+inline > preprocessor,  but only a request to compiler
+anywhere declaration
+
+MACRO, by default, has a file scope..even if decl. in a function..
+C++ has overloading and call by reference
+
+Generics in C++
+
+template<class T>
+void swap(T &a, T &b){
+T e;
+e = a;
+a = b;
+b = e;
+}
+
+Default variable - starts from RHS
+An array passed as an argument is passed by reference
+
+Generics   ===>
+Multiple template arguments:
+template<class T1, class T2>
+void copy(const T1 src[], T2 dest[], int size){
+for(int i =0; i < size; ++i) {
+dest[i] = static_cast<T2>(src[i]);
+}
+}
+
+const_cast<> cast away constness ( not recommended )
+
+
+
+Operator overloading   ===>
+# Ternary operators cannot be overloaded..
+Example:
+ostream& operator<<(ostream& out, days d) 
+{
+    out<<"ok";
+}
+
+ostream& is returned to keep associativity i.e.  cout << a << b =>  operator<<(cout, a) << b  => out << b
+The type variable is returned in case of binary operators.
+
+Class member functions have automatic access to private members
+
+Constructor   ===>
+Initializer list - Constructor
+
+constructor(Type t1, Type t2):var_1(t1), var_2(t2) {}
+# Initializer list can initialize const variable, but default consructor cannot
+
+
+# this is used to disambiguate member variable and argument name if both have same name
+
+class point {
+double x;
+point(double x) {
+    x = x;  //wont do anything
+}
+};
+
+Dynamic allocation   ===>
+char *p = new char[12];    // get off heap
+int *i  new int(10);   // single int initialized
+delete[] p;
+delet i;
+
+
+C++11 enums
+enum class is a better form of enumeration data structure.
+enum class <Identifier> : <Int Type> { enumeration list }
+It is type safe too.
+Example:
+
+enum class Color : short{
+RED, 
+BLUE,
+GREEN
+};
+
+
+for-range loop:
+for(auto i : w) {
+	cout<<i<<endl;
+}
+in case of complex containers, auto is a pointer and *ptr is actually a value.
+
+Friend function:
+Independent of access modifiers.
+
+
+Newly introduced:
+
+<regex>  - Regular Expression
+<thread> - Threading
+<unordered_map> - hash based map, original map was based on RB tree
+<array> - Fixed size array has size as a member
+<forward_list> - SLL, original list is DLL
+
+
+STL -  3 legs of stool
+- Containers
+-- Sequence containers - Vector, Deque, List
+-- Associative Containers - Maps, Sets
+- Iterators
+-- input ... random
+- Algorithms
+-- Sorting, Find, Count, Mutating Sequence
+
+Containers:
+
+STL was accepted in 1994.
+
+Two type of containers:
+Sequence - Vector , List ( Also forward_list ), Deque
+Associative - Map , Multimap (A hash based impl. called unordered map ) , Set , MultiSet
+C++11 Associative - Hash based lookup in Set and Map - unordered_map and unordered_set
+
+
+Typical Container Interfaces:
+* Constructors - Default and Copy.
+* Destructors.
+* Element access.
+* ELement insertion.
+* Element deletion.
+* Element emplacements ( C++11 std. move constructors ).
+* Iterators.
+* Associated memory allocators.
+
+Associative Containers:
+These containers are key based access elements and employs self-balancing binary trees to store and access data.
+There is an ordering relation between elements in the associative containers. 
+
+Iterators: It is generally a pointer to the data type operated upon.
+
+Input
+Output
+Forward - Search forward using ++ operator
+It can be copy constrcuted and can be used with == and !=
+
+// the function replaces x by y in specified iterator range - a mutating sequence algo.
+template<class ForwardIterator, class T>
+void replace(ForwardIterator first, ForwardIterator last, const T&x, const T&y)
+{}
+
+Random - Equivalent to indexed array
+template<class RandomIterator>
+sort(RandomIterator ri_1, RandomIterator ri_2);
+
+Bidirectional - That allows -- in addition to ++
+reverse(BidirectionalIterator b1, BidirectionalIterator b2);
+The reverse function uses swap and move that would lead to reverse.
+
+## Algorithms Library ##
+* Sorting algorthms
+* Non-mutating sequence algorithms
+* Mutating Sequence algorithms
+* Numerical algorithms
+* Generally used iterators to access containers instantiated on given type.
+
+template<class RandomAcc>
+void sort( RandomAcc a, RandomAcc b );     // A QuickSort algorithms
+
+template<class RandomAcc>
+void stable_sort( RandomAcc a, RandomAcc b );  // In-place algorithms
+
+* Non-mutating sequence algorithms
+These algos do not modify the sequence they go through. Example - find()
+
+template<class InputIter, Class T>
+InputIter find(InputIter b, InputIter e, const T& t);   // Find position of 't' in range 'b' to 'e'
+
+template<class InputIter, class Predicate>
+InputIter find_if(InputIter b, InputIter e, Predicate p); // Find position of first element that makes the predicate true
+                                                       // in range 'b' to 'e' , otherwise position 'e' returned.
+
+template<class InputIter, class Function>
+void for_each(InputIter d, InputIter e, Function f);  // Apply 'f' to each value stored in 'd' to 'e'
+
+* Numerical Algorithms
+- Sums
+- Inner product
+- Adjacent differences
+
+template<class InputIter, class T, BinOp binop) {
+    // Successive elements from range b to e are summed with sum = binop(sum, element)
+}
+
+Sum - accumulate(v1, v1+3, 0.0);
+Inner product - prod = inner_product(v1, v1+3, v2, 0);
+
+
+#### Lambda Expressions ####
+A i-place type of unnamed function derived from LISP.
+
+In another way to write below: 
+void outarr() { cout<<i; }
+
+int main() {
+vector<int> v(6);
+for_each(v.begin(), v.end(), outarr);
+return 0;
+}
+
+we can write:
+[](int i) { cout << i << endl; }   // goes where function object is required
+
+[](int n) { return n*4.4; } // returns double
+[](int n) -> int { return ++n; } // explicit
+
+
+
+#### Function Objects####
+Function Objects are the classes with operator() defined. These are inlined and produce efficient code.
+
+#### Defined function object classes ####
+-> Arithmetic Objects
+-> Comparison Objects
+-> Logical Objects
+
+Generators - 
+template <class ForwardIterator, class Generator>
+  void generate (ForwardIterator first, ForwardIterator last, Generator gen);
+The behavior of this function template is equivalent to:
+template <class ForwardIterator, class Generator>
+
+void generate ( ForwardIterator first, ForwardIterator last, Generator gen )
+{
+  while (first != last) {
+    *first = gen();
+    ++first;
+  }
+}
+
+template<class T>
+struct plus/minus/times/divides/modulus/negate<T>
+
+### Function Adapters ###
+-> Creation of function objects using adaptation
+-> Negators for negating predicate objects
+-> Binders for binding a function argument       
+-> Adapters for pointer to a function.
+
+
+
+
+
+
+Notes:
+References:
+-> Generally behaves like a pointer
+-> Cannot be declared as of void type
+-> Once reference are created, they cannot point to other objects.
+-> Reference cannot be NULL and must be initialized before usage.
+-> We cannot have pointer to reference var.
+-> C++ deliberately specifies that binding a temporary object to a reference to const on the stack lengthens the lifetime of the temporary to the lifetime of the reference itself,
+
+-> 
+int& ref = x;      // Decl a reference
+
+Function Overloading:
+-> A function taking an array or a pointer as parameter are equivalent, so no overloading is allowed.
+-> C++ allows functions to be overloaded on the basis of const-ness of parameters only if the const parameter is a reference or a pointer. 
+-> Overloading doesn’t work for derived class in C++ programming language. There is no overload resolution between Base and Derived. The compiler looks into the scope of Derived.
+-> We can have overloaed main() function inside class.
+-> Function in derived class hides the function of the same name in base class even if parameter are of diff. types
+-> When a function is declared as const, it can be called on any type of object. Non-const functions can only be called by non-const objects.
+-> 
+
+Classes:
+-> all the functions defined inside the class are implicitly inline.
+-> C++ compiler cannot perform inlining if the function is virtual. The reason is call to a virtual function is resolved at runtime instead of compile time.
+-> Inlining cannot be done if the address of the function is required anywhere in the code.
+-> Whether new/delete will call malloc()/free() is implementation defined.
+-> A static member variable is not stored inside each object of a class.
+-> C++ allows member methods to be overloaded on the basis of const type.
+-> 
+
+Object slicing
+* When derived class object is passed to a function which takes base class object, then the member variables which are in derived class and not in superclass are sliced off. It only happens when object is passed by value but not when object is passed by ref.,.
+
+
+
+
+
+
+
+
+
+
+
+
