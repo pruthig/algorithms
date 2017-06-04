@@ -35,13 +35,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\computer.h" />
+    <ClInclude Include="inc\dijkstra.h" />
     <ClInclude Include="inc\generic.h" />
+    <ClInclude Include="inc\graph.h" />
     <ClInclude Include="inc\player.h" />
     <ClInclude Include="inc\unweighted_graph.h" />
     <ClInclude Include="inc\user.h" />
     <ClInclude Include="inc\weighted_graph.h" />
     <ClInclude Include="inc\hex.h" />
     <ClInclude Include="inc\prim_mst.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\dijkstraData.txt" />
+    <Text Include="resources\IntegerArray.txt" />
+    <Text Include="resources\KargerMinCut.txt" />
+    <Text Include="resources\MinCut.txt" />
+    <Text Include="resources\MST.txt" />
+    <Text Include="resources\QuickSort.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E74ED4BC-F8F7-4E08-AFDA-30ECD9AB2885}</ProjectGuid>

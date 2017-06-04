@@ -211,7 +211,7 @@ Player& Hex::player_object(){
 	return this->player;
 }
 
-int main(){
+void hex_main(){
 	int option;
 	Hex hex_game;
 	int choice = 0;
@@ -258,5 +258,4 @@ int main(){
 
 		}
 	}
-	return 0;
 }

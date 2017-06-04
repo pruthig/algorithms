@@ -19,7 +19,7 @@ using namespace std;
 /*
 *
 */
-int back_main(int argc, char** argv) {
+int main(int argc, char** argv) {
 
 	int match;
 
@@ -80,7 +80,7 @@ int back_main(int argc, char** argv) {
 			prim_mst_main();
 			break;
 		case 12:
-			//hex_main();
+			hex_main();
 			break;
 		case 100:
 			tree_main();
