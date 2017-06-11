@@ -21,7 +21,7 @@ static std::vector< std::list<int>* > graph(size + 1);  // the 0th index won't b
 static void construct_graph() {
 	int num;
 	int index = 0, counter = 0;
-	std::ifstream infile("MinCut.txt");
+	std::ifstream infile("resources/MinCut.txt");
 
 	std::string line;
 	//std::vector< std::list<int> > vertex_list;

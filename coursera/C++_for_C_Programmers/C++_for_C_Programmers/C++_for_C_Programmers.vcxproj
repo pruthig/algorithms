@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\2-Sum.cpp" />
     <ClCompile Include="src\card_game.cpp" />
     <ClCompile Include="src\computer.cpp" />
     <ClCompile Include="src\counting_inversions.cpp" />
@@ -32,7 +33,7 @@
     <ClCompile Include="src\sum_of_vector_elements.cpp" />
     <ClCompile Include="src\tree.cpp" />
     <ClCompile Include="src\unweighted_graph.cpp" />
-	<ClCompile Include="src\MedianMaintenance.cpp" />
+    <ClCompile Include="src\MedianMaintenance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\computer.h" />
@@ -47,6 +48,7 @@
     <ClInclude Include="inc\prim_mst.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="resources\2-Sum.txt" />
     <Text Include="resources\dijkstraData.txt" />
     <Text Include="resources\IntegerArray.txt" />
     <Text Include="resources\KargerMinCut.txt" />

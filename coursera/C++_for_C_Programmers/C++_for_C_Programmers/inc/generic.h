@@ -26,6 +26,8 @@ void order_statistics_main();
 void karger_min_cut_main();
 void prim_mst_main();
 void hex_main();
+void median_maintenance_main();
+void _2_sum_main();
 
 // Data structures
 void tree_main();

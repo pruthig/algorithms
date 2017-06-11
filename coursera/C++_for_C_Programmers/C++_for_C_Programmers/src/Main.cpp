@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
 		cout << "11. Find Minimum Spanning tree" << '\n';
 		cout << "12. Play Hex Game" << '\n';
 		cout << "13. Find median maintenance" << '\n';
+		cout << "14. Find 2- Sum" << '\n';
 		cout << "100. Tree Data Structure Operations" << '\n';
 
 		cout << "0 Exit" << '\n';
@@ -84,6 +85,9 @@ int main(int argc, char** argv) {
 			break;
 		case 13:
 			median_maintenance_main();
+			break;
+		case 14:
+			_2_sum_main();
 			break;
 		case 100:
 			tree_main();
