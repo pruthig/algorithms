@@ -29,7 +29,6 @@ private:
 	int records_per_file = 0;
 	int records_flushed = 0;
 	int size_of_entries = 0;
-	int num_files = 0;
 	// File iterator for flushing the remaining data
 	file_iter f_iter_flush;
 
