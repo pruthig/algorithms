@@ -6,8 +6,8 @@
 
 class single{
 private:
-single& operator=(single&);
-single(const single& s){}
+single operator=(single&);
+single(single& s){}
 single(){}
 public:
 static single *instance;
