@@ -46,15 +46,15 @@ return mainPtr;
 
 void mirrorTree(struct treeStruct *ptr)
 {
-if(ptr == NULL)
-	return;
-
-mirrorTree(ptr->left);
-mirrorTree(ptr->right);
+	if(ptr == NULL)
+		return;
 	
-struct treeStruct *temp = ptr->left;
-ptr->left = ptr->right;
-ptr->right = temp;
+	mirrorTree(ptr->left);
+	mirrorTree(ptr->right);
+		
+	struct treeStruct *temp = ptr->left;
+	ptr->left = ptr->right;
+	ptr->right = temp;
 }
 
 	
@@ -70,14 +70,14 @@ return 0;
 
 
 void rootToLeafPrinter(struct treeStruct *ptr){
-if(ptr == NULL){
+	if(ptr == NULL){
+		return;
+	}
+	
+	rootToLeafPrinter(ptr->left);  //6 ka left completed
+	cout<<ptr->element<<" ";
+	rootToLeafPrinter(ptr->right);
 	return;
-}
-
-rootToLeafPrinter(ptr->left);  //6 ka left completed
-cout<<ptr->element<<" ";
-rootToLeafPrinter(ptr->right);
-return;
 }
 
 

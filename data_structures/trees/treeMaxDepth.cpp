@@ -44,19 +44,19 @@ return mainPtr;
 int maxDepth = 0;
 
 int treeMaxDepth(struct treeStruct *ptr, int counter){
-if(ptr != NULL)
-	counter++;
-
-if(ptr == NULL){
-	if(counter > maxDepth)
-  	maxDepth = counter;	
-	return counter;
-}
-
-treeMaxDepth(ptr->left, counter);
-treeMaxDepth(ptr->right, counter);
-
-return maxDepth-1;
+	if(ptr != NULL)
+		counter++;
+	
+	if(ptr == NULL){
+		if(counter > maxDepth)
+	  	maxDepth = counter;	
+		return counter;
+	}
+	
+	treeMaxDepth(ptr->left, counter);
+	treeMaxDepth(ptr->right, counter);
+	
+	return maxDepth-1;
 }
 
 int main(){
