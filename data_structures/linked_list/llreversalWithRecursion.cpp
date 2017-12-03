@@ -11,7 +11,7 @@ using namespace  std;
 
 void insertElement();
 void deleteElement();
-void reverseList(struct linked*, struct linked*);
+void reverseList(struct linked*);
 void printElement();
 
 
@@ -38,7 +38,7 @@ case 1:
 insertElement();
 break;
 case 2:
-reverseList(NULL, head);
+reverseList(head);
 break;
 case 3:
 deleteElement();
@@ -108,7 +108,20 @@ dummy = dummy->next;
 cout<<"NULL"<<endl;
 } 
 
+// Single variable function
+void reverseList(struct linked *node) {
+    if(node == NULL)
+        return;  // don't do anything
+    if(node->next == NULL) {
+        head = node;
+        return;
+    }
+    reverseList(node->next);
+    node->next->next = node;
+    node->next = NULL;
+}
 
+/*
 void reverseList(struct linked *prev, struct linked *cur){
 if(cur == NULL){
 	head = prev;
@@ -119,6 +132,7 @@ reverseList(cur, cur->next);
 
 cur->next = prev;
 }
+*/
 
 
 
