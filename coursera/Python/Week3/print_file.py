@@ -1,13 +1,14 @@
-# - print_file.py *- coding: utf-8 -*-
-""" Opens file and prints its contents line by line. """
+#%%
 
-import sys     # we need this library to deal with operating system
+import sys
+infilename = sys.argv[1]
+outfilename = sys.argv[2]
 
-filename = sys.argv[1]
-
-infile = open(filename)
+infile = open(infilename)
+outfile = open(outfilename,'w')
 
 for line in infile:
-    print(line,end="") # the file has "\n" at the end of each line already
-
+    outfile.write(line)
+    
 infile.close()
+outfile.close()

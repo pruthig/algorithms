@@ -293,9 +293,12 @@ outline of what needs to be done is given as comments.
 #%% 
 def write_to_file(filename, myname, myage, major):
     # open file first
+    outfile = open(filename, 'w')
+    
     outfile.write("My name is "+ myname + " \n")
-    # write out the age and major in two lines
-    # close the file
+    outfile.write("My age is " + str(myage) +  "\n")    # close the file
+    outfile.write("My major " + major +  "\n")
+    outfile.close()
 
     
 #%%
@@ -613,7 +616,7 @@ def read_csv_file2(filename):
     """Reads a CSV file and prints each row without list brackets. """
     f = open(filename)
     for row in csv.reader(f):
-        pass # replace this line with your code
+        print(row[0], row[1], row[2])
     f.close()
 #%%
 """
@@ -683,16 +686,24 @@ Solution starter:
 def name_phone(csv_filename):
     
     # open the csv file here
-    
+    outFile = open(csv_filename, 'w', newline="")
+    mainlist = []
     while True:
         nextname = input("Enter a friend's name, press return to end: ")
         if nextname == "":
             break              # break jumps out of the loop
-        print(nextname) 
-        
+        print(nextname)
+        phonenumber = input("Enter phone number of friend")
+        print(phonenumber)
+        temp = []
+        temp.append(nextname)
+        temp.append(phonenumber)
+        csv.writer(outFile).writerow(temp)
+
         # add lines here to build a row (that is, a list) and append these
         # two pieces of data to it.  Write to the csv file
-        
+    
+    outFile.close()
     # don't forget to close the csv file
         
 #%% 
