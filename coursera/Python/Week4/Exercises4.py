@@ -97,7 +97,17 @@ Solution:
 """
 #%%
 
+import random
 
+def make_random_real():
+    lst = []
+    for i in range(0, 10):
+        lst.append(random.random())
+    return lst
+
+
+    
+    
 
 
 
@@ -149,7 +159,14 @@ Solution:
 #%%
 
 
+import random
 
+def make_random_real():
+    lst = []
+    random.seed(17)
+    for i in range(0, 10):
+        lst.append(random.random())
+    return lst
 
 
 
@@ -375,8 +392,13 @@ Solution:
 """
 #%%
 def temp_stat(temps):
+    import statistics
     """ prints the average, median, std dev, and variance of temps """
-    pass # replace this pass (a do-nothing) statement with your code
+    print("Mean temperature is:", statistics.mean(temperatures))
+    print("Median temperature is:", statistics.median(temperatures))
+    print("Median temperature is:", statistics.stdev(temperatures))
+    print("Median temperature is:", statistics.variance(temperatures))
+
     
 
 
@@ -418,9 +440,23 @@ Mode error:  no unique mode; found 4 equally common values
 Solution:
 """
 #%%
+import random
+random.seed(237)
+temperatures = []
+for i in range(0,20):
+    temperatures.append(random.randint(20,95))
+
+
+import statistics
+
 def temp_stat(temps):
     """ computes the average, median, std dev, and variance of temps """
-    pass # replace this pass (a do-nothing) statement with your code
+    try:
+        print("Mode is:", statistics.mode(temperatures))
+    except Exception as e:
+        print("Exception is: ",e)
+        
+    
 
 
 
