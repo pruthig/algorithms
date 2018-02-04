@@ -71,7 +71,7 @@ toothbrush               $  2.60
 def problem4_3(product, cost):
     """ Prints the product name in a space of 25 characters, left-justified
         and the price in a space of 6 characters, right-justified"""
-    print("{0:<25}$ {1:>6}".format(product, cost))
+    print("{0:<25}${1:>6.2f}".format(product, cost))
 
 
 #%%    
@@ -189,6 +189,7 @@ def load_phone_list():
 
      
 def reorder_phones():
+    global phones
     phones.sort(key=lambda phone: phone[0].lower())
 
     
