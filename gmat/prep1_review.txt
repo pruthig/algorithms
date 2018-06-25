@@ -9,3 +9,4 @@ Linda invested certain amount ... for case 1 x was given and for case 2 y was gi
 Is m+z>0. If we combine 2 options get 1 equation then we should take those 2 equations as true and use the resultant eqn to arrive at a answer
 range of +ve integers in a list containing both +ve and -ve numbers. Forgot that only +ve integers range was to be found. range of numbers with terminal numbers as x and y where y > x is (y-x)
 If it took Carlos 1/2 hour to cycle from his house to - Given if x > 16 and x < 18 then it doesn't mean that x = 17
+
