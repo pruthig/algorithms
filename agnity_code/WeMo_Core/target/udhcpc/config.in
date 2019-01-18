@@ -1,0 +1,8 @@
+bool 'Enable LOG '					CONFIG_LOG
+string 'Log file location'				CONFIG_LOG_FILE_LOCATION	/tmp/log/dhcpc.log
+
+bool 'Use uptime instead of time'			CONFIG_SYS_UPTIME
+bool 'Use bcmnvram.h instead of nvram.h'		CONFIG_VENDOR_BCM
+bool 'Support Yahoo BB'					CONFIG_YAHOO_BB
+bool 'Support WL 5VT'					CONFIG_WL_5VT
+endmenu
