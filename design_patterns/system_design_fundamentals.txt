@@ -1,0 +1,24 @@
+=== Consistent Hashing ===
+In distributed system, in which we have multiple servers and multiple clients, multiple hashtables are used to store cached data in multiple servers. Problem occurs when server is added or removed. Because on addition, load has to be distributed evenly and on removal, the hashed hosted by removed served needs to be reassigned. 
+To solve this problem Consistent Hashing is utilized. In this technique, we've a hashring. On hashring, there are nodes of resources. Each resource is assigned some position in circle which is based on the angle translated by the hash of the function and hence it is independent of the server serving that resource. Similarly, all servers are also hashed and stored on hashring. Since we have the keys for both the objects/resources and the servers on the same circle, we may define a simple rule to associate the former with the latter: Each object key will belong in the server whose key is closest, in a counterclockwise direction (or clockwise, depending on the conventions used). In other words, to find out which server to ask for a given key, we need to locate the key on the circle and move in the ascending angle direction until we find a server. For a given key we can use Binary search to search a given server (by assigning a given server a value). To dispersed it in a good way, we can label the servers e.g. A (A0 to A100), B(B0 to B100) and interspersed them on the hashring, with all Ax mapping to A and Bx mapping to B resp. 
+Solution using this hashring:
+When a server is added, say M, its labels (M0 to M100) are randomly distributed and keys assigned to old servers are mapped to new server. Similarly, if a server is removed, it's all keys are re-distributed to existing servers() since labels were interspersed ). Removal of a server will result in cache miss for that key in the server they are newly assigned to but everything will be in cache again after sometime.
+
+
+Load Balancing Models:
+
+Pull Migration:
+Pull migration occurs when an idle processor pulls a waiting task from a busy processor. 
+
+Push Migration:
+With push migration, a specific task periodically checks the load on each processor and-if it finds an imbalance-evenly distributes the load by moving (or pushing) processes from overloaded to idle or less-busy processors.
+
+Distributed transaction:
+Use SAGA, in case we need multiple DBs by respective multiple services such as an order transaction in which we don't want customer to exceed a given credit limit. So, we cannot have an ACID. In this case, we can have SAGA or series of local transactions. One transaction triggers another and in case another fails, first one is undoned.
+
+Scheduling:
+The most common model includes a foreground interactive queue that uses RR scheduling and a background batch queue that uses FCFS scheduling.
+
+
+
+
