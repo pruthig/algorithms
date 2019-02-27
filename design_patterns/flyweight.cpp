@@ -4,48 +4,89 @@
 
 #include<iostream>
 #include<cstdlib>
+#include<conio.h>
 #include<ctime>
 #include<chrono>
-#include<map>
+#include<string>
+#include<unordered_map>
 
 using namespace std;
-using namespace std::chrono;
 
-class Circle{
 
-	int radius;
-public:
- 	Circle(){}
-	Circle(int n):radius(n) {}
+enum Color {
+	BLUE,
+	RED,
+	YELLOW,
+	BLACK,
+	CYAN,
+	BROWN
 };
 
-std::map<int, Circle*> mCircle;
+namespace
+{
 
-
-int main(){
-std::srand(std::time(0));  // needed once per program run
-auto start=system_clock::now();
-/*
-for(int i = 0; i < 1000; ++i) {
-	int r = std::rand() % 10 + 1;
-    Circle *c = new Circle(r);
+	unordered_map<Color, string> mp_clr_str = 
+	{
+		{Color::BLUE, "blue"},
+		{Color::RED, "red"},
+		{Color::YELLOW, "yellow"},
+		{Color::CYAN, "cyan" },
+		{Color::BLACK, "black" },
+		{Color::BROWN, "brown" },
+	};
 }
-*/
-for(int i = 0; i < 1000; ++i) {
-	int r = std::rand() % 10 + 1;
-	Circle *c ;
-	auto searcher = mCircle.find(r) ;
-    if(searcher != mCircle.end())
-		c = searcher->second;
-	else {
-    	c = new Circle(r);
-		mCircle.insert(std::make_pair(r, c));
+
+class Shape {
+public:
+	virtual void draw() {}
+};
+
+
+
+class Circle : public Shape {
+
+	int radius;
+	Color color;
+public:
+	Circle() {}
+	Circle(Color c) :color(c) {}
+	void draw()
+	{
+		cout << "Circle drawn\n";
 	}
-}
+};
+
+class CircleCreatorFactory : public Shape
+{
+	std::unordered_map<Color, Circle*> mCircle{};
+public:
+	void draw(){}
+
+	Shape* createCircle(Color color)
+	{
+		if (mCircle.find(color) == mCircle.end())
+		{
+			// create the object
+			Circle *c = new Circle(color);
+			mCircle.insert(std::make_pair(color, c));
+			cout << "New object created for color: " << mp_clr_str[color]<<endl;
+		}
+		else
+		{
+			cout << "Returning already stored value for color: " << mp_clr_str[color] << endl;
+			return mCircle[color];
+		}
+		return nullptr;
+	}
+};
 
 
 
-auto end=system_clock::now();
-cout<<"Time elapsed : "<<(end - start).count()<< endl;
-return 0;
+int main() {
+	CircleCreatorFactory *factory = new CircleCreatorFactory();
+	Circle *c  = static_cast<Circle*>(factory->createCircle(Color::BLACK)); 
+	c = static_cast<Circle*>(factory->createCircle(Color::CYAN));
+	c = static_cast<Circle*>(factory->createCircle(Color::BLACK));
+	_getch();
+	return 0;
 }
