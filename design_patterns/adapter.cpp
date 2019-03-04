@@ -6,33 +6,33 @@
 using namespace std;
 
 class flowers{
-vector<string> flowerList;
+    vector<string> flowerList;
 public:
-vector<string> getFlowerList(){
-	return flowerList;
-}
-void insertFlower(string flower){
-	flowerList.push_back(flower);
-}
+    vector<string> getFlowerList(){
+        return flowerList;
+    }
+    void insertFlower(string flower){
+        flowerList.push_back(flower);
+    }
 };
 
 class garden{
-vector<string> plantList;
+    vector<string> plantList;
 public:
-
-flowers *fl;
-vector<string> getFlowerList(){
-	return fl->getFlowerList();
-}
-vector<string> getPlants(){
-	return plantList;
-}
-void insertPlant(string plant){
-	plantList.push_back(plant);
-}
-flowers* getFlowerRef(){
-	return fl;
-}
+    flowers *fl;
+    
+    vector<string> getFlowerList(){
+        return fl->getFlowerList();
+    }
+    vector<string> getPlants(){
+        return plantList;
+    }
+    void insertPlant(string plant){
+        plantList.push_back(plant);
+    }
+    flowers* getFlowerRef(){
+        return fl;
+    }
 };
 
 

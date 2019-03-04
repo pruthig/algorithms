@@ -18,100 +18,100 @@ using namespace std;
 //Here follows the 5 classes to achieve this..
 class authority{
 public:
-void approveHousing(){
-cout<<"Approve the construction of house\n";
-}
-void cityPlan(){
-//this might have certain other encapsulated objects or methods.
-}
-void sanitationPlan(){
-//sanitation plan for whole city
-}
+    void approveHousing(){
+        cout<<"Approve the construction of house\n";
+    }
+    void cityPlan(){
+        //this might have certain other encapsulated objects or methods.
+    }
+    void sanitationPlan(){
+        //sanitation plan for whole city
+    }
 };
 
 class Architect{
 public:
-void drawMap(){
-cout<<"Draws map\n";
-}
-void chargeMoney(){
-//depending on the area and complexity.
-}
+    void drawMap(){
+        cout<<"Draws map\n";
+    }
+    void chargeMoney(){
+        //depending on the area and complexity.
+    }
 };
 
 
 
 class contractor{
 public:
-void quotePrice(){
-//Depending on the number of labourers..
-}
-void supplyLabourers(){
-cout<<"Supply laboureres depending on the requirement\n";
-}
+    void quotePrice(){
+        //Depending on the number of labourers..
+    }
+    void supplyLabourers(){
+        cout<<"Supply laboureres depending on the requirement\n";
+    }
 };
 
 class rawMaterial{
 public:
-void buyCement(){
-cout<<"Buy Cement\n";
-}
-void buyBricks(){
-cout<<"Buy bricks\n";
-}
-void buyIron(){
-cout<<"Buy steel bars\n";
-}
-void buyAll(){
-buyCement();
-buyBricks();
-buyIron();
-}
+    void buyCement(){
+        cout<<"Buy Cement\n";
+    }
+    void buyBricks(){
+        cout<<"Buy bricks\n";
+    }
+    void buyIron(){
+        cout<<"Buy steel bars\n";
+    }
+    void buyAll(){
+        buyCement();
+        buyBricks();
+        buyIron();
+    }
 };
 
 class builder{
 public:
-void startBuilding(){
-//Procedure how to build the house...
-cout<<"Start building\n";
-}
+    void startBuilding(){
+        //Procedure how to build the house...
+        cout<<"Start building\n";
+    }
 };
 
 
 //Now lets take a common CLASS that represents the compositer
 class Facade{
-authority a; 
-Architect at;
-contractor ct;
-rawMaterial rm; 
-builder bd;
+    authority a; 
+    Architect at;
+    contractor ct;
+    rawMaterial rm; 
+    builder bd;
 public:
-void doAll(){
-a.approveHousing();
-at.drawMap();
-ct.supplyLabourers();
-rm.buyAll();
-bd.startBuilding();
-}
+    void doAll(){
+        a.approveHousing();
+        at.drawMap();
+        ct.supplyLabourers();
+        rm.buyAll();
+        bd.startBuilding();
+    }
 };
 
 int main(){
-authority a; 
-Architect at;
-contractor ct;
-rawMaterial rm; 
-builder bd;
+    authority a; 
+    Architect at;
+    contractor ct;
+    rawMaterial rm; 
+    builder bd;
 
-//Below 5 calls show the subsystem calls ... rather we can create an object that encapsulates all or some in a single method.
-a.approveHousing();
-at.drawMap();
-ct.supplyLabourers();
-rm.buyAll();
-bd.startBuilding();
+    //Below 5 calls show the subsystem calls ... rather we can create an object that encapsulates all or some in a single method.
+    a.approveHousing();
+    at.drawMap();
+    ct.supplyLabourers();
+    rm.buyAll();
+    bd.startBuilding();
 
-cout<<"\nAll steps now in one call\n";
-Facade f;
-f.doAll();
+    cout<<"\nAll steps now in one call\n";
+    Facade f;
+    f.doAll();
 
-return 0;
+    return 0;
 }

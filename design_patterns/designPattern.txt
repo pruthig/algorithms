@@ -1,22 +1,42 @@
 Double Check Lock Pattern
 
 //Here you need to specify the class type along with the definition of static function defined inside a class...
+//constructor, assignment and copy assignment operators are deleted
 Singleton* Singleton::instance() {
    if (pInstance == 0) { // 1st test
-      Lock lock;
+      unique_lock lck;
+      lck.lock();
       if (pInstance == 0) { // 2nd test
          pInstance = new Singleton;
       }
+      lck.unlock()
    }
    return pInstance;
 }
 
+OR
+
+static Singleton& getInstance()
+{
+    static Singleton instance; // Guaranteed to be destroyed. Instantiated on first use.
+    return instance;
+}
+
+=== Open-Closed Principle  ===
+It states that classes should be open for extension and closed for modification.
+ 
+Factory Design Pattern
+In factory design pattern, we do away with client knowing the actual class type. Hence, we pass simple arguments to the static creator method inside the base class. This method then creates the objects.
+static shape*::Create(int type);
 
 State Machine Design pattern
 
 We create a table of function pointers
 Used Singleton and Strategy Pattern
 Have knowledge about Facade/Factory pattern
+
+Adapter:
+Adapters are used when we have a class (Client) expecting some type of object and we have an object (Adaptee) offering the same features but exposing a different interface.
 
 
 Strategy pattern specifically defines a family of algorithms encapsulate each one in an interface and make them interchangeable depending  on the client using it.
@@ -25,6 +45,8 @@ SalesOrder (class) calculates tax using CalcTax (class) which is an interface , 
 Concrete Strategies implement these different algorithms . the context call these concrete strategy algorithm using this generic Strategy interface.
 Context holds that object/pointer(in case of abstract class) of strategy.
 
+Decorator Pattern:
+The decorator pattern changes the behavior of object dynamically. Basically we have a wrapper around the concrete object. When we call a method of concrete object, the decorator reply in the way different than what concrete object would've sent.
 
 Creational design patterns are Factory Method, Abstract Factory, Builder, Singleton, Object Pool, Prototype and Singleton
 Structural design patterns are Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Private Class Data and Proxy
