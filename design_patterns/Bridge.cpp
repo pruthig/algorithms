@@ -1,3 +1,6 @@
+// Bridge design pattern is used when we want to establish relation between two abstractions. Like, we have shape abstraction and drawing API related to each other
+// In Shapes we can have circle, rectangle, square etc. while we also have drawing API which is inherited by concrete class.
+
 #include <iostream>
 using namespace std;
 /* Implementor*/
