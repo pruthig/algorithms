@@ -1,0 +1,66 @@
+public enum PieceType {
+    None, Pawn, Knight, Bishop, Rook, Queen, King
+}
+
+public enum PieceColor {
+    White, Black
+}
+
+public struct Piece {
+    public PieceType Type { get; set; }
+    public PieceColor Color { get; set; }
+}
+
+public struct Square {
+    public int X { get; set; }
+    public int Y { get; set; }
+
+    public static implicit operator Square(string str) {
+        // Parses strings like "a1" so you can write "a1" in code instead
+        // of new Square(0, 0)
+    }
+}
+
+public class Board {
+    private Piece[,] board;
+
+    public Piece this[Square square] { get; set; }
+
+    public Board Clone() { ... }
+}
+
+public class Move {
+    public Square From { get; }
+    public Square To { get; }
+    public Piece PieceMoved { get; }
+    public Piece PieceCaptured { get; }
+    public PieceType Promotion { get; }
+    public string AlgebraicNotation { get; }
+}
+
+public class Game {
+    public Board Board { get; }
+    public IList<Move> Movelist { get; }
+    public PieceType Turn { get; set; }
+    public Square? DoublePawnPush { get; set; } // Used for tracking valid en passant captures
+    public int Halfmoves { get; set; }
+    public bool CanWhiteCastleA { get; set; }
+    public bool CanWhiteCastleH { get; set; }
+    public bool CanBlackCastleA { get; set; }
+    public bool CanBlackCastleH { get; set; }
+}
+
+/*
+IGameRules interface that is responsible for:
+Determining what moves are valid, including castling and en passant.
+Determining if a specific move is valid.
+Determining when players are in check/checkmate/stalemate.
+Executing moves.
+*/
+public interface IGameRules {
+    // ....
+}
+
+
+
+
