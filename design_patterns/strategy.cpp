@@ -1,34 +1,48 @@
 //Implementation of strategy pattern...
 #include<iostream>
 #include<string>
-#include"strategy.h"
 
 using namespace std;
 
-class strategy{
+class strategy;
+
+class laplace : public strategy{
 public:
-virtual void call();
+	void call(){
+		cout<<"Laplace transform called\n";
+	}
+};
 
-strategy* getTransform(string s){
-if(s == "laplace")
-	return new laplace;
-else
-	return new bezier;
-}
-
+class bezier : public strategy{
+public:
+	void call(){
+		cout<<"Bezier curve algo called\n";
+	}
 };
 
 class client{
-strategy st;
+	strategy st;
 public:
-strategy getStrategy(){
-return st;
-}
+	strategy getStrategy(){
+		return st;
+	}
+};
+
+class strategy{
+public:
+	virtual void call();
+
+	strategy* getTransform(string s){
+		if(s == "laplace")
+		return new laplace;
+		else
+		return new bezier;
+	}
+
 };
 
 int main(){
-client c;
-c.getStrategy.getTransform("bezier").call();
-return 0;
+	client c;
+	c.getStrategy.getTransform("bezier").call();
+	return 0;
 }
-
