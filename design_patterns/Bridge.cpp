@@ -1,4 +1,4 @@
-// Bridge design pattern is used when we want to establish relation between two abstractions. Like, we have shape abstraction and drawing API related to each other
+// The bridge pattern is a design pattern used in software engineering that is meant to "decouple an abstraction from its implementation so that the two can vary independently",
 // In Shapes we can have circle, rectangle, square etc. while we also have drawing API which is inherited by concrete class.
 
 #include <iostream>
