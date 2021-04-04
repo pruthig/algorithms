@@ -25,6 +25,9 @@ int count_ones_in_binary_array(int arr[], int start, int end, int n) {
     }
     return 0;
 }
+*/
+
+/*
 int find_floor(int x, int arr[], int start, int end, int n) {
     if(start<=end && start >= 0 && end < n) {
         int mid = (start+end)/2;
@@ -47,7 +50,9 @@ int find_floor(int x, int arr[], int start, int end, int n) {
     }
     return -1;
 }
+*/
 
+/*
 void twoRepeated (int arr[], int N)
 {
     int first=0, second=0;
@@ -67,7 +72,9 @@ void twoRepeated (int arr[], int N)
         arr[abs(arr[i])-1] = -arr[abs(arr[i])-1];
     }    
 }
+*/
 
+/*
 // find the maximum number of consecutive steps you can put forward such
 // that you gain an increase in altitude with each step
 int maxStep(int A[], int N){
@@ -91,6 +98,8 @@ int maxStep(int A[], int N){
     max_steps = steps;
    return max_steps;
 }
+*/
+
 int main() {
     int arr[] = { 1, 2, 1, 3, 4, 3 };
     int n = sizeof(arr)/sizeof(arr[0]);
@@ -98,5 +107,7 @@ int main() {
     //cout<<"Floor of array is: "<<find_floor(1, arr, 0, n-1, n)<<endl;
     //cout<<"Two repeated elements are: "<<twoRepeated(arr, 6)<<endl;
     //cout<<"Maximum consecutive steps count is:  "<<maxStep(arr, n)<<endl;
+    // Search row-wise and column-wise sorted matrix ...
+    
     return 0;
 }

@@ -38,10 +38,7 @@ struct treeStruct* treeCreator(){
 	return mainPtr;
 }
 
-void InorderTraversalWithoutRecur(struct treeStruct *ptr)
-{
-	vector<int> vec{};
-	
+void InorderTraversalWithoutRecur(struct treeStruct *ptr) {
 	if(ptr == nullptr)
 		return;
 	stack<treeStruct*> st{};
@@ -52,7 +49,7 @@ void InorderTraversalWithoutRecur(struct treeStruct *ptr)
 	}
 	while(!st.empty()) {
 		treeStruct *p = st.top();
-		vec.push_back(p->element);
+    cout<<p->element<<" ";
 		treeStruct *p_rt = p->right;
 		st.pop();
 		while(p_rt) {
@@ -60,10 +57,6 @@ void InorderTraversalWithoutRecur(struct treeStruct *ptr)
 			p_rt = p_rt->left;
 		}
 	}
-	cout<<"Values are: ";
-	for(auto a : vec)
-		cout<<" "<<a;
-	cout<<endl;
 }
 	
 	

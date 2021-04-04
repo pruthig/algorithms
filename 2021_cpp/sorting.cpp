@@ -275,20 +275,58 @@ bool find_triplets_sum_to_zero(int arr[], int n)
     return false;
 }
 
+// This function searches for an element in a nearly sorted array
+bool search_nearly_sorted(int arr[], int s, int e, int n, int k) {
+    if(s<0 || e>n || (s >= e && arr[s] != k))
+        return false;
+    int mid = s + (e-s)/2;
+    if(arr[mid] == k || (mid-1 >= 0 && arr[mid-1] == k) ||
+                        (mid+1<=e && arr[mid+1] == k))
+        return true;
+    else if(mid-1 >= 0 && k<arr[mid-1])
+        e=mid-2;
+    else if(mid+1 <= n && k>arr[mid+1])
+        s=mid+2;
+    else {}
+
+    return search_nearly_sorted(arr, s, e, n, k);
+}
+
+// Merge 2 sorted arrays without extra space
+void merge(long long arr1[], long long arr2[], int n, int m) 
+{ 
+    int i=0, j=0;
+    while(1) {
+        while(i<n && j<m && arr1[i]<arr2[j])
+            ++i;
+        if(i!=n) {
+            int bk_j=j;
+            swap(arr1[i], arr2[j]);
+            while(j+1<m && arr2[j]>arr2[j+1]) {
+                swap(arr2[j], arr2[j+1]);
+                ++j;
+            }
+            j=bk_j;
+        }
+        else
+            break;
+    }
+} 
+
 int main() {
-    int arr[] = { 2, 1, 3, 4, 6, 5 };
+    int arr[] = { 10, 3, 40, 20, 50, 80, 70};
     int n = sizeof(arr)/sizeof(arr[0]);
     //bubble_sort(arr, n);
     //quick_sort(arr, 0, n);
     //LOOP(i, 0, n)
     //    cout<<arr[i]<<" ";
-    //cout<<"Kth smallest element is: "<<kthsmallest(arr, 0, n, 2)<<endl;
+    //cout<<"Kth smallest element is: "<<kthsmallest(arr, 0, n, 3)<<endl;
     //triplet_sum_in_array(arr, n, 10);
     //sort_0_1_2(arr, n);
     //threeWayPartition(arr, n, 44, 62);
     //cout<<"Does array contain triplet that sum up to zero : ";
     //if(find_triplets_sum_to_zero(arr, n)==0) cout<<"No"<<endl; else cout<<"Yes"<<endl;
-    max_water_in_2_bldgs(arr, n);
+    //max_water_in_2_bldgs(arr, n);
+    cout<<"Element found: "<<search_nearly_sorted(arr, 0, n-1, n-1, 40)<<endl;
     return 0;
 }
-        

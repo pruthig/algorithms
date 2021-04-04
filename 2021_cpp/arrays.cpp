@@ -100,7 +100,7 @@ void frequencycount(vector<int>& arr,int n) {
   // element present at arr[i]%n to keep track of count of
   //  occurrences of arr[i]
   for (int i = 0; i < n; i++)
-    arr[arr[i] % n] = arr[arr[i] % n] + n;
+    arr[arr[i] % n] += n;
 
   // To print counts, simply print the number of times n
   // was added at index corresponding to every element
@@ -387,7 +387,7 @@ int FindMaxSum(int arr[], int n)
     return max(sum[n-1], sum[n-2]);
 }
 */
-
+/*
 void rearrange_alternate(int arr[], int n) {
   int min_index = 0, max_index = n-1;
   int max_element = arr[n-1] + 1;
@@ -410,8 +410,75 @@ void rearrange_alternate(int arr[], int n) {
     arr[i] = arr[i]/max_element;
   }
 }
+*/
+/*
+// Find a starting point where the truck can start to get through the complete circle 
+// without exhausting its petrol in between
+struct petrolPump
+{
+    int petrol;
+    int distance;
+};
 
+int tour(petrolPump p[],int n)
+{
+   //Your code here
+   int res_index = -1;
+   int i=0;
+   for(;i<n;++i) {
+       if(p[i].petrol - p[i].distance < 0)
+            continue;
+        else {
+            int cur_sum = p[i].petrol - p[i].distance;
+            int j = 1;
+            for(;j<n;++j) {
+                cur_sum += p[(i+j)%n].petrol - p[(i+j)%n].distance;
+                if(cur_sum<0)
+                    break;
+            }
+            if(j == n && cur_sum >= 0)
+                return i;
+        }
+   }
+   return res_index;
+}
+*/
+
+/*
+// Program to search an element in row-wise
+// and column-wise sorted matrix
+int searchInColAndRowWiseSortedMatrix(int mat[4][4], int n, int x)
+{
+	if (n == 0)
+		return -1;
+
+	int smallest = mat[0][0], largest = mat[n - 1][n - 1];
+	if (x < smallest || x > largest)
+		return -1;
+
+	// set indexes for top right element
+	int i = 0, j = n - 1;
+	while (i < n && j >= 0)
+	{
+		if (mat[i][j] == x)
+		{
+			cout << "n Found at "
+				<< i << ", " << j;
+			return 1;
+		}
+		if (mat[i][j] > x)
+			j--;
 	
+		// Check if mat[i][j] < x
+		else
+			i++;
+	}
+
+	cout << "n Element not found";
+	return 0;
+}
+*/
+
 int main() {
   int arr[] = { 1, 2, 3, 4, 5, 6 };
   vector<int> vec{ 2,3,2,3,5 };
@@ -448,6 +515,7 @@ int main() {
   /* cout<<"Majority element is: "<<majorityElement(arr, sizeof(arr)/sizeof(arr[0])); */
   // Sort the binary array of 0s and 1s
   // vector<int> res = SortBinaryArray(vec);  for(auto a:res) cout<<a<<" "; 
+  // Find the minimum distance between two numbers
   /* cout<<"min dist is: "<<minDist(arr, 27, 78, 68)<<endl; */
   /* cout<<"Max non contiguous sum is: "<<FindMaxSum(arr, sizeof(arr)/sizeof(arr[0])); */
   // Rearrange the given array so that arr[i] becomes arr[arr[i]]
@@ -455,6 +523,17 @@ int main() {
   // Rearrange the array so that element appears in form... max_elem, min_elem,
   // second_max, second_min... and so on
   /* rearrange_alternate(arr, sizeof(arr)/sizeof(arr[0]));  for(int i=0;i<sizeof(arr)/sizeof(arr[0]);++i) {  cout<<arr[i]<<" "; } */
+  // Find a starting point where the truck can start to get through the complete circle without exhausting its petrol in between
+  /* tour(<>); */
+  // Search for an element in row-wise and column-wise sorted matrix
+  /* int mat[4][4] = { { 10, 20, 30, 40 },
+					{ 15, 25, 35, 45 },
+					{ 27, 29, 37, 48 },
+					{ 32, 33, 39, 50 } };
+   searchInColAndRowWiseSortedMatrix(mat, 4, 29);
+   */
+
+  
   
   return 0;
 }
