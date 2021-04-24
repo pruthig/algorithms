@@ -479,8 +479,170 @@ int searchInColAndRowWiseSortedMatrix(int mat[4][4], int n, int x)
 }
 */
 
+/*
+// Function to find minimum swaps
+// to group all 1's together
+int minSwaps(int arr[], int n)
+{
+
+    int numberOfOnes = 0;
+
+    // find total number of all 1's in the array
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == 1)
+        numberOfOnes++;
+    }
+
+    // length of subarray to check for
+    int x = numberOfOnes;
+
+    int count_ones = 0, maxOnes;
+
+    // Find 1's for first subarray of length x
+    for(int i = 0; i < x; i++){
+        if(arr[i] == 1)
+        count_ones++;
+    }
+        
+    maxOnes = count_ones;
+        
+    // using sliding window technique to find
+    // max number of ones in subarray of length x
+    for (int i = 1; i <= n-x; i++) {
+        
+        // first remove leading element and check
+        // if it is equal to 1 then decreament the
+        // value of count_ones by 1
+        if (arr[i-1] == 1)
+        count_ones--;
+        
+        // Now add trailing element and check
+        // if it is equal to 1 Then increment
+        // the value of count_ones by 1
+        if(arr[i+x-1] == 1)
+        count_ones++;
+        
+        if (maxOnes < count_ones)
+        maxOnes = count_ones;
+    }
+
+    // calculate number of zeros in subarray
+    // of length x with maximum number of 1's
+    int numberOfZeroes = x - maxOnes;
+
+    return numberOfZeroes;
+}
+
+*/
+
+/*
+// Find minimum difference b/w length of tallest and shortest tower
+private static int doIt(final int[] arr, final int k) {
+    java.util.Arrays.sort(arr);
+    final int n = arr.length;
+    int result = arr[n - 1] - arr[0];
+    for (int i = 1; i < n; ++i) {
+        final int min = Math.min(arr[0] + k, arr[i] - k);
+        final int max = Math.max(arr[n - 1] - k, arr[i - 1] + k);
+        result = Math.min(result, max - min);
+    }
+    return result;
+}
+*/
+
+/*
+// This is implementation of fisher yates shuffling algorithm
+void fisher_yates_shuffling(int arr[], int n) {
+    srand(time(NULL));
+    for(int i=n;i>=1;--i) {
+        int rand_index = (rand()%i+1);
+        swap(arr[rand_index], arr[i]);
+    }
+}
+*/
+
+/*
+// Qn. : Apply A*x*x + B*x + C for each element x in the array and sort the modified array.
+// The equation given is parabolic. So the result of applying it to
+// a sorted array will result in an array that will have a maximum/minimum 
+// with the sub-arrays to its left and right sorted.
+void sortArray(int arr[], int n, int A, int B, int C) {
+	for (int i = 0; i < n; i++)
+		arr[i] = A*arr[i]*arr[i] + B*arr[i] + C;
+
+	// Find maximum element in resultant array
+	int index, maximum = INT_MIN;
+	for (int i = 0; i< n; i++)
+		if (maximum < arr[i]) {
+			index = i;
+			maximum = arr[i];
+		}
+
+	// Use maximum element as a break point
+	// and merge both subarrays usin simple
+	// merge function of merge sort
+	int i = 0, j = n-1;
+	int new_arr[n], k = 0;
+	while (i < index && j > index)
+		if (arr[i] < arr[j])
+			new_arr[k++] = arr[i++];
+		else
+			new_arr[k++] = arr[j--];
+	
+	// Merge remaining elements
+	while (i < index)
+		new_arr[k++] = arr[i++];
+	while (j > index)
+		new_arr[k++] = arr[j--];
+
+	new_arr[n-1] = maximum;
+
+	// Modify original array
+	for (int i = 0; i < n ; i++)
+		arr[i] = new_arr[i];
+}
+*/
+
+// Find all permutations of a given string
+/*
+void permute(string orig_str, string buf, int idx, int len) {
+    int *arr = new int[len];
+    if(idx == len) {
+        cout<<buf<<endl;
+        return;
+    }
+    for(int i=0;i<len;++i) {
+        if(arr[i] == -1)
+            continue;
+        arr[i]=-1;
+        permute(orig_str, buf+orig_str[i], idx+1, len);
+        arr[i]=0;
+    }
+}
+*/
+
+// Another way to permute
+/*
+void permute(string a, int l, int r) {
+    if (l == r)
+        cout<<a<<endl;
+    else {
+        // Permutations made
+        for (int i = l; i <= r; i++) {
+            swap(a[l], a[i]);    // Swapping done
+            permute(a, l+1, r);  // Recursion called
+            swap(a[l], a[i]);   //backtrack
+        }
+    }
+}
+*/
+
+/* Given an array, check if that can represent a pre-order traversal. For this, use the idea of next greater element */
+
+
 int main() {
   int arr[] = { 1, 2, 3, 4, 5, 6 };
+  int sz = sizeof(arr)/sizeof(arr[0]);
   vector<int> vec{ 2,3,2,3,5 };
   /*int val = bin_search(arr, 0, 5, 12); // args - array, size_array, element_to_search
   if(val == -1) cout<<"Element not found\n"; else cout<<"Element found\n";
@@ -532,6 +694,17 @@ int main() {
 					{ 32, 33, 39, 50 } };
    searchInColAndRowWiseSortedMatrix(mat, 4, 29);
    */
+   /*
+   fisher_yates_shuffling(arr, sz);
+   for(int i=0;i<sz;++i)
+    cout<<arr[i]<<" ";
+    */
+   // Find all permutations of a string
+   /*string s = "pinchu";
+   string buf = "";
+   permute(s, buf, 0, 6);
+   */
+   
 
   
   
