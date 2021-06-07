@@ -1,10 +1,6 @@
 //Main class that will hold the list
 //Subject class basically has methods to register and unregister the observers and a method to notify
 //those observers
-
-
-
-
 #include<iostream>
 #include "observed.h"
 #include<string>
@@ -30,7 +26,7 @@ void subject::attach(shop* s){
 
 void subject::detach(shop *s){
 for(vector<shop*>::iterator itr = list.begin(); itr != list.end(); ++itr)
-	if(*itr = s){
+	if(*itr == s){
 		list.erase(itr);
 		cout<<"Shop Erased";
 	}

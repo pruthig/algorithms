@@ -1,54 +1,69 @@
-//Adapter design pattern uses a given interface from another interface which
-//expects the functionality provided by the 1st interface
+// An adapter pattern converts the interface of a class into another interface the clients expect. 
+// Adapter lets classes work together that couldn't otherwise because of incompatible interfaces.
+#include <iostream>
+#include <string>
 
-#include<bits/stdc++.h>
-
-using namespace std;
-
-class flowers{
-    vector<string> flowerList;
-public:
-    vector<string> getFlowerList(){
-        return flowerList;
-    }
-    void insertFlower(string flower){
-        flowerList.push_back(flower);
-    }
+/* Adaptee (source) interface */
+class EuropeanSocketInterface
+{
+    public:
+        virtual int voltage() = 0;
 };
 
-class garden{
-    vector<string> plantList;
-public:
-    flowers *fl;
-    
-    vector<string> getFlowerList(){
-        return fl->getFlowerList();
-    }
-    vector<string> getPlants(){
-        return plantList;
-    }
-    void insertPlant(string plant){
-        plantList.push_back(plant);
-    }
-    flowers* getFlowerRef(){
-        return fl;
-    }
+/* Adaptee */
+class Socket : public EuropeanSocketInterface
+{
+    public:
+        int voltage() { return 230; }
 };
 
+/* Target interface */
+class USASocketInterface {
+    public:
+        virtual int voltage() = 0;
+};
 
+/* The Adapter */
+class Adapter : public USASocketInterface {
+    EuropeanSocketInterface* socket;
+    public:
+        void plugIn(EuropeanSocketInterface* outlet) {
+            socket = outlet;
+        }
+        int voltage() { return 110; }
+};
 
-int main(){
-	flowers f;
-	f.insertFlower("rose");
-	f.insertFlower("lotus");
-	f.insertFlower("Lily");
-	f.insertFlower("cauliflower");
-	garden g;
-	g.fl = &f;
-	for(auto a : g.getFlowerList())
-		cout<<"Flower :"<<a<<endl;
+/* Client */
+class ElectricKettle {
+    USASocketInterface* power;
 
-	return 0;
+    public:
+        void plugIn(USASocketInterface* supply) {
+            power = supply;
+        }
+
+        void boil() {
+            if (power->voltage() > 110)
+            {
+                std::cout << "Kettle is on fire!" << std::endl;
+                return;
+            }
+        }
+};
+
+int main()
+{
+    Socket* socket = new Socket;
+    Adapter* adapter = new Adapter;
+    ElectricKettle* kettle = new ElectricKettle;
+
+    /* Pluging in. */
+    adapter->plugIn(socket);
+    kettle->plugIn(adapter);
+
+    /* Having coffee */
+    kettle->boil();
+
+    return 0;
 }
-
 

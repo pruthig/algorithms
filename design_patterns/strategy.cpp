@@ -1,4 +1,5 @@
-//Implementation of strategy pattern...
+//Strategy pattern involves choosing the appropriate algorithm at runtime
+
 #include<iostream>
 #include<string>
 

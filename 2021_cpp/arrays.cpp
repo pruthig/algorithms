@@ -268,6 +268,43 @@ ector<long long int> productExceptSelf(vector<long long int>& nums, int n) {
    return t_vec;
 }
 */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+/* 
+// For a given array arr[],
+//returns the maximum j – i such that
+//arr[j] > arr[i] 
+int maxIndexDiff(int arr[], int n)
+{
+	int maxDiff;
+	int i, j;
+
+	int* LMin = new int[(sizeof(int) * n)];
+	int* RMax = new int[(sizeof(int) * n)];
+
+	LMin[0] = arr[0];
+	for (i = 1; i < n; ++i)
+		LMin[i] = min(arr[i], LMin[i - 1]);
+
+	RMax[n - 1] = arr[n - 1];
+	for (j = n - 2; j >= 0; --j)
+		RMax[j] = max(arr[j], RMax[j + 1]);
+
+	i = 0, j = 0, maxDiff = -1;
+	while (j < n && i < n) {
+		if (LMin[i] < RMax[j]) {
+			maxDiff = max(maxDiff, j - i);
+			j = j + 1;
+		}
+		else
+			i = i + 1;
+	}
+	return maxDiff;
+}
+*/
+
 /*
 int getPairsCount(int arr[], int n, int k) {
     unordered_map<int, int> s{};
@@ -639,6 +676,87 @@ void permute(string a, int l, int r) {
 
 /* Given an array, check if that can represent a pre-order traversal. For this, use the idea of next greater element */
 
+// Spiral order traversal of array
+void spiralOrderTraversal() {
+	int a[][4] = {
+					{ 1, 2, 3, 4 },
+					{ 5, 6, 7, 8 },
+					{ 9, 10, 11, 12 },
+					{ 13, 14, 15, 16}
+				};
+	
+	int top=0, down=3, left=0,right=3;
+	int direction = 0;
+	while(top<=down && left <= right) {
+		if(direction == 0) {
+			for(int i=left; i<=right;++i) {
+				cout<<a[top][i]<<" ";
+			}
+			++top;
+		}
+		else if(direction == 1) {
+			for(int i=top; i<=down;++i) {
+				cout<<a[i][right]<<" ";
+			}
+			--right;		
+		}
+		else if(direction == 2) {
+			for(int i=right; i>=left;--i) {
+				cout<<a[down][i]<<" ";
+			}
+			--down;		
+		}
+
+		else if(direction == 3) {
+			for(int i=down; i>=top;--i) {
+				cout<<a[i][left]<<" ";
+			}
+			++left;		
+		}
+		direction = (direction+1)%4;
+	}
+}
+
+void expandingSpiralFromCenter() {
+    int x = 0; // current position; x
+    int y = 0; // current position; y
+    int d = 0; // current direction; 0=RIGHT, 1=DOWN, 2=LEFT, 3=UP
+    int c = 0; // counter
+    int s = 1; // chain size
+
+	int a[][4] = {
+					{ 1, 2, 3, 4 },
+					{ 5, 6, 7, 8 },
+					{ 9, 10, 11, 12 },
+					{ 13, 14, 15, 16}
+				};
+	int size = 4;
+    // starting point
+    x = ((int)floor(size/2.0))-1;
+    y = ((int)floor(size/2.0))-1;
+
+    for (int k=1; k<=(size-1); k++)
+    {
+        for (int j=0; j<(k<(size-1)?2:3); j++)
+        {
+            for (int i=0; i<s; i++)
+            {
+                std::cout << a[x][y] << " ";
+                c++;
+
+                switch (d)
+                {
+                    case 0: y = y + 1; break;
+                    case 1: x = x + 1; break;
+                    case 2: y = y - 1; break;
+                    case 3: x = x - 1; break;
+                }
+            }
+            d = (d+1)%4;
+        }
+        s = s + 1;
+    }
+}
 
 int main() {
   int arr[] = { 1, 2, 3, 4, 5, 6 };
@@ -704,10 +822,20 @@ int main() {
    string buf = "";
    permute(s, buf, 0, 6);
    */
+   /* Spiral order traversal of array */
+   //spiralOrderTraversal();
+   /* Expanding spiral order traversal */
+   expandingSpiralFromCenter();
    
 
   
   
   return 0;
 }
+
+// Notes:
+// 1. To find minimum unsorted subarray that needs to be sorted to make the complete array sorted. First find the deviation
+// from left, then deviation from right. Then find min and max in that range (s, e) because all elements in that range should
+// be greater than the element immediate left to range and all elements in that range need to be lesser than the element
+// which is immediate right after the range.
 

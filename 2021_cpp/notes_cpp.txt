@@ -1,0 +1,43 @@
+Notes C++ 2021 
+------------------------------------------------
+
+> main must return int.. return statment can be absent.. in that case 0 is returned
+> Declaring function which returns a function pointer:
+servedFunctionReturnType (*servingFunction(servingFunctionArgument))(servedFunctionArguments)
+> void pointer couldn't be dereferenced
+> Basically, void is an incomplete type and sizeof(void) and void pointer +/- 1 shouldn't make sense but for sizeof(void), gcc returns 1 and also allows increment operations
+on void pointer. Also, sizeof(void*) is 4/8 bytes depending on machine
+> Both uninitialized local static and global static go in bss segment and the initialized (global or static (global or local)) go in data segment.
+> In case of ternary operator, return type is determined by exp2; e.g int m = exp1?exp2:exp3;
+> Derived class constructor is implicitly deleted if base class constructor is private.
+> In multiple inheritance, when we use ‘virtual’ keyword, the default constructor of grandparent class is called even if the parent classes explicitly call parameterized constructor. To make it happen call parameterized constructor from derived class
+> We won't get compilation error if we don't provide const in user defined copy constructor.
+> We can have return statement inside both ctor and dtor but return type is not allowed.
+> there can only one destructor in a class with classname preceded by ~, no parameters and no return type.
+> To run functions before and after main without touching main function
+void before_main() __attribute__((constructor));
+void after_main() __attribute__((destructor));
+> Function overloading based on constness of reference is allowed (const reference and non-const reference)
+> Same function in derived class overrides the base class function with same name and argument might be different
+> Overloaded conversion operators must be a member method
+> We can do A a = b; if we have conversion operator in B for A
+> To prevent inheritance, we can use either 'final' keyword or make the constructor virtual in class
+> Virtual constructor is not possible but we can create it using following technique -> static Base *Create(int id); Delegate the creation of object to base class from User class so appropriate type of Derived class is created.
+> const data (char *c and const int s[] = { 1, 2.. } etc. is stored in text segment.
+> default arguments are not allowed in friend function while it is declared inside a class. though, you can add it in definition. because as per the standard a friend function declaration with default args should be the definition too.
+> private member functions too are inherited but not accessible
+> cout << (bmf == 38) ?15 : 10;  will print either 0 or 1, because '<<' has high precedence than '?'
+How we have used C++ concepts like polymorphism, overloading in our project
+>> While calling encryption functions we generally have extra parameter telling whether to add line separator for each cert. string.
+>> We have general CipherSuite class from which different cipher suite classes are derived.
+> A *ptr = nullptr; a->show(); without variable access will work since the address of the method is independent of the actual object instance, but it'll crash if variable is also used in the function.
+> 
+>  
+
+
+
+----------------------- General --------------
+> program crashes as soon as soon as return statement of h() is executed ... -> h has modified the return address.
+> Russian Peasent algorithm to multiply 2 numbers -> The idea is to double the first number and halve the second number repeatedly till the second number doesn’t become 1. In the process, whenever the second number become odd, we add the first number to result (result is initialized as 0) 
+> for a very large image (2D matrix) the row-major traversal is better than column-major traversal because rows are contiguously allocated.
+> 
