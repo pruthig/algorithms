@@ -147,6 +147,7 @@ int trapped_water(int arr[], int n) {
 }
 */
 /*
+// This function involves multiple stock_buy_sell not single one..
 int stock_buy_sell(int arr[], int n) {
 	int *aux = new int[n];
 	memset(aux, 0, n);
@@ -179,6 +180,8 @@ int stock_buy_sell(int arr[], int n) {
 */
 /* Function to find first smallest positive
  missing number in the array
+// Another method could be to segregate -ve and +ve numbers
+// and use the technique of finding duplicates in +ve array
 int missingNumber(int a[], int n) {
 
     // Your code here
@@ -253,7 +256,7 @@ int findMaxDiff(int A[], int n)
 }			
 *
 /*
-ector<long long int> productExceptSelf(vector<long long int>& nums, int n) {
+vector<long long int> productExceptSelf(vector<long long int>& nums, int n) {
    long double res=0.0, tmp=0.0;
    vector<long long int> t_vec{};
    for(int i=0;i<n;++i) {
@@ -261,7 +264,7 @@ ector<long long int> productExceptSelf(vector<long long int>& nums, int n) {
        res += log(nums[i]);
    }
    for(int i=0;i<n;i++) {
-       tmp = res - logl(nums[i]);
+       tmp = res - log(nums[i]);
        //cout<<"tmp is: "<<exp(tmp)<<endl;
        t_vec.push_back((long long int)exp(tmp));
    }
@@ -321,6 +324,7 @@ int getPairsCount(int arr[], int n, int k) {
 }
 */
 /*
+// Find zeroes to be flipped so that number of consecutive 1’s is maximized
 int findZeroes(int arr[], int n, int m) {
     int max_n = INT_MIN;
     int start=0, n0 = 0;
@@ -345,18 +349,15 @@ int findZeroes(int arr[], int n, int m) {
 int majorityElement(int a[], int size) {
     int major_element = a[0];
     int count = 1;
-    bool found = false;
     for(int i=1;i<size;++i) {
         if(a[i] == major_element) {
             ++count;
-            found = true;
         }
         else {
             if(count >1)
                 --count;
             else {
                major_element = a[i];
-               found = false;
                count = 1;
             }
         }
@@ -460,7 +461,6 @@ struct petrolPump
 int tour(petrolPump p[],int n)
 {
    //Your code here
-   int res_index = -1;
    int i=0;
    for(;i<n;++i) {
        if(p[i].petrol - p[i].distance < 0)
@@ -477,7 +477,7 @@ int tour(petrolPump p[],int n)
                 return i;
         }
    }
-   return res_index;
+   return -1;
 }
 */
 
@@ -758,6 +758,109 @@ void expandingSpiralFromCenter() {
     }
 }
 
+// Find triplet in an array such that A[i] < A[j] < A[k] and i < j < k.
+// We can do this in O(n) without space, keeping following things in mind
+// If we have arr[i] < A[j] but arr[i] > A[i], update the middle element.
+// If we have arr[i] == A[i], continue;
+// If nums[i] < min_num, min_num = nums[i]
+vector<int> find3Numbers(vector<int> arr, int N) {
+    vector<int> res{};
+    vector<int> vec_si{}, vec_gi{};
+    int s_index  = 0;
+    vec_si.push_back(0);
+    for(int i=1;i<N;++i) {
+        if(arr[i]>=arr[s_index])
+            vec_si.push_back(s_index);
+        else {
+            vec_si.push_back(i);
+            s_index = i;
+        }
+    }
+    int g_index  = N-1;
+    vec_gi.push_back(N-1);
+    for(int i=N-2;i>=0;--i) {
+        if(arr[i]>arr[g_index]) {
+            vec_gi.push_back(i);
+            g_index = i;
+        }
+        else {
+            vec_gi.push_back(g_index);
+        }
+    }
+    reverse(vec_gi.begin(), vec_gi.end());
+    for(int i=0;i<N;++i) {
+        if(i != vec_si[i] && i != vec_gi[i] && arr[i] != arr[vec_si[i]] 
+           && arr[i] != arr[vec_gi[i]] ) {
+            res.push_back(arr[vec_si[i]]);
+            res.push_back(arr[i]);
+            res.push_back(arr[vec_gi[i]]);
+            break;
+        }
+        
+    }
+    return res;
+}
+
+// Convert a number from decimal to binary
+void bin(unsigned n)
+{
+    /* step 1 */
+    if (n > 1)
+        bin(n / 2); 
+    /* step 2 */
+    cout << n % 2;
+}
+
+// reverse bits of a number
+unsigned int reverseBits(unsigned int n) {
+    unsigned int rev = 0;     
+    // traversing bits of 'n' from the right
+    while (n > 0) {
+        rev <<= 1;
+        if (n & 1 == 1)
+            rev ^= 1;
+        n >>= 1;           
+    }
+    return rev;
+}
+
+// Find count of subarrays with sum divisible by k.
+int subCount(int arr[], int n, int k)
+{
+	// create auxiliary hash array to count frequency
+	// of remainders
+	int mod[k];
+	memset(mod, 0, sizeof(mod));
+
+	// Traverse original array and compute cumulative
+	// sum take remainder of this current cumulative
+	// sum and increase count by 1 for this remainder
+	// in mod[] array
+	int cumSum = 0;
+	for (int i = 0; i < n; i++) {
+		cumSum += arr[i];
+
+		// as the sum can be negative, taking modulo twice
+		mod[((cumSum % k) + k) % k]++;
+	}
+
+	int result = 0; // Initialize result
+
+	// Traverse mod[]
+	for (int i = 0; i < k; i++)
+
+		// If there are more than one prefix subarrays
+		// with a particular mod value.
+		if (mod[i] > 1)
+			result += (mod[i] * (mod[i] - 1)) / 2;
+
+	// add the elements which are divisible by k itself
+	// i.e., the elements whose sum = 0
+	result += mod[0];
+
+	return result;
+}
+
 int main() {
   int arr[] = { 1, 2, 3, 4, 5, 6 };
   int sz = sizeof(arr)/sizeof(arr[0]);
@@ -838,4 +941,8 @@ int main() {
 // from left, then deviation from right. Then find min and max in that range (s, e) because all elements in that range should
 // be greater than the element immediate left to range and all elements in that range need to be lesser than the element
 // which is immediate right after the range.
-
+// To find frequency of elements in a sorted array in < O(n). Do check if arr[high] == arr[low], then store the count as freq[arr[low]] += (high-low+1)
+// To search for an element in a matrix which is strictly sorted. Typecast 2D array to 1D array and do bin_search. 
+/// Another solution: Compare the element with middle column till only 2 elements are left. Then according to the value of the 
+/// element 'x' check whether it is present in the 1st half of 1st row, 1st/2nd half of 1st/2nd row, and go left or right accordingly, skipping the top/bottom rows.
+// 

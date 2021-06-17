@@ -30,7 +30,7 @@ void after_main() __attribute__((destructor));
 How we have used C++ concepts like polymorphism, overloading in our project
 >> While calling encryption functions we generally have extra parameter telling whether to add line separator for each cert. string.
 >> We have general CipherSuite class from which different cipher suite classes are derived.
-> A *ptr = nullptr; a->show(); without variable access will work since the address of the method is independent of the actual object instance, but it'll crash if variable is also used in the function.
+> A *ptr = nullptr; ptr->show(); without variable access will work since the address of the method is independent of the actual object instance, but it'll crash if variable is also used in the function.
 > 
 >  
 
