@@ -1,0 +1,129 @@
+During the handshake, the client and server will use:
+
+A key exchange algorithm
+A bulk encryption cipher
+A digital signature scheme
+A Hash/MAC function
+
+There are 37 TLS 1.2 ciphers and five TLS 1.3 ciphers
+
+Cipher suites are named combinations of:
+
+> Key Exchange Algorithms (RSA, DH, ECDH, DHE, ECDHE, PSK)
+> Authentication/Digital Signature Algorithm (RSA, ECDSA, DSA)
+> Bulk Encryption Algorithms (AES, CHACHA20, Camellia, ARIA)
+> Message Authentication Code Algorithms (SHA-256, POLY1305)
+
+TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+List of protocol - TLS1.3/1.2/1.1 SSLv3/2/1
+Starting with ECDHE we can see that during the handshake the keys will be exchanged via ephemeral Elliptic Curve Diffie Hellman (ECDHE). RSA is the authentication algorithm. AES_128_GCM is the bulk encryption algorithm: AES running Galois Counter Mode with 128-bit key size. Finally, SHA-256 is the hashing algorithm.
+RSA key exchange algo is based on assymetric encryption ecosystem - server sends public key via certificate which client then extracts to encrypt the session key
+this key is then used by server to derive the session key.
+with Diffie-Hellman no asymmetric encryption actually takes place during the key exchange, rather the two parties mutually arrive at values that can be used to derive the session key.
+AES produces 128-bit blocks, regardless of key size.
+Advanced Encryption Standard, a.k.a. Rijndael, is a NIST-approved encryption cipher with a block size of 128 bits, and symmetric keys with lengths of either 128, 192 or 256 bits. 
+key sizes actually refer to the number of “rounds” that the plaintext will be put through as it’s encrypted.
+128-bit key = 10 Rounds
+192-bit key = 12 Rounds
+256-bit key = 14 Rounds
+
+Key exchange refers to the actual process that’s used to transmit those symmetric session keys
+MD5 and SHA-1 were deprecated because of collisions as different outputs were resulting in same values.
+Padding oracle attacks are mostly associated with CBC mode decryption used within block ciphers
+
+=====================================================================
+Here are some of the ciphers and algorithms discontinued in TLS 1.3:
+
+RC4 Steam Cipher
+RSA Key Transport
+SHA-1 Hash Function
+CBC Mode Ciphers (padding oracle attacks)
+MD5 Algorithm (Collisions)
+Various Diffie-Hellman groups (ECDH, DH)
+EXPORT-strength ciphers
+DES (Breakable)
+3DES (A bit stronger)
+
+======================================================================
+
+Handshake Mechanism
+-------------------
+2 round trips:
+
+Client ------ ------------hello ------------> server
+client <------------------hello ------------- server
+client <-------------- certificate ---------- server
+client <-------- server key exchange -------- server
+client <--------------- hello done ---------- server
+client --------- client key exchange -------> server
+cient  --------- change cipher spec --------> server
+client ---------------- finished -----------> server
+client <-------- change cipher spec --------- server
+client <--------------- finished -----------> server
+
+This mechanism brings latency. 
+
+TLS 1.3 single round trip
+
+client ----------- client hello/key exchange/change cipher spec --> server
+client <----------- server hello/key exchange --------------------- server
+
+=======================================================================
+
+TLS Session Resumption
+-------------------------
+The extra latency and computational costs of the full TLS handshake impose a serious performance penalty on all applications that require secure communication. To help mitigate some of the costs, TLS provides a mechanism to resume or share the same negotiated secret key data between multiple connections.
+
+
+What is Hashing?
+-----------------
+Hashing is the practice of using an algorithm to map data of any size to a fixed length. This is called a hash value (or sometimes hash code or hash sums or even a hash digest if you’re feeling fancy).
+
+Salting 
+-------
+It means adding some unique value to the end of password and then hashing it, making a brute force attack difficult. Salt for each password should be different.
+
+
+IV
+----
+In cryptography, an initialization vector (IV) or starting variable (SV)[1] is an input to a cryptographic primitive (ECB/CBC?GCM)being used to provide the initial state. 
+
+ In 1980, the NIST published a national standard document designated Federal Information Processing Standard (FIPS) 
+ 
+Stream cipher
+----------------
+In this, a given character of plaintext is encrypted 1 at a time. Example is RC4, ChaCha20, Rabbit, Panama, Snow, Seal. In this, we generate the sequence of pseudorandom bits (i.e., the keystream). This is typically based on an internal state. Keystream is basically generated using the key and IV. Once you have your keystream, you XOR the pseudorandom bits with the binary of your plaintext message. They are faster and better on a system with fewer resources. 
+
+Block Cipher
+-------------
+Text is encrypted in blocks. there are multiple modes in which these can work:
+ECB: This is the most simplistic (and weakest) operational mode that encrypts blocks separately. It’s not designed for new blocks to be dependent upon the output of previous blocks. This means that you can encrypt or decrypt data blocks independently.
+Cipher Block Chaining (CBC) Mode: The gist of this operational mode is that it’s a sequential process that builds upon previous data blocks (this is the explicit chaining we mentioned earlier). So, plaintext blocks of input data get “chained” to previous output blocks of ciphertext with the use of an initialization vector (IV). And to make the IV more random, it’s XORed prior to the encryption of each input.
+Disadvantages:
+> Slow computation
+> Padding attacks: If an attacker manages to alter the ciphertext of one block, the next block would be affected because of the data chaining.
+Explicit chaining is involved in both CFB and OFB modes. And the use of IVs, which are part of the encryption and decryption steps for CBC, CFB, and OFB modes, is integral to the security of these three modes.
+Cipher Feedback (CFB) Mode: Similar to like CBC mode
+
+PKCS
+Public key cryptographic standards - primarily are 1, 7, 8, 11 and 12... rest of them are abandoned or merged.
+pkcs7 - Used to sign and/or encrypt messages under a PKI
+pkcs8 is generally associated with private key specc.
+pkcs10 certificare request standard
+pkcs11 The PKCS #11 standard defines a platform-independent API to cryptographic tokens, such as hardware security modules (HSM) and smart cards, a
+pkcs12 standard defines a container for cryptographic objects like certificates with their private keys, public keys, cert chains together like in a wallet.
+
+
+HSM
+Hardware security module is a hardware token that is pluggedin to application servers and act as a cryptographic processor, responsible for managing and generation of keys etc. In PKI environments, the HSMs may be used by certification authorities (CAs) and registration authorities (RAs) to generate, store, and handle asymmetric key pairs.
+
+
+TDE - transparent data encryption
+> It is used for encrypting data in DB
+> One of the goals of this is to make the DB PCI-DSS compliant which is payments card related security standard.
+> The columns and tablespace can be encrypted with different encryption keys which is then protected/encrypted with a master key. Maste key can be either stored in HSM..also called hardware security module or in a keystore which is in PKCS12 format...In case there are many databases, oracle keyvault can be used
+> 
+
+
+file level encryption. Keys for TDE can be stored in an HSM to manage keys across servers, protect keys with hardware, and introduce a separation of duties.The same key is used to encrypt columns in a table, regardless of the number of columns to be encrypted. These encryption keys are encrypted using the database server master key and are stored in a dictionary table in the database.
+By default, TDE stores its master key in an Oracle Wallet, a PKCS#12 standards-based key storage file. Wallets provide an easy solution for small numbers of encrypted databases.
