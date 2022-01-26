@@ -127,3 +127,19 @@ TDE - transparent data encryption
 
 file level encryption. Keys for TDE can be stored in an HSM to manage keys across servers, protect keys with hardware, and introduce a separation of duties.The same key is used to encrypt columns in a table, regardless of the number of columns to be encrypted. These encryption keys are encrypted using the database server master key and are stored in a dictionary table in the database.
 By default, TDE stores its master key in an Oracle Wallet, a PKCS#12 standards-based key storage file. Wallets provide an easy solution for small numbers of encrypted databases.
+
+Digital Signature
+==================
+Authenticity of the sender can be determined by the trusted certificate that the sender sends, but who will authenticates that sender is the actual sender and not the other party. For this, company sends its certificate data + public key to CA. CA will hash the data, sign the hash with it's private key and append the signed data to the certificate. This signed data is called the digital signature. When the certificate is delivered to the receiver, the receiver will use CA's public key to decrypt the hashed data. let's say it hash1. Then receiver will again generate hash of rest of the certificate, say it hash2. Then hash1 and hash2 are matched to check whether the sender is authentic.
+
+CIA Goals -- Confidentiality, Integrity, Availability
+Confidentiality - Encryption
+Integrity - Digital signature
+Availability - Data must be available to authorized user
+
+Non-repudiation
+===============
+Repudiation means Denial of truth. 
+Receiver can't deny that he hasn't got the data even though it has been sent by sender. Also, sender can't deny that he hasn't send the message. 
+
+
