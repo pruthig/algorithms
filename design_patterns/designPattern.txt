@@ -54,3 +54,13 @@ Behavioral patterns are Chain of responsibility, Command, Interpreter, Iterator,
 
 
 
+Cloud:
+
+availability domains - data centers which are completely isolated, fault tolerant and very unlikely to fail.. shares nothing
+AD1, AD2, AD3 if AD1 fails, use AD2 and AD3
+Within each AD, we have multiple FD (fault domains). Changes are made at only 1 FD at a time..
+Each FD has application and RAC databases.
+
+
+
+

@@ -6,8 +6,8 @@
 
 class single{
 private:
-    single operator=(single&);
-    single(single& s){}
+    single operator=(const single&);
+    single(const single& s){}
     single(){}
 public:
     static single *instance;
@@ -15,13 +15,19 @@ public:
     static single* getInstance();
 };
 
-// For c++11, following will work
-static single& getInstance_CPP11() {
-    static single singleInstance;
-    return singleInstance;
-}
+// ########  For c++11, following will work
+class Singleton {
+    private:
+        Singleton() = default;
+        Singleton(const Singleton&) = delete;
+        Singleton& operator=(const Singleton&) = delete;
+public:
+        static Singleton& getSingleton() {
+            static Singleton single;
+            return single;
+        }
 };
-
+// #########  End c++11 example
 
 pthread_mutex_t single::mx = PTHREAD_MUTEX_INITIALIZER;
 single* single::instance = NULL;

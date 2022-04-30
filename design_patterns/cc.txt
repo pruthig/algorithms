@@ -1,0 +1,35 @@
+Stolen voice
+------------
+Speech is a medium through which an individual expresses his/her thoughts and feelings. A healthy individual
+
+
+memcpy safer than memmove in case there is buffer overlap.. try--> memcpy(ptr+5, ptr, 7);  // problematic as 6 and 7th bytes will be overwritten
+memchr - first matching byte in first n bytes of s
+memcmp - compare first 'n' bytes of ptr1 and ptr2
+strcat - If dest is not large enough, program behavior is unpredictable; buffer overruns are a favorite avenue for attacking secure programs
+Both strcat and strncat add null-terminating character. Therefore, the size of dest must be at least strlen(dest)+n+1.
+Buffer overrun/overflow - writing past the memory allocated.
+strcpy - buffer overlap shouldn't be there and dest string should be  1 + size of source string. else null char won't be copied
+
+Limitation of strcpy -
+> Buffer overrun
+> 
+Limitation of strncpy - Problem with strncpy(): If there is no null character among the first n character of src, the string placed in dest will not be null-terminated. So strncpy() does not guarantee that the destination string will be NULL terminated. The strlen() non-terminated string can cause segfault. In other words, a non-terminated string in C/C++ is a time-bomb just waiting to destroy code.
+best replacement - snprintf
+
+
+Best way secure code
+> Use library managed methods
+> Only that much memory how much it is needed.
+> Stay away from undefined behavior
+> use fgets in place of gets as gets doesn' take any size.
+> 
+
+
+
+
+When strncpy - If size of source >= destination, no NUl char is added to destination, so add NUL yourself by copying (size-1) but strcpy copies and add NUL char as well in case source size > destination size
+Overwriting beyond the bounds of allocated memory causes Undefined Behavior.
+
+
+farm submit -build -deplabel HAS_MAIN_LINUX.X64_220226.TRENTSEC,ENTSEC_DBMAIN_GENERIC_220302 lrgism6 lrgsrgdbcone lrgsrgdbcon9 lrgsrgdbconf2  lrgsrgdbconf  -user gapruthi -cc akhaladk, vinavish

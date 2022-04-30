@@ -1,6 +1,10 @@
-//Main class that will hold the list
-//Subject class basically has methods to register and unregister the observers and a method to notify
-//those observers
+// Main class that will hold the list
+// Observer is a behavioral design pattern that allows some objects to notify other objects about changes 
+// in their state. The Observer pattern provides a way to subscribe and unsubscribe to and from these events for 
+// any object that implement subscriber interface.
+// Subject class basically has methods to register and unregister the observers and a method to notify
+// those observers
+
 #include<iostream>
 #include "observed.h"
 #include<string>

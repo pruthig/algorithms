@@ -77,7 +77,11 @@ The extra latency and computational costs of the full TLS handshake impose a ser
 
 What is Hashing?
 -----------------
-Hashing is the practice of using an algorithm to map data of any size to a fixed length. This is called a hash value (or sometimes hash code or hash sums or even a hash digest if you’re feeling fancy).
+Hashing is the practice of using an algorithm to map data of any size to a fixed length. This is called a hash value (or sometimes hash code or hash sums or even a hash digest if you’re feeling fancy). Hash Functions provide a mapping between an arbitrary length input, and a (usually) fixed length (or smaller length) output. Hashing is not reversible as encryption and encoding.
+
+Encoding
+----------
+Encoding is used for changing the data into a special format which makes it usable by external processes. Unlike encryption, the intention of encoding is not related to security. The message is encoded by using an algorithm or scheme.
 
 Salting 
 -------
@@ -106,12 +110,15 @@ Explicit chaining is involved in both CFB and OFB modes. And the use of IVs, whi
 Cipher Feedback (CFB) Mode: Similar to like CBC mode
 
 PKCS
-Public key cryptographic standards - primarily are 1, 7, 8, 11 and 12... rest of them are abandoned or merged.
-pkcs7 - Used to sign and/or encrypt messages under a PKI
+Public key cryptographic standards - primarily are 1, 7, 8, 11 and 12... rest of them are abandoned or merged, published by RSA to standardize processes on different cryptographic primitives.
+pkcs1 - Defines the mathematical properties and format of RSA public and private keys (ASN.1 format)
+pkcs5 - password based encryption standard
+pkcs7 - Used to sign and/or encrypt messages under a PKI... used for S/MIME
 pkcs8 is generally associated with private key specc.
 pkcs10 certificare request standard
 pkcs11 The PKCS #11 standard defines a platform-independent API to cryptographic tokens, such as hardware security modules (HSM) and smart cards, a
 pkcs12 standard defines a container for cryptographic objects like certificates with their private keys, public keys, cert chains together like in a wallet.
+pkcs15 - Defines a standard allowing users of cryptographic tokens to identify themselves to applications,
 
 
 HSM
@@ -128,9 +135,21 @@ TDE - transparent data encryption
 file level encryption. Keys for TDE can be stored in an HSM to manage keys across servers, protect keys with hardware, and introduce a separation of duties.The same key is used to encrypt columns in a table, regardless of the number of columns to be encrypted. These encryption keys are encrypted using the database server master key and are stored in a dictionary table in the database.
 By default, TDE stores its master key in an Oracle Wallet, a PKCS#12 standards-based key storage file. Wallets provide an easy solution for small numbers of encrypted databases.
 
+Digital Certificate
+====================
+Digital certificate is a file that ensures holder’s identity and provides security.
+Cert contents:
+--------------
+Subject, issuer, expiration date, serial number, public key, key usage, eku
+
+
 Digital Signature
 ==================
 Authenticity of the sender can be determined by the trusted certificate that the sender sends, but who will authenticates that sender is the actual sender and not the other party. For this, company sends its certificate data + public key to CA. CA will hash the data, sign the hash with it's private key and append the signed data to the certificate. This signed data is called the digital signature. When the certificate is delivered to the receiver, the receiver will use CA's public key to decrypt the hashed data. let's say it hash1. Then receiver will again generate hash of rest of the certificate, say it hash2. Then hash1 and hash2 are matched to check whether the sender is authentic.
+(digital signature = encryption (private key of sender, message digest) and message digest = message digest algorithm(message)).
+Receiver decrypts the digital signature using the public key of sender.(This assures authenticity, as only sender has his private key so only sender can encrypt using his private key which can thus be decrypted by sender’s public key).
+
+
 
 CIA Goals -- Confidentiality, Integrity, Availability
 Confidentiality - Encryption
